@@ -4,7 +4,7 @@ import Page from '../components/nav/Page/Page';
 import { Item, Row, Table } from '../components/table/Table';
 import { useGetAllCategoriesQuery } from '../store/services/productService';
 
-const categories = () => {
+const CategoriesPage = () => {
 	const { data, error, isLoading } = useGetAllCategoriesQuery();
 	return (
 		<Page selected='Categories'>
@@ -27,4 +27,4 @@ const categories = () => {
 	);
 };
 
-export default categories;
+export default CategoriesPage;

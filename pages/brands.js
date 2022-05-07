@@ -4,7 +4,7 @@ import Page from '../components/nav/Page/Page';
 import { Item, Row, Table } from '../components/table/Table';
 import { useGetAllBrandsQuery } from '../store/services/productService';
 
-const brands = () => {
+const BrandsPage = () => {
 	const { data, error, isLoading } = useGetAllBrandsQuery();
 	return (
 		<Page selected='Brands'>
@@ -27,4 +27,4 @@ const brands = () => {
 	);
 };
 
-export default brands;
+export default BrandsPage;

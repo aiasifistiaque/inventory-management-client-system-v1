@@ -4,7 +4,7 @@ import Page from '../components/nav/Page/Page';
 import { Item, Row, Table } from '../components/table/Table';
 import { useGetAllProductsQuery } from '../store/services/productService';
 
-const products = () => {
+const ProductsPage = () => {
 	const { data, error, isLoading } = useGetAllProductsQuery();
 	return (
 		<Page selected='Products'>
@@ -31,4 +31,4 @@ const products = () => {
 	);
 };
 
-export default products;
+export default ProductsPage;
