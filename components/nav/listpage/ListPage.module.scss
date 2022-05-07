@@ -1,0 +1,12 @@
+@import '../../../styles/imports';
+
+.container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	.title {
+		display: flex;
+		justify-content: space-between;
+		margin: 0 8px;
+	}
+}

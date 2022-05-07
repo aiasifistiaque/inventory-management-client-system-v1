@@ -1,0 +1,10 @@
+//@at-root
+
+.container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	background-color: whitesmoke;
+	height: 100vh;
+	padding: 24px 16px 0 18vw;
+}

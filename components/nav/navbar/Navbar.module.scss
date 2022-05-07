@@ -1,0 +1,31 @@
+//@at-root
+@import '../../../styles/imports';
+
+.nav {
+	background-color: white;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	padding: 0 32px;
+	font-family: 'Space Grotesk', sans-serif;
+	margin-left: 15vw;
+	box-shadow: 0 2px 4px 2px rgba(black, 0.05);
+	position: fixed;
+	width: 100%;
+
+	.logout {
+		cursor: pointer;
+		align-self: center;
+		width: 50%;
+
+		p {
+			text-align: right;
+			font-size: 14px;
+			font-weight: 700;
+		}
+	}
+
+	h3 {
+		cursor: pointer;
+	}
+}
