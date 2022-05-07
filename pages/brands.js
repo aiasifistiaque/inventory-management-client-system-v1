@@ -6,6 +6,8 @@ import { useGetAllBrandsQuery } from '../store/services/productService';
 
 const BrandsPage = () => {
 	const { data, error, isLoading } = useGetAllBrandsQuery();
+	if (isLoading) return null;
+
 	return (
 		<Page selected='Brands'>
 			<ListPage title='Brands' button='Add Brand'>
@@ -15,6 +17,7 @@ const BrandsPage = () => {
 						<Item title>Date Added</Item>
 					</Row>
 					{!isLoading &&
+						data?.data &&
 						data.data.map((item, i) => (
 							<Row key={i}>
 								<Item>{item.name}</Item>

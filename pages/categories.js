@@ -6,6 +6,8 @@ import { useGetAllCategoriesQuery } from '../store/services/productService';
 
 const CategoriesPage = () => {
 	const { data, error, isLoading } = useGetAllCategoriesQuery();
+	if (isLoading) return null;
+
 	return (
 		<Page selected='Categories'>
 			<ListPage title='Categories' button='Add Category'>
@@ -15,6 +17,7 @@ const CategoriesPage = () => {
 						<Item title>Date Added</Item>
 					</Row>
 					{!isLoading &&
+						data?.data &&
 						data.data.map((item, i) => (
 							<Row key={i}>
 								<Item>{item.name}</Item>

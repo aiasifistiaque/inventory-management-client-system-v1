@@ -6,6 +6,7 @@ import { useGetAllProductsQuery } from '../store/services/productService';
 
 const ProductsPage = () => {
 	const { data, error, isLoading } = useGetAllProductsQuery();
+	if (isLoading) return null;
 	return (
 		<Page selected='Products'>
 			<ListPage title='Products' button='Add Product' href='/addproduct'>
@@ -17,6 +18,7 @@ const ProductsPage = () => {
 						<Item title>Stock</Item>
 					</Row>
 					{!isLoading &&
+						data?.data &&
 						data.data.map((item, i) => (
 							<Row key={i} href={`/product/${item._id}`}>
 								<Item>{item.name}</Item>
