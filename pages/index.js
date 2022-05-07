@@ -9,8 +9,10 @@ export default function Home() {
 	const router = useRouter();
 	const auth = useAuth();
 	useEffect(() => {
-		if (!auth.isLoggedIn) {
-			router.push('/login');
+		if (!auth.loading) {
+			if (auth.token == null) {
+				router.push('/login');
+			}
 		}
 	}, [auth.loading]);
 	if (auth.loading) return null;
