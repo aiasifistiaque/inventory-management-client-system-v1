@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const localUrl = 'http://localhost:5000/api';
-const backennd = 'https://pos-backend-1234.herokuapp.com/api';
+const backend = 'https://pos-backend-1234.herokuapp.com/api';
 
 export const productsApi = createApi({
 	reducerPath: 'productsApi',
 	baseQuery: fetchBaseQuery({
-		baseUrl: localUrl,
+		baseUrl: backend,
 	}),
 	endpoints: builder => ({
 		getProductById: builder.query({
