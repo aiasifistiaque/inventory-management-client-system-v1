@@ -28,6 +28,9 @@ const Sidebar = ({ selected }) => {
 				<Link href='/brands'>
 					<Item selected={selected}>Brands</Item>
 				</Link>
+				<Link href='/expenses'>
+					<Item selected={selected}>Expenses</Item>
+				</Link>
 			</div>
 		</div>
 	);

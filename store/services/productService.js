@@ -23,6 +23,7 @@ export const productsApi = createApi({
 		'Categories',
 		'Brands',
 		'Dashboard',
+		'Expenses',
 	],
 
 	endpoints: builder => ({
@@ -49,6 +50,10 @@ export const productsApi = createApi({
 			query: () => `/brands`,
 			providesTags: ['Brands'],
 		}),
+		getAllExpenses: builder.query({
+			query: () => `/expenses`,
+			providesTags: ['Expenses'],
+		}),
 		getAllPurchaseOrders: builder.query({
 			query: () => `/purchases`,
 			providesTags: ['Purchases'],
@@ -66,6 +71,16 @@ export const productsApi = createApi({
 				};
 			},
 			invalidatesTags: ['Brands', 'Dashboard'],
+		}),
+		addExpenses: builder.mutation({
+			query(body) {
+				return {
+					url: `/expenses`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Expenses', 'Dashboard'],
 		}),
 		addProduct: builder.mutation({
 			query(body) {
@@ -124,4 +139,6 @@ export const {
 	useAddCategoryMutation,
 	useAddBrandMutation,
 	useGetDashboardQuery,
+	useGetAllExpensesQuery,
+	useAddExpensesMutation,
 } = productsApi;

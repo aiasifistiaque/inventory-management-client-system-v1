@@ -5,15 +5,11 @@ import {
 	useAddProductMutation,
 	useGetAllBrandsQuery,
 	useGetAllCategoriesQuery,
-	useGetProductByIdQuery,
 } from '../store/services/productService';
-import { DetailsItem, DetailsTable } from '../components/table/Details';
-import { Item } from '../components/table/Table';
+import { DetailsTable } from '../components/table/Details';
 import Input from '../components/auth/Input';
 import Button from '../components/buttons/Button';
 import useAuth from '../hooks/useAuth';
-import * as lib from '../lib/constants';
-import axios from 'axios';
 import Text from '../components/util/Text';
 
 const AddProduct = () => {

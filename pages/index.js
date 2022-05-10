@@ -57,6 +57,9 @@ export default function Home() {
 					<History data={data?.data?.sales && data.data.sales}>
 						{`Sales [All Time]`}{' '}
 					</History>
+					<History data={data?.data?.expenses && data.data.expenses}>
+						{`Expenses [All Time]`}{' '}
+					</History>
 				</UnitLayer>
 				<UnitLayer title='Purchases'>
 					<History data={data?.data?.purchase && data.data.purchase}>
