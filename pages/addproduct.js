@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Page from '../components/nav/Page/Page';
 import {
+	useAddProductMutation,
 	useGetAllBrandsQuery,
 	useGetAllCategoriesQuery,
 	useGetProductByIdQuery,
@@ -13,6 +14,7 @@ import Button from '../components/buttons/Button';
 import useAuth from '../hooks/useAuth';
 import * as lib from '../lib/constants';
 import axios from 'axios';
+import Text from '../components/util/Text';
 
 const AddProduct = () => {
 	const router = useRouter();
@@ -21,48 +23,33 @@ const AddProduct = () => {
 	const [brand, setBrand] = useState();
 	const [price, setPrice] = useState();
 	const [cost, setCost] = useState();
-	const [creating, setCreating] = useState(false);
+	const [stock, setStock] = useState();
 
 	const brands = useGetAllBrandsQuery();
 	const categories = useGetAllCategoriesQuery();
 
 	const auth = useAuth();
+	const [addNewProudct, result] = useAddProductMutation();
+
+	const { isLoading, isSuccess, isError } = result;
 
 	const submitForm = async e => {
 		e.preventDefault();
-		setCreating(true);
-		const formdata = {};
-		formdata.name = name;
-		formdata.category = category;
-		formdata.brand = brand;
-		formdata.price = price;
-		formdata.cost = cost;
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				authorization: JSON.parse(auth.token),
-			},
-		};
-		try {
-			const { data } = await axios.post(
-				`${lib.api.backend}/api/products`,
-				{
-					name,
-					category,
-					brand,
-					price,
-					cost,
-				},
-				config
-			);
-			setCreating(false);
-
-			router.push(`/product/${data.data._id}`);
-		} catch (e) {
-			console.log(e);
-			setCreating(false);
-		}
+		addNewProudct({
+			name,
+			category,
+			brand,
+			price,
+			cost,
+			stock: stock ? stock : 0,
+		});
 	};
+
+	useEffect(() => {
+		if (isSuccess) {
+			router.push('/products');
+		}
+	}, [isSuccess]);
 
 	return (
 		<div>
@@ -112,12 +99,20 @@ const AddProduct = () => {
 							onChange={e => setCost(e)}
 							placeholder='Product Cost'
 						/>
-						{creating ? (
+						<Input
+							label='Opening stock'
+							value={stock}
+							onChange={e => setStock(e)}
+							placeholder='Initial stock of product'
+							type='Number'
+						/>
+						{isLoading ? (
 							<Button>processing...</Button>
 						) : (
 							<Button submit>Create Product</Button>
 						)}
 					</form>
+					{isError && <Text error>There was an error</Text>}
 				</DetailsTable>
 			</Page>
 		</div>

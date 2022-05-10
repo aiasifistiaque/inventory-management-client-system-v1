@@ -9,7 +9,7 @@ const useAuth = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		const token = localStorage.getItem(tokenName);
+		const token = JSON.parse(localStorage.getItem(tokenName));
 
 		if (token != null) {
 			setAuthToken(() => token);

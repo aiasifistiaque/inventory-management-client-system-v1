@@ -6,26 +6,27 @@ import { useGetAllBrandsQuery } from '../store/services/productService';
 
 const BrandsPage = () => {
 	const { data, error, isLoading } = useGetAllBrandsQuery();
-	if (isLoading) return null;
 
 	return (
 		<Page selected='Brands'>
-			<ListPage title='Brands' button='Add Brand'>
-				<Table title='All Brands'>
-					<Row>
-						<Item title>Brand Name</Item>
-						<Item title>Date Added</Item>
-					</Row>
-					{!isLoading &&
-						data?.data &&
-						data.data.map((item, i) => (
-							<Row key={i}>
-								<Item>{item.name}</Item>
-								<Item date>{item.createdAt}</Item>
-							</Row>
-						))}
-				</Table>
-			</ListPage>
+			{!isLoading && (
+				<ListPage title='Brands' button='Add Brand' href='/addbrand'>
+					<Table title='All Brands'>
+						<Row title>
+							<Item title>Brand Name</Item>
+							<Item title>Date Added</Item>
+						</Row>
+						{!isLoading &&
+							data?.data &&
+							data.data.map((item, i) => (
+								<Row key={i}>
+									<Item>{item.name}</Item>
+									<Item date>{item.createdAt}</Item>
+								</Row>
+							))}
+					</Table>
+				</ListPage>
+			)}
 		</Page>
 	);
 };

@@ -1,16 +1,21 @@
 @import '../../styles/imports';
 
+$table-border: #e5e5e5;
+$table-header-color: #000;
+$table-top-color: #faf9fb;
+$table-box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.04),
+	0 2px 4px 0 rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+
 .container {
 	overflow: auto;
 	flex-wrap: nowrap;
 	flex: 1;
 	display: flex;
-	padding: 24px;
 	border-radius: 10px;
 	background-color: white;
 	margin: 0.5rem;
-	box-shadow: 0 2px 2px 2px rgba(black, 0.05);
-	//margin-left: 16.5vw;
+	//box-shadow: 0 2px 2px 2px rgba(black, 0.05);
+	box-shadow: $table-box-shadow;
 	flex-direction: column;
 }
 
@@ -22,36 +27,45 @@
 	margin-left: 16.5vw;
 }
 
-.items {
+$item-margin: 32px;
+
+%table-items {
 	display: flex;
 	border-radius: 4;
 	justify-content: space-between;
 	border-right-width: 0;
 	border-left-width: 0;
 	flex-wrap: nowrap;
+	border-bottom: 0.1px solid $table-border;
+	text-transform: capitalize;
+	margin: 0 $item-margin;
+	padding: 4px 0;
+}
+
+.items {
+	@extend %table-items;
+}
+
+.titleItems {
+	@extend %table-items;
+	margin: 0;
+	padding: 4px $item-margin;
+	background-color: $table-top-color;
 }
 
 .linkItems {
-	display: flex;
-	border-radius: 4;
-	justify-content: space-between;
-	border-right-width: 0;
-	border-left-width: 0;
-	flex-wrap: nowrap;
+	@extend %table-items;
 	cursor: pointer;
 	&:hover {
 		text-decoration-line: underline;
 	}
 }
 
-.item {
+%table-item {
 	flex: 1;
-
 	text-align: left;
 	min-width: 200px;
 	padding: 12px 0;
-	border-right-width: 0;
-	border-left-width: 0;
 
 	p,
 	h6 {
@@ -60,9 +74,17 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 	}
+}
+
+.titleItem {
+	@extend %table-item;
 	h6 {
 		font-size: 1rem;
+		color: $table-header-color;
 	}
+}
+.item {
+	@extend %table-item;
 	a {
 		font-size: 14px;
 		color: dodgerblue;

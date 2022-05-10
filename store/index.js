@@ -3,6 +3,8 @@ import counterReducer from './slices/counterSlice';
 import authReducer from './slices/authSlice';
 import { productsApi } from './services/productService';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import thunk from 'redux-thunk';
+import { applyMiddleware } from 'redux';
 
 const reducer = {};
 

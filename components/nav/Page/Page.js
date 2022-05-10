@@ -1,5 +1,5 @@
 import React from 'react';
-// import Navbar from '../navbar/Navbar';
+import Navbar from '../navbar/Navbar';
 import Sidebar from '../sidebar/Sidebar';
 import styles from './Page.module.css';
 import Head from 'next/head';
@@ -12,7 +12,7 @@ const Page = ({ children, selected }) => {
 				<meta name='viewport' content='initial-scale=1.0, width=device-width' />
 			</Head>
 			<Sidebar selected={selected} />
-			{/* <Navbar /> */}
+			<Navbar />
 			<main className={styles.container}>{children}</main>
 		</div>
 	);

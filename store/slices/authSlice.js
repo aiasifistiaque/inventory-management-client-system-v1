@@ -1,27 +1,39 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { tokenName } from '../../lib/constants';
 
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
-		token: null,
-		loggedIn: false,
+		token:
+			typeof window !== 'undefined' && localStorage.getItem(tokenName) != null
+				? JSON.parse(localStorage.getItem(tokenName))
+				: null,
+		loggedIn:
+			typeof window !== 'undefined' && localStorage.getItem(tokenName) !== null
+				? true
+				: false,
 	},
 	reducers: {
-		logout: state => {
+		logout: (state, action) => {
 			localStorage.setItem(tokenName, null);
-			document.location.href = '/';
 			state.token = null;
 			state.loggedIn = false;
+			document.location.href = '/login';
 		},
 		login: (state, action) => {
-			//localStorage.setItem(tokenName, action.payload);
+			localStorage.setItem(tokenName, action.payload);
 			state.token = action.payload;
 			state.loggedIn = true;
 			document.location.href = '/';
 		},
 	},
 });
+
+export const logoutAction = async dispatch => {
+	localStorage.setItem(tokenName, action.payload);
+	dispatch({ type: logout });
+	document.location.href = '/';
+};
 
 // const loginActionn = () => async dispatch => {
 // 	dispatch(usersLoading());

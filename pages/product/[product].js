@@ -11,7 +11,7 @@ const Productpage = () => {
 	const { data, error, isLoading } = useGetProductByIdQuery(product);
 	const [item, setItem] = useState();
 	useEffect(() => {
-		!isLoading && setItem(data.data);
+		!isLoading && data?.data && setItem(data.data);
 	}, [isLoading]);
 
 	if (isLoading || !item) return <Page selected='Products'>Loading</Page>;
@@ -19,14 +19,19 @@ const Productpage = () => {
 		<div>
 			<Page selected='Products'>
 				<DetailsTable title='Product'>
-					<DetailsItem title='Name'>{item.name}</DetailsItem>
-					<DetailsItem title='Id'>{item._id}</DetailsItem>
-					<DetailsItem title='Category'>{item.category}</DetailsItem>
-					<DetailsItem title='Stock'>{item.stock}</DetailsItem>
-					<DetailsItem title='Price'>{item.price}</DetailsItem>
-					<DetailsItem title='Cost'>{item.cost}</DetailsItem>
+					<DetailsItem title='Name'>{item?.name && item.name}</DetailsItem>
+					<DetailsItem title='Id'>{item?._id && item._id}</DetailsItem>
+					<DetailsItem title='Category'>
+						{item?.category?.name && item.category.name}
+					</DetailsItem>
+					<DetailsItem title='Brand'>
+						{item?.brand?.name ? item.brand.name : 'Not defined'}
+					</DetailsItem>
+					<DetailsItem title='Stock'>{item?.stock && item.stock}</DetailsItem>
+					<DetailsItem title='Price'>{item?.price && item.price}</DetailsItem>
+					<DetailsItem title='Cost'>{item?.cost && item.cost}</DetailsItem>
 					<DetailsItem title='Date Added' date>
-						{item.createdAt}
+						{item?.createdAt && item.createdAt}
 					</DetailsItem>
 				</DetailsTable>
 			</Page>

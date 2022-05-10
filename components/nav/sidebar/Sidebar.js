@@ -16,6 +16,12 @@ const Sidebar = ({ selected }) => {
 				<Link href='/products'>
 					<Item selected={selected}>Products</Item>
 				</Link>
+				<Link href='/sales'>
+					<Item selected={selected}>Sales</Item>
+				</Link>
+				<Link href='/purchases'>
+					<Item selected={selected}>Purchases</Item>
+				</Link>
 				<Link href='/categories'>
 					<Item selected={selected}>Categories</Item>
 				</Link>

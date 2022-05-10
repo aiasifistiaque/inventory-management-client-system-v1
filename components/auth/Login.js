@@ -7,6 +7,8 @@ import * as lib from '../../lib/constants';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import { Router, useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/slices/authSlice';
 
 const Login = () => {
 	const [email, setEmail] = useState();
@@ -15,6 +17,7 @@ const Login = () => {
 	const [error, setError] = useState();
 	const auth = useAuth();
 	const router = useRouter();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		auth.isLoggedIn && router.push('/');
@@ -22,6 +25,37 @@ const Login = () => {
 
 	const loginClick = async e => {
 		e.preventDefault();
+		setLoading(true);
+		try {
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			};
+
+			const { data } = await axios.post(
+				`${lib.api.backend}/auth/login`,
+				{
+					email,
+					password,
+				},
+				config
+			);
+
+			dispatch(login(data));
+			localStorage.setItem(lib.tokenName, JSON.stringify(data));
+			setLoading(false);
+		} catch (error) {
+			console.log(error);
+			setError(error);
+			setLoading(false);
+		}
+	};
+
+	const handleKeyPress = e => {
+		if (e.code === 'Enter') {
+			loginClick(e);
+		}
 	};
 	return (
 		<AuthContainer>
@@ -32,6 +66,7 @@ const Login = () => {
 					onChange={e => setEmail(e)}
 					placeholder='Your Email'
 					required
+					onKeyPress={e => handleKeyPress(e)}
 				/>
 				<AuthInput
 					label='password'
@@ -40,6 +75,7 @@ const Login = () => {
 					placeholder='Your Password'
 					required
 					password
+					onKeyPress={e => handleKeyPress(e)}
 				/>
 				<div>
 					{loading ? <Button>loading</Button> : <Button submit>Login</Button>}

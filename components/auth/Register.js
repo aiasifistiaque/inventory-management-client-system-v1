@@ -45,8 +45,6 @@ const Register = () => {
 				config
 			);
 
-			console.log(data);
-
 			dispatch(login(data));
 			localStorage.setItem(lib.tokenName, JSON.stringify(data));
 			setLoading(false);

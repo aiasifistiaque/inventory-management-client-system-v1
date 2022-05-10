@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export const DetailsTable = ({ children, loading, title }) => {
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ padding: '24px 44px' }}>
 			<h5>{title}</h5>
 			{!loading ? <div>{children}</div> : <h6>loading...</h6>}
 		</div>
