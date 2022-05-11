@@ -14,7 +14,7 @@ const Navbar = () => {
 	return (
 		<div className={styles.nav}>
 			<Link href='/'>
-				<h3>IMS</h3>
+				<h5>IMS</h5>
 			</Link>
 			<div className={styles.logout} onClick={() => dispatch(logout())}>
 				<p>logout</p>

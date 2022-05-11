@@ -1,25 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
-.mb-2 {
-  margin-bottom: 8px;
-}
-
-.mt-3 {
-  margin-top: 16px;
-}
-
-.mt-4 {
-  margin-top: 24px;
-}
-
-.mt-5 {
-  margin-top: 32px;
-}
-
-.ml-2 {
-  margin-left: 8px;
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 .ma-2 {
   margin: 2px 2px;
 }
@@ -682,8 +663,7 @@
   background-color: white;
   padding: 16px 24px;
   border-radius: 8px;
-  -webkit-box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.04), 0 2px 4px 0 rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-          box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.04), 0 2px 4px 0 rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(57, 31, 66, 0.1);
   -ms-flex-item-align: start;
       align-self: flex-start;
 }

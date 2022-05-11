@@ -1,12 +1,29 @@
 //@at-root
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
-$color-primary: #363062;
+@import './utilities/margins/marginaround';
+@import './utilities/margins/marginbottom';
+@import './utilities/margins/margintop';
+@import './utilities/margins/marginleft';
+@import './utilities/margins/marginright';
+@import './utilities/margins/marginhorizontal';
+@import './utilities/margins/marginvertical';
+
+@import './utilities/paddings/paddingbottom';
+@import './utilities/paddings/paddingright';
+@import './utilities/paddings/paddingtop';
+@import './utilities/paddings/paddingleft';
+@import './utilities/paddings/paddinghorizontal';
+@import './utilities/paddings/paddingvertical';
+
+//$color-primary: #363062;
+$color-primary: #391f42;
 $color-secondary: #4d4c7d;
 $color-light: #827397;
 $color-bg: #faf9fb;
-$color-text: #404040;
+$color-text: #424242;
 $color-text-inv: #f5f5f5;
 $color-text-inv-light: rgba(#f5f5f5, 0.5);
 $color-link: #1e90ff;
@@ -21,4 +38,3 @@ $color-input-border: transparent;
 
 @import './utilities/mixin';
 @import './utilities/partials';
-@import './utilities/margins';
