@@ -16,7 +16,6 @@ import {
 	Table,
 } from '../components/table/Table';
 import Text from '../components/util/Text';
-//import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 import dynamic from 'next/dynamic';
 
 const BarcodeScannerComponent = dynamic(

@@ -3,7 +3,6 @@ import ListPage from '../components/nav/listpage/ListPage';
 import Page from '../components/nav/Page/Page';
 import { Item, Row, Table } from '../components/table/Table';
 import { useGetAllProductsQuery } from '../store/services/productService';
-import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 
 const ProductsPage = () => {
 	const { data, error, isLoading } = useGetAllProductsQuery();
