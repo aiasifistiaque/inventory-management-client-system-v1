@@ -16,6 +16,15 @@ import {
 	Table,
 } from '../components/table/Table';
 import Text from '../components/util/Text';
+//import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
+import dynamic from 'next/dynamic';
+
+const BarcodeScannerComponent = dynamic(
+	() => import('react-qr-barcode-scanner'),
+	{
+		ssr: false,
+	}
+);
 
 const Pospage = () => {
 	const router = useRouter();
@@ -31,6 +40,8 @@ const Pospage = () => {
 
 	const [addPurchaseOrder, result] = useAddSaleMutation();
 	const { isLoading, isSuccess, isError } = result;
+	const [barCode, setBarCode] = useState('');
+	const [reader, setReader] = useState(false);
 
 	useEffect(() => {
 		//setPrice('');
@@ -86,6 +97,24 @@ const Pospage = () => {
 								data={products.data.data}
 							/>
 						)}
+						{reader && (
+							<BarcodeScannerComponent
+								width={200}
+								height={100}
+								onUpdate={(err, result) => {
+									if (result) {
+										setProduct(result.text);
+										setReader(false);
+									} else setBarCode('Not Found');
+								}}
+							/>
+						)}
+						{!reader ? (
+							<Button onClick={() => setReader(true)}>Scan Barcode</Button>
+						) : (
+							<Button onClick={() => setReader(false)}>Stop scan</Button>
+						)}
+
 						{!singleProduct.isLoading && product && (
 							<div style={{ marginBottom: 64 }}>
 								<>

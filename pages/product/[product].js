@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import Page from '../../components/nav/Page/Page';
 import { useGetProductByIdQuery } from '../../store/services/productService';
 import { DetailsItem, DetailsTable } from '../../components/table/Details';
-import { Item } from '../../components/table/Table';
+import Barcode from 'react-barcode';
+import { QRCodeSVG, QRCodeCanvas } from 'qrcode.react';
 
 const Productpage = () => {
 	const router = useRouter();
@@ -19,6 +20,13 @@ const Productpage = () => {
 		<div>
 			<Page selected='Products'>
 				<DetailsTable title='Product'>
+					<Barcode value={item?._id ? item._id : ''} />,
+					<div>
+						<QRCodeCanvas value={item?._id ? item._id : ''} />
+						<p>{item?.name && item.name}</p>
+						<p>Price: BDT {item?.price && item.price}</p>
+						<br />
+					</div>
 					<DetailsItem title='Name'>{item?.name && item.name}</DetailsItem>
 					<DetailsItem title='Id'>{item?._id && item._id}</DetailsItem>
 					<DetailsItem title='Category'>

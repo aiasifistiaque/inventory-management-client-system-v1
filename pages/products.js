@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ListPage from '../components/nav/listpage/ListPage';
 import Page from '../components/nav/Page/Page';
 import { Item, Row, Table } from '../components/table/Table';
 import { useGetAllProductsQuery } from '../store/services/productService';
+import BarcodeScannerComponent from 'react-webcam-barcode-scanner';
 
 const ProductsPage = () => {
 	const { data, error, isLoading } = useGetAllProductsQuery();
-
+	const [barcode, setBarCode] = useState('');
 	return (
 		<Page selected='Products'>
 			{!isLoading && (
@@ -24,7 +25,7 @@ const ProductsPage = () => {
 							data?.data &&
 							data.data.map((item, i) => (
 								<Row key={i} href={`/product/${item._id}`}>
-									<Item>{item && i + 1 < 10 ? `0${i}` : i}</Item>
+									<Item>{item && i + 1 < 9 ? `0${i + 1}` : i + 1}</Item>
 									<Item>{item?.name && item.name}</Item>
 									<Item>{item?.category?.name && item.category.name}</Item>
 									<Item>{item?.price && item.price}</Item>
