@@ -1,6 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import './imports';
 
+@import './utilities/margins/marginaround';
+@import './utilities/margins/marginbottom';
+@import './utilities/margins/margintop';
+@import './utilities/margins/marginleft';
+@import './utilities/margins/marginright';
+@import './utilities/margins/marginhorizontal';
+@import './utilities/margins/marginvertical';
+
+@import './utilities/paddings/paddingbottom';
+@import './utilities/paddings/paddingright';
+@import './utilities/paddings/paddingtop';
+@import './utilities/paddings/paddingleft';
+@import './utilities/paddings/paddinghorizontal';
+@import './utilities/paddings/paddingvertical';
+
 $font-family: 'Rubik', sans-serif;
 
 html,

@@ -14,6 +14,7 @@ const Input = ({
 	min,
 	select,
 	data,
+	objectSelect,
 }) => {
 	if (select)
 		return (
@@ -33,7 +34,9 @@ const Input = ({
 					</option>
 
 					{data.map((option, i) => (
-						<option key={i} value={option._id}>
+						<option
+							key={i}
+							value={objectSelect ? JSON.stringify(option) : option._id}>
 							{option.name}
 						</option>
 					))}

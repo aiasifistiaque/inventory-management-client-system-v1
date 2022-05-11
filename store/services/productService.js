@@ -24,6 +24,8 @@ export const productsApi = createApi({
 		'Brands',
 		'Dashboard',
 		'Expenses',
+		'Customers',
+		'Suppliers',
 	],
 
 	endpoints: builder => ({
@@ -53,6 +55,14 @@ export const productsApi = createApi({
 		getAllExpenses: builder.query({
 			query: () => `/expenses`,
 			providesTags: ['Expenses'],
+		}),
+		getAllCustomers: builder.query({
+			query: () => `/customers?role=customer`,
+			providesTags: ['Customers'],
+		}),
+		getAllSuppliers: builder.query({
+			query: () => `/customers?role=supplier`,
+			providesTags: ['Suppliers'],
 		}),
 		getAllPurchaseOrders: builder.query({
 			query: () => `/purchases`,
@@ -123,6 +133,26 @@ export const productsApi = createApi({
 			},
 			invalidatesTags: ['Sales', 'Products', 'Dashboard'],
 		}),
+		addCustomer: builder.mutation({
+			query(body) {
+				return {
+					url: `/customers?role=customer`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Customers'],
+		}),
+		addSupplier: builder.mutation({
+			query(body) {
+				return {
+					url: `/customers?role=supplier`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Suppliers'],
+		}),
 	}),
 });
 
@@ -141,4 +171,8 @@ export const {
 	useGetDashboardQuery,
 	useGetAllExpensesQuery,
 	useAddExpensesMutation,
+	useGetAllCustomersQuery,
+	useGetAllSuppliersQuery,
+	useAddCustomerMutation,
+	useAddSupplierMutation,
 } = productsApi;

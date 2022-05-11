@@ -1,9 +1,9 @@
 import React from 'react';
 import moment from 'moment';
-import styles from './Table.module.css';
+import styles from './SmallTable.module.css';
 import Link from 'next/link';
 
-export const Table = ({ children, loading, title }) => {
+export const SmallTable = ({ children, loading, title }) => {
 	return (
 		<div className={styles.container}>
 			{/* <h5>{title}</h5> */}
@@ -12,11 +12,7 @@ export const Table = ({ children, loading, title }) => {
 	);
 };
 
-export const Contain = ({ children }) => {
-	return <div className={styles.contain}>{children}</div>;
-};
-
-export const Row = ({ children, href, title }) => {
+export const SmallRow = ({ children, href, title }) => {
 	if (title) return <div className={styles.titleItems}>{children}</div>;
 	if (href)
 		return (
@@ -27,7 +23,7 @@ export const Row = ({ children, href, title }) => {
 	return <div className={styles.items}>{children}</div>;
 };
 
-export const Item = ({ children, title, date, email }) => {
+export const SmallItem = ({ children, title, date }) => {
 	if (title)
 		return (
 			<div className={styles.titleItem}>
@@ -36,9 +32,7 @@ export const Item = ({ children, title, date, email }) => {
 		);
 	return (
 		<div className={styles.item}>
-			<p style={email ? { textTransform: 'lowercase' } : {}}>
-				{date ? moment(children).calendar() : children}
-			</p>
+			<p>{date ? moment(children).calendar() : children}</p>
 		</div>
 	);
 };

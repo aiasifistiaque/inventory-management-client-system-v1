@@ -8,23 +8,32 @@
 	transition: 0.2s;
 
 	p {
-		font-size: 1rem;
-		//letter-spacing: 0.5px;
-		font-weight: 600;
+		font-size: 0.9rem;
+	}
+}
+
+%common {
+	img {
+		width: 24px;
+		height: 24px;
+		margin-right: 12px;
+		object-fit: contain;
 	}
 }
 
 %solidButton {
 	@extend %buttonUtil;
+	@extend %common;
 	background-color: $color-primary;
 	height: 42px;
 	align-items: center;
 	justify-content: center;
-	color: white;
-	padding: 0 32px;
+	color: whitesmoke;
+	padding: 0 16px;
 	border-radius: 4px;
 	//min-width: 250px;
 	border: 1px solid $color-primary;
+	font-family: 'Montserrat', sans-serif;
 
 	// @include tab {
 	// 	min-width: 180px;
@@ -41,18 +50,58 @@
 
 .button {
 	@extend %solidButton;
-	letter-spacing: 0.5px;
-	font-weight: 600;
-	font-family: 'Space Grotesk', sans-serif;
+	letter-spacing: 0.2px;
+	font-weight: 700;
+	//font-family: 'Space Grotesk', sans-serif;
+}
+
+.disabled {
+	@extend %solidButton;
+	cursor: not-allowed;
+	letter-spacing: 0.2px;
+	font-weight: 700;
+	//font-family: 'Space Grotesk', sans-serif;
+	background-color: #bcbcbc;
+	border: 1px solid #bcbcbc;
+	color: #424242;
+
+	@include desktop {
+		&:hover {
+			background-color: #bcbcbc;
+		}
+	}
+	&:active {
+		background-color: #bcbcbc;
+	}
+}
+
+.secondary {
+	@extend %solidButton;
+	background-color: whitesmoke;
+	color: dodgerblue;
+	letter-spacing: 0.2px;
+	font-weight: 700;
+	border: none;
+	@include desktop {
+		&:hover {
+			background-color: darken(whitesmoke, 10%);
+		}
+	}
+	&:active {
+		background-color: lighten(whitesmoke, 10%);
+	}
 }
 
 .textButton {
+	@extend %common;
 	background-color: transparent;
 	color: $color-link;
 	padding: 1rem 0;
+	font-family: 'Montserrat', sans-serif;
+
 	cursor: pointer;
 	p {
-		font-weight: 700;
+		font-weight: 600;
 	}
 	&:hover {
 		text-decoration-line: underline;

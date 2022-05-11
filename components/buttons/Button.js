@@ -1,10 +1,21 @@
 import React from 'react';
 import styles from './Buttons.module.css';
 
-const Button = ({ children, outlined, onClick, submit, text, secondary }) => {
-	if (text)
+const Button = ({
+	children,
+	outlined,
+	onClick,
+	submit,
+	text,
+	secondary,
+	icon,
+	disabled,
+	noText,
+}) => {
+	if (disabled)
 		return (
-			<div className={styles.textButton} onClick={onClick}>
+			<div className={styles.disabled}>
+				{icon && <img src={`/icons/${icon}.png`} alt={icon} />}
 				<p>{children}</p>
 			</div>
 		);
@@ -20,9 +31,18 @@ const Button = ({ children, outlined, onClick, submit, text, secondary }) => {
 
 	return (
 		<div
-			className={outlined ? styles.outlined : styles.button}
+			className={
+				outlined
+					? styles.outlined
+					: text
+					? styles.textButton
+					: secondary
+					? styles.secondary
+					: styles.button
+			}
 			onClick={onClick}>
-			<p>{children}</p>
+			{icon && <img src={`/icons/${icon}.png`} alt={icon} />}
+			{!noText && <p>{children}</p>}
 		</div>
 	);
 };

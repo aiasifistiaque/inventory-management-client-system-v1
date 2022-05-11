@@ -5,36 +5,23 @@
   overflow: auto;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-radius: 10px;
   background-color: white;
-  margin: 0.5rem;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   border: 1px solid rgba(57, 31, 66, 0.1);
-}
-
-.contain {
-  border-radius: 10px;
-  background-color: white;
-  margin: 0.5rem;
-  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  margin-left: 16.5vw;
+  margin-bottom: 0.5rem;
+  margin-top: -24px;
 }
 
 .items, .titleItems, .linkItems {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-radius: 4;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -64,12 +51,10 @@
 }
 
 .titleItem, .item {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   text-align: left;
-  min-width: 200px;
+  min-width: 150px;
   padding: 12px 0;
+  margin-right: 16px;
 }
 
 .titleItem p, .item p,
@@ -94,4 +79,4 @@
   color: dodgerblue;
   cursor: pointer;
 }
-/*# sourceMappingURL=Table.module.css.map */
+/*# sourceMappingURL=SmallTable.module.css.map */
