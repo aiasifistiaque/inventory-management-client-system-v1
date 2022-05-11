@@ -52,14 +52,14 @@ const Sidebar = ({ selected }) => {
 					<Link href='/daily'>
 						<Item selected={selected}>Daily</Item>
 					</Link>
-					<Link href='/Weekly'>
+					<Link href='/weekly'>
 						<Item selected={selected}>Weekly</Item>
 					</Link>
-					<Link href='/Monthly'>
-						<Item selected={selected}>monthly</Item>
+					<Link href='/monthly'>
+						<Item selected={selected}>Monthly</Item>
 					</Link>
-					<Link href='/Yearly'>
-						<Item selected={selected}>yearly</Item>
+					<Link href='/yearly'>
+						<Item selected={selected}>Yearly</Item>
 					</Link>
 				</Section>
 				<Link href='/settings'>
@@ -83,10 +83,9 @@ const Section = ({ children, title }) => {
 
 const Item = ({ children, selected, onClick }) => {
 	const style = selected == children ? { color: '#f5f5f5' } : {};
+	const ico = children.toLowerCase();
 	const icon =
-		selected == children
-			? `/icons/${children}-selected.png`
-			: `/icons/${children}.png`;
+		selected == children ? `/icons/${ico}-selected.png` : `/icons/${ico}.png`;
 	return (
 		<div className={styles.item} onClick={onClick}>
 			<img src={icon} alt='ico' />
