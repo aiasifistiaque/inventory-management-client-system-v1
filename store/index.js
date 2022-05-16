@@ -3,8 +3,7 @@ import counterReducer from './slices/counterSlice';
 import authReducer from './slices/authSlice';
 import { productsApi } from './services/productService';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import thunk from 'redux-thunk';
-import { applyMiddleware } from 'redux';
+import toggleSlice from './slices/toggleSlice';
 
 const reducer = {};
 
@@ -12,6 +11,7 @@ export const store = configureStore({
 	reducer: {
 		counter: counterReducer,
 		auth: authReducer,
+		toggle: toggleSlice,
 		[productsApi.reducerPath]: productsApi.reducer,
 	},
 	devTools: true,

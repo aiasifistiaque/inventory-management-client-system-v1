@@ -26,7 +26,7 @@ const Salespage = () => {
 									<Item>
 										{item?.orderItems?.length && item.orderItems.length}
 									</Item>
-									<Item>{item?.user && item.user}</Item>
+									<Item>{item?.user.name && item.user.name}</Item>
 								</Row>
 							))}
 					</Table>

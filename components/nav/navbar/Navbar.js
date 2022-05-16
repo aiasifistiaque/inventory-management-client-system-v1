@@ -1,18 +1,17 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { tokenName } from '../../../lib/constants';
 import styles from './Navbar.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout, logoutAction } from '../../../store/slices/authSlice';
 
 const Navbar = () => {
 	const router = useRouter();
-	//const { data, loading, error } = useGetMyDetails();
 	const dispatch = useDispatch();
+	const { toggled } = useSelector(state => state.toggle);
 
 	return (
-		<div className={styles.nav}>
+		<div className={toggled ? styles.toggled : styles.nav}>
 			<Link href='/'>
 				<h5>IMS</h5>
 			</Link>

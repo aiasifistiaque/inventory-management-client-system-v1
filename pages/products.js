@@ -6,7 +6,6 @@ import { useGetAllProductsQuery } from '../store/services/productService';
 
 const ProductsPage = () => {
 	const { data, error, isLoading } = useGetAllProductsQuery();
-	const [barcode, setBarCode] = useState('');
 	return (
 		<Page selected='Products'>
 			{!isLoading && (

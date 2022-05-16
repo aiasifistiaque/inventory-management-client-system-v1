@@ -15,6 +15,7 @@ const Input = ({
 	select,
 	data,
 	objectSelect,
+	other,
 }) => {
 	if (select)
 		return (
@@ -40,6 +41,7 @@ const Input = ({
 							{option.name}
 						</option>
 					))}
+					{other && <option value='other'>other</option>}
 				</select>
 			</div>
 		);

@@ -1,14 +1,54 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { expand, shrink } from '../../../store/slices/toggleSlice';
 import styles from './SIdebar.module.css';
 
 const Sidebar = ({ selected }) => {
-	return (
-		<div className={styles.container}>
-			<div className={styles.logo}>
-				<img src='/logo.png' />
+	const { toggled } = useSelector(state => state.toggle);
+	const dispatch = useDispatch();
+	const Section = ({ children, title }) => {
+		return (
+			<div className={styles.section}>
+				<div className={styles.sectionTitle}>
+					<p>{!toggled ? title : '...'}</p>
+				</div>
+				<div>{children}</div>
 			</div>
+		);
+	};
 
+	const Item = ({ children, selected, onClick }) => {
+		const style = selected == children ? { color: '#f5f5f5' } : {};
+		const ico = children.toLowerCase();
+		const icon =
+			selected == children ? `/icons/${ico}-selected.png` : `/icons/${ico}.png`;
+		return (
+			<div className={styles.item} onClick={onClick}>
+				<img src={icon} alt='ico' />
+				{!toggled && <a style={style}>{children}</a>}
+			</div>
+		);
+	};
+	return (
+		<div className={!toggled ? styles.container : styles.toggle}>
+			<div className={styles.logo}>
+				<img
+					src='/icons/toggle.png'
+					onClick={() => {
+						if (!toggled) {
+							dispatch(shrink());
+						} else {
+							dispatch(expand());
+						}
+					}}
+				/>
+				{!toggled && (
+					<Link href='/'>
+						<h6>Thinkventory System</h6>
+					</Link>
+				)}
+			</div>
 			<div className={styles.items}>
 				<Link href='/'>
 					<Item selected={selected}>Dashboard</Item>
@@ -65,31 +105,7 @@ const Sidebar = ({ selected }) => {
 				<Link href='/settings'>
 					<Item selected={selected}>Settings</Item>
 				</Link>
-			</div>
-		</div>
-	);
-};
-
-const Section = ({ children, title }) => {
-	return (
-		<div className={styles.section}>
-			<div className={styles.sectionTitle}>
-				<p>{title}</p>
-			</div>
-			<div>{children}</div>
-		</div>
-	);
-};
-
-const Item = ({ children, selected, onClick }) => {
-	const style = selected == children ? { color: '#f5f5f5' } : {};
-	const ico = children.toLowerCase();
-	const icon =
-		selected == children ? `/icons/${ico}-selected.png` : `/icons/${ico}.png`;
-	return (
-		<div className={styles.item} onClick={onClick}>
-			<img src={icon} alt='ico' />
-			<a style={style}>{children}</a>
+			</div>{' '}
 		</div>
 	);
 };

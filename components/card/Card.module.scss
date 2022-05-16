@@ -1,0 +1,42 @@
+@import '../../styles/imports';
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.card {
+	border: 0.5px solid rgba(#888, 0.2);
+	padding: 16px;
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	font-family: 'Montserrat', 'sans-sherif';
+
+	.image {
+		flex: 1;
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+	main {
+		flex: 1;
+		margin: 8px 0;
+	}
+}
+
+.clickable {
+	cursor: pointer;
+	&:hover {
+		background-color: whitesmoke;
+	}
+}
+
+.cardTitle {
+	margin-bottom: 4px;
+	h6 {
+		font-family: 'Montserrat', 'sans-sherif';
+	}
+}

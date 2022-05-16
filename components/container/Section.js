@@ -7,25 +7,32 @@ const Section = ({
 	align,
 	flex,
 	justify,
-	mv,
-	mh,
 	mt,
 	mb,
 	mr,
 	ml,
 	m,
+	p,
+	pl,
+	pr,
+	pt,
+	pb,
 	style,
+	bg,
 }) => {
 	return (
 		<div
 			style={{
 				...(m && { margin: m }),
-				...(mv && { marginVertical: mv }),
-				...(mh && { marginHorizontal: mh }),
 				...(mt && { marginTop: mt }),
 				...(mb && { marginBottom: mb }),
 				...(ml && { marginLeft: ml }),
 				...(mr && { marginRight: mr }),
+				...(p && { padding: p }),
+				...(pt && { paddingTop: pt }),
+				...(pb && { paddingBottom: pb }),
+				...(pl && { paddingLeft: pl }),
+				...(pr && { paddingRight: pr }),
 
 				// marginVertical: mv ? mv : 0,
 				// marginHorizontal: mh ? mh : 0,
@@ -38,6 +45,7 @@ const Section = ({
 				flexDirection: horizontal ? 'row' : 'column',
 				justifyContent: justify ? justify : 'flex-start',
 				alignItems: align ? align : 'flex-start',
+				backgroundColor: bg ? bg : 'transparent',
 				...style,
 			}}>
 			{children}

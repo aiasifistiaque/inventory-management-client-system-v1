@@ -3,8 +3,10 @@ import Navbar from '../navbar/Navbar';
 import Sidebar from '../sidebar/Sidebar';
 import styles from './Page.module.css';
 import Head from 'next/head';
+import { useSelector } from 'react-redux';
 
 const Page = ({ children, selected }) => {
+	const { toggled } = useSelector(state => state.toggle);
 	return (
 		<div>
 			<Head>
@@ -16,7 +18,9 @@ const Page = ({ children, selected }) => {
 			</Head>
 			<Sidebar selected={selected} />
 			<Navbar />
-			<main className={styles.container}>{children}</main>
+			<main className={toggled ? styles.toggled : styles.container}>
+				{children}
+			</main>
 		</div>
 	);
 };

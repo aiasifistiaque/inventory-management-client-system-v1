@@ -1,45 +1,60 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
-.toggled {
-  margin-left: 60px;
+.cards {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card {
+  border: 0.5px solid rgba(136, 136, 136, 0.2);
+  padding: 16px;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: #f9f9f9;
-  height: 100vh;
-  padding: 64px 16px 0 16px;
-  overflow-y: scroll;
+  font-family: 'Montserrat', 'sans-sherif';
 }
 
-.container {
-  margin-left: 60px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.card .image {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background-color: #f9f9f9;
-  height: 100vh;
-  padding: 64px 16px 0 16px;
-  overflow-y: scroll;
 }
 
-@media (min-width: 1008px) {
-  .container {
-    margin-left: 220px;
-  }
+.card .image img {
+  width: 100%;
+  height: auto;
 }
-/*# sourceMappingURL=Page.module.css.map */
+
+.card main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 8px 0;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  background-color: whitesmoke;
+}
+
+.cardTitle {
+  margin-bottom: 4px;
+}
+
+.cardTitle h6 {
+  font-family: 'Montserrat', 'sans-sherif';
+}
+/*# sourceMappingURL=Card.module.css.map */

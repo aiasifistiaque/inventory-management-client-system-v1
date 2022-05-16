@@ -1,11 +1,27 @@
 //@at-root
+@import '../../../styles/imports';
 
-.container {
+.toggled {
+	margin-left: 60px;
 	display: flex;
 	flex: 1;
 	flex-direction: column;
 	background-color: #f9f9f9;
 	height: 100vh;
-	padding: 72px 16px 0 18vw;
+	padding: 64px 16px 0 16px;
 	overflow-y: scroll;
+}
+
+.container {
+	margin-left: 60px;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	background-color: #f9f9f9;
+	height: 100vh;
+	padding: 64px 16px 0 16px;
+	overflow-y: scroll;
+	@include desktop {
+		margin-left: 220px;
+	}
 }

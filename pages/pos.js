@@ -3,26 +3,27 @@ import { useRouter } from 'next/router';
 import Page from '../components/nav/Page/Page';
 import {
 	useAddSaleMutation,
+	useGetAllCategoriesQuery,
 	useGetAllProductsQuery,
 	useGetProductByIdQuery,
 } from '../store/services/productService';
-import { DetailsTable } from '../components/table/Details';
 import Input from '../components/auth/Input';
 import Button from '../components/buttons/Button';
 
-import {
-	Item as TableItem,
-	Row as TableRow,
-	Table,
-} from '../components/table/Table';
 import Text from '../components/util/Text';
 import dynamic from 'next/dynamic';
-import {
-	SmallItem,
-	SmallRow,
-	SmallTable,
-} from '../components/table/small/SmallTable';
+
 import Section from '../components/container/Section';
+import SelectedProducts from '../components/pos/SelectedProducts';
+import ProductsList from '../components/pos/ProductsList';
+import {
+	PosFooter,
+	PosFooterItem,
+	PosLeftTable,
+	PosPage,
+	PosRightTable,
+	PosTable,
+} from '../components/pos/PosItems';
 
 const BarcodeScannerComponent = dynamic(
 	() => import('react-qr-barcode-scanner'),
@@ -34,18 +35,54 @@ const BarcodeScannerComponent = dynamic(
 const Pospage = () => {
 	const router = useRouter();
 
-	const [quantity, setQuantity] = useState();
-	const [price, setPrice] = useState();
+	const [category, setCategory] = useState();
+
+	const categories = useGetAllCategoriesQuery();
 
 	const [product, setProduct] = useState();
-	const [orderItems, setOrderItems] = useState([]);
 
-	const products = useGetAllProductsQuery();
+	const productData = useGetProductByIdQuery(product);
+
+	const [orderItems, setOrderItems] = useState([]);
 
 	const [addPurchaseOrder, result] = useAddSaleMutation();
 	const { isLoading, isSuccess, isError } = result;
 	const [barCode, setBarCode] = useState('');
 	const [reader, setReader] = useState(false);
+	const [test, setTest] = useState();
+	const [reload, setReload] = useState(false);
+
+	useEffect(() => {
+		setTest(productData.isLoading);
+		if (
+			product &&
+			!productData.isLoading &&
+			!productData.error &&
+			productData?.data?.data?._id
+		) {
+			const exists = orderItems.findIndex(
+				item => item.product === productData.data.data._id
+			);
+
+			if (exists >= 0) {
+				const newArr = orderItems;
+				newArr[exists].quantity += 1;
+				setOrderItems(x => [...newArr]);
+				setProduct(null);
+			} else {
+				const newItem = {
+					name: productData?.data?.data?.name && productData?.data?.data.name,
+					product: productData?.data?.data?._id && productData?.data?.data._id,
+					quantity: 1,
+					price:
+						productData?.data?.data?.price && productData?.data?.data.price,
+				};
+
+				setOrderItems(x => [...x, newItem]);
+				setProduct(null);
+			}
+		}
+	}, [productData.isLoading, product, reload]);
 
 	const totalPrice = () => {
 		let price = 0;
@@ -57,50 +94,60 @@ const Pospage = () => {
 		orderItems.map(i => (quantity += i.quantity));
 		return quantity;
 	};
-	const [selected, setSelected] = useState();
 
-	useEffect(() => {
-		if (product) {
-			setSelected(JSON.parse(product));
-		}
-
-		// setPrice('');
-		// setQuantity('');
-	}, [product]);
-
-	const addItem = () => {
-		const parsedProduct = JSON.parse(product);
-
-		const exists = orderItems.findIndex(
-			item => item.product === parsedProduct._id
+	const del = productToDelete => {
+		const newArr = orderItems.filter(
+			item => item.product !== productToDelete.product
 		);
 
-		// orderItems.map((item, i) => {
-		// 	console.log(parsedProduct._id);
-		// 	if (item.product === parsedProduct._id) {
-		// 		console.log('item exists');
-		// 	} else {
-		// 		console.log('item does not exist');
-		// 	}
-		// });
+		setOrderItems(x => [...newArr]);
+	};
+
+	const increase = productToIncrease => {
+		const exists = orderItems.findIndex(
+			item => item.product === productToIncrease.product
+		);
+
+		if (exists < 0) return;
+		const newArr = orderItems;
+		newArr[exists].quantity += 1;
+		setOrderItems(x => [...newArr]);
+	};
+
+	const decrease = productToDecrease => {
+		const exists = orderItems.findIndex(
+			item => item.product === productToDecrease.product
+		);
+
+		if (exists < 0) return;
+		const newArr = orderItems;
+		if (newArr[exists].quantity <= 1) return;
+
+		newArr[exists].quantity -= 1;
+		setOrderItems(x => [...newArr]);
+	};
+
+	const addItem = productToAdd => {
+		const exists = orderItems.findIndex(
+			item => item.product === productToAdd._id
+		);
 
 		if (exists >= 0) {
-			orderItems[exists].quantity += 1;
+			const newArr = orderItems;
+			newArr[exists].quantity += 1;
+			setOrderItems(x => [...newArr]);
 		} else {
 			const newItem = {
-				name: parsedProduct?.name && parsedProduct.name,
-				product: parsedProduct?._id && parsedProduct._id,
+				name: productToAdd?.name && productToAdd.name,
+				product: productToAdd?._id && productToAdd._id,
 				quantity: 1,
-				price: parsedProduct?.price && parsedProduct.price,
+				price: productToAdd?.price && productToAdd.price,
 			};
 
-			if (price == '' || quantity == '') {
-				return;
-			}
 			setOrderItems(x => [...x, newItem]);
 		}
 
-		setProduct('');
+		//setProduct('');
 	};
 
 	const submitForm = async e => {
@@ -121,11 +168,12 @@ const Pospage = () => {
 	return (
 		<div>
 			<Page selected='Sales'>
-				<DetailsTable>
-					<form onSubmit={submitForm}>
+				<PosPage ph={16} pv={8}>
+					<form onSubmit={submitForm} style={{ width: '100%' }}>
 						<Section horizontal>
-							<Section mr={8} flex={1}>
+							<PosLeftTable mr={8} flex={1} border='none'>
 								<h5>Create New Sale</h5>
+
 								{reader && (
 									<BarcodeScannerComponent
 										width={200}
@@ -134,6 +182,7 @@ const Pospage = () => {
 											if (result) {
 												setProduct(result.text);
 												setReader(false);
+												setReload(!reload);
 											} else setBarCode('Not Found');
 										}}
 									/>
@@ -149,7 +198,7 @@ const Pospage = () => {
 									<Button onClick={() => setReader(false)}>Stop scan</Button>
 								)}
 
-								{products?.data?.data && (
+								{/* {products?.data?.data && (
 									<Section horizontal align='center'>
 										<Input
 											label='Product'
@@ -166,48 +215,51 @@ const Pospage = () => {
 											<Button disabled>Add</Button>
 										)}
 									</Section>
-								)}
+								)} */}
 
-								{/* <p>{product.name}</p> */}
-							</Section>
-							<Section flex={1}>
-								<SmallTable title='Selected Products'>
-									<SmallRow title>
-										<SmallItem title>Name</SmallItem>
-										<SmallItem title>Price</SmallItem>
-										<SmallItem title>Quantity</SmallItem>
-									</SmallRow>
-									{orderItems &&
-										orderItems.length > 0 &&
-										orderItems.map((item, i) => (
-											<SmallRow key={i}>
-												<SmallItem>{item?.name && item.name}</SmallItem>
-												<SmallItem>
-													Tk. {item?.price && item.price} x {item.quantity}
-												</SmallItem>
-												<SmallItem>{item?.quantity && item.quantity}</SmallItem>
-											</SmallRow>
-										))}
-									<SmallRow title>
-										<SmallItem>Total Items: {totalQuantity()}</SmallItem>
-									</SmallRow>
-									<SmallRow title>
-										<SmallItem>Sub Total Tk. {totalPrice()}</SmallItem>
-									</SmallRow>
-								</SmallTable>
-
-								{isLoading ? (
-									<Button>processing...</Button>
-								) : (
-									<Button submit>Submit Order</Button>
+								{categories?.data?.data && (
+									<Section horizontal align='center'>
+										<Input
+											label='Categories'
+											value={category}
+											onChange={e => setCategory(e)}
+											placeholder='Select a category'
+											select
+											data={categories.data.data}
+										/>
+									</Section>
 								)}
-							</Section>
+								<ProductsList category={category} addItem={e => addItem(e)} />
+							</PosLeftTable>
+							<PosRightTable border='none'>
+								<PosTable title='Selected Products'>
+									<SelectedProducts
+										orderItems={orderItems}
+										increase={e => increase(e)}
+										decrease={e => decrease(e)}
+										del={e => del(e)}
+									/>
+								</PosTable>
+								<PosFooter>
+									<PosFooterItem title='Total Items'>
+										{totalQuantity()}
+									</PosFooterItem>
+									<PosFooterItem title='Sub Total'>
+										Tk. {totalPrice()}
+									</PosFooterItem>
+									{isLoading ? (
+										<Button>processing...</Button>
+									) : (
+										<Button submit>Submit Order</Button>
+									)}
+								</PosFooter>
+							</PosRightTable>
 						</Section>
 
 						{isError && <Text error>There was an error, try again</Text>}
 						{isSuccess && <Text success>Order placed successfully</Text>}
 					</form>
-				</DetailsTable>
+				</PosPage>
 			</Page>
 		</div>
 	);

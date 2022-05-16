@@ -20,6 +20,7 @@ const AddProduct = () => {
 	const [price, setPrice] = useState();
 	const [cost, setCost] = useState();
 	const [stock, setStock] = useState();
+	const [otherCategory, setOtherCategory] = useState();
 
 	const brands = useGetAllBrandsQuery();
 	const categories = useGetAllCategoriesQuery();
@@ -38,6 +39,7 @@ const AddProduct = () => {
 			price,
 			cost,
 			stock: stock ? stock : 0,
+			otherCategory,
 		});
 	};
 
@@ -68,6 +70,16 @@ const AddProduct = () => {
 								required
 								select
 								data={categories.data.data}
+								other
+							/>
+						)}
+						{category == 'other' && (
+							<Input
+								label='Category Name'
+								value={otherCategory}
+								onChange={e => setOtherCategory(e)}
+								placeholder='Enter Other Category Name'
+								required
 							/>
 						)}
 						{brands?.data?.data && (
@@ -78,7 +90,6 @@ const AddProduct = () => {
 								placeholder='Product Brand'
 								select
 								data={brands.data.data}
-								required
 							/>
 						)}
 
