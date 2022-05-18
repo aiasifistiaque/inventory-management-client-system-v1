@@ -2,8 +2,19 @@ import React from 'react';
 import moment from 'moment';
 import styles from './Table.module.css';
 import Link from 'next/link';
+import { Placeholder } from 'semantic-ui-react';
 
-export const DetailsTable = ({ children, loading, title }) => {
+export const DetailsTable = ({ children, loading, title, isLoading }) => {
+	if (isLoading)
+		return (
+			<div
+				className={styles.container}
+				style={{
+					padding: `${24}px ${32}px`,
+				}}>
+				<DetailsPlaceholder />
+			</div>
+		);
 	return (
 		<div
 			className={styles.container}
@@ -36,5 +47,34 @@ export const DetailsItem = ({ children, title, date }) => {
 			<h6>{title}</h6>
 			<p>{date ? moment(children).calendar() : children}</p>
 		</div>
+	);
+};
+
+const DetailsPlaceholder = () => {
+	return (
+		<Placeholder>
+			<Placeholder.Header image>
+				<Placeholder.Line />
+				<Placeholder.Line />
+			</Placeholder.Header>
+			<Placeholder.Paragraph>
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+			</Placeholder.Paragraph>
+			<Placeholder.Paragraph>
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+				<Placeholder.Line />
+			</Placeholder.Paragraph>
+		</Placeholder>
 	);
 };

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Page from '../components/nav/Page/Page';
+import Page from '../../../components/nav/Page/Page';
 import {
 	useAddPurchaseOrderMutation,
 	useGetAllProductsQuery,
 	useGetProductByIdQuery,
-} from '../store/services/productService';
-import { DetailsItem, DetailsTable } from '../components/table/Details';
-import Input from '../components/auth/Input';
-import Button from '../components/buttons/Button';
+} from '../../../store/services/productService';
+import { DetailsItem, DetailsTable } from '../../../components/table/Details';
+import Input from '../../../components/auth/Input';
+import Button from '../../../components/buttons/Button';
 
 import {
 	Item as TableItem,
 	Row as TableRow,
 	Table,
-} from '../components/table/Table';
-import Text from '../components/util/Text';
+} from '../../../components/table/Table';
+import Text from '../../../components/util/Text';
 
 const AddPurchaseOrder = () => {
 	const router = useRouter();
@@ -64,7 +64,7 @@ const AddPurchaseOrder = () => {
 	};
 
 	useEffect(() => {
-		isSuccess && router.push('/purchases');
+		isSuccess && router.push(`/b/${router.query.store}/purchases`);
 	}, [isSuccess]);
 
 	return (

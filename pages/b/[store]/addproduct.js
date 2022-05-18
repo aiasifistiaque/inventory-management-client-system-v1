@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Page from '../components/nav/Page/Page';
+import Page from '../../../components/nav/Page/Page';
 import {
 	useAddProductMutation,
 	useGetAllBrandsQuery,
 	useGetAllCategoriesQuery,
-} from '../store/services/productService';
-import { DetailsTable } from '../components/table/Details';
-import Input from '../components/auth/Input';
-import Button from '../components/buttons/Button';
-import useAuth from '../hooks/useAuth';
-import Text from '../components/util/Text';
+} from '../../../store/services/productService';
+import { DetailsTable } from '../../../components/table/Details';
+import Input from '../../../components/auth/Input';
+import Button from '../../../components/buttons/Button';
+import useAuth from '../../../hooks/useAuth';
+import Text from '../../../components/util/Text';
 
 const AddProduct = () => {
 	const router = useRouter();
@@ -21,6 +21,8 @@ const AddProduct = () => {
 	const [cost, setCost] = useState();
 	const [stock, setStock] = useState();
 	const [otherCategory, setOtherCategory] = useState();
+
+	const store = router.query.store;
 
 	const brands = useGetAllBrandsQuery();
 	const categories = useGetAllCategoriesQuery();
@@ -40,12 +42,13 @@ const AddProduct = () => {
 			cost,
 			stock: stock ? stock : 0,
 			otherCategory,
+			store,
 		});
 	};
 
 	useEffect(() => {
 		if (isSuccess) {
-			router.push('/products');
+			router.push(`/b/${store}/products`);
 		}
 	}, [isSuccess]);
 

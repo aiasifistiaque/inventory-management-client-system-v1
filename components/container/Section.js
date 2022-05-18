@@ -40,6 +40,7 @@ const Section = ({
 				// marginBottom: mb ? mb : 0,
 				// marginRight: mr ? mr : 0,
 				// marginLeft: ml ? ml : 0,
+				width: '100%',
 				display: 'flex',
 				flex: flex ? flex : 1,
 				flexDirection: horizontal ? 'row' : 'column',

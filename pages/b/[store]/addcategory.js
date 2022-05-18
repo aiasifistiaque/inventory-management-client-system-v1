@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Page from '../components/nav/Page/Page';
-import { useAddCategoryMutation } from '../store/services/productService';
-import { DetailsTable } from '../components/table/Details';
-import Input from '../components/auth/Input';
-import Button from '../components/buttons/Button';
-import Text from '../components/util/Text';
+import Page from '../../../components/nav/Page/Page';
+import { useAddCategoryMutation } from '../../../store/services/productService';
+import { DetailsTable } from '../../../components/table/Details';
+import Input from '../../../components/auth/Input';
+import Button from '../../../components/buttons/Button';
+import Text from '../../../components/util/Text';
 
 const Addcategory = () => {
 	const router = useRouter();
@@ -23,7 +23,7 @@ const Addcategory = () => {
 
 	useEffect(() => {
 		if (isSuccess) {
-			router.push('/categories');
+			router.push(`/b/${router.query.store}/categories`);
 		}
 	}, [isSuccess]);
 

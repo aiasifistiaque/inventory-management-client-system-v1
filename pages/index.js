@@ -1,21 +1,17 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import { Router, useRouter } from 'next/router';
-import { useEffect } from 'react';
-import {
-	Unit,
-	UnitBox,
-	UnitItem,
-	UnitLayer,
-} from '../components/dashboard/unit/Unit';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
+import Button from '../components/buttons/Button';
+import { Card, CardItem, Cards, CardTitle } from '../components/card/Card';
+import Section from '../components/container/Section';
 import Page from '../components/nav/Page/Page';
+import { DetailsTable } from '../components/table/Details';
+import { Hr, Mb, Mt } from '../components/util/Margins';
 import useAuth from '../hooks/useAuth';
-import { useGetDashboardQuery } from '../store/services/productService';
+import { useGetMyStoresQuery } from '../store/services/productService';
 
-export default function Home() {
-	const router = useRouter();
+const Landingpage = () => {
 	const auth = useAuth();
-	const { data, isLoading, error } = useGetDashboardQuery();
+	const { data, isLoading, isError } = useGetMyStoresQuery();
 	useEffect(() => {
 		if (!auth.loading) {
 			if (!auth.isLoggedIn) {
@@ -26,109 +22,58 @@ export default function Home() {
 	if (auth.loading) return null;
 
 	return (
-		<Page selected='Dashboard'>
-			<UnitBox isLoading={isLoading}>
-				<UnitLayer title='Overview'>
-					<Unit title='Products'>
-						<UnitItem> {data?.data?.products && data.data.products}</UnitItem>
-					</Unit>
-					<Unit title='Categories'>
-						<UnitItem>
-							{data?.data?.categories && data.data.categories}
-						</UnitItem>
-					</Unit>
-					<Unit title='Brands'>
-						<UnitItem>{data?.data?.brands && data.data.brands}</UnitItem>
-					</Unit>
-					<Unit title='Products'>
-						<UnitItem> {data?.data?.products && data.data.products}</UnitItem>
-					</Unit>
-					<Unit title='Inventory'>
-						<UnitItem title='Total Item'>
-							{data?.data?.inventory?.count && data.data.inventory.count}
-						</UnitItem>
-						<UnitItem value title='Total Value'>
-							{data?.data?.inventory?.value && data.data.inventory.value}
-						</UnitItem>
-					</Unit>
-					<History data={data?.data?.purchase && data.data.purchase}>
-						{`Purchases [All Time]`}
-					</History>
-					<History data={data?.data?.sales && data.data.sales}>
-						{`Sales [All Time]`}{' '}
-					</History>
-					<History data={data?.data?.expenses && data.data.expenses}>
-						{`Expenses [All Time]`}{' '}
-					</History>
-				</UnitLayer>
-				<UnitLayer title='Purchases'>
-					<History data={data?.data?.purchase && data.data.purchase}>
-						All Time
-					</History>
-
-					<History data={data?.data?.purchaseToday && data.data.purchaseToday}>
-						Today
-					</History>
-					<History
-						data={data?.data?.purchaseYesterday && data.data.purchaseYesterday}>
-						Yesterday
-					</History>
-					<History
-						data={data?.data?.purchaseThisWeek && data.data.purchaseThisWeek}>
-						This Week
-					</History>
-					<History
-						data={data?.data?.purchaseLastWeek && data.data.purchaseLastWeek}>
-						Last Week
-					</History>
-					<History
-						data={data?.data?.purchaseThisMonth && data.data.purchaseThisMonth}>
-						This Month
-					</History>
-					<History
-						data={data?.data?.purchaseLastMonth && data.data.purchaseLastMonth}>
-						Last Month
-					</History>
-				</UnitLayer>
-				<UnitLayer title='Sales'>
-					<History data={data?.data?.sales && data.data.sales}>
-						All Time
-					</History>
-
-					<History data={data?.data?.salesToday && data.data.salesToday}>
-						Today
-					</History>
-					<History
-						data={data?.data?.salesYesterday && data.data.salesYesterday}>
-						Yesterday
-					</History>
-					<History data={data?.data?.salesThisWeek && data.data.salesThisWeek}>
-						This Week
-					</History>
-					<History data={data?.data?.salesLastWeek && data.data.salesLastWeek}>
-						Last Week
-					</History>
-					<History
-						data={data?.data?.salesThisMonth && data.data.salesThisMonth}>
-						This Month
-					</History>
-					<History
-						data={data?.data?.salesLastMonth && data.data.salesLastMonth}>
-						Last Month
-					</History>
-				</UnitLayer>
-			</UnitBox>
+		<Page landing={true}>
+			<Section vertical flex={1}>
+				<Section horizontal justify='space-between' flex={0.1}>
+					<h4>Projects</h4>
+					<Btn />
+				</Section>
+				<Section>
+					<DetailsTable isLoading={isLoading}>
+						{data?.data?.length > 0 ? (
+							<Cards>
+								{data?.data &&
+									data.data.map((item, i) => (
+										<Card key={i} w={300}>
+											<CardTitle>
+												{item?.store?.name && item.store.name}
+											</CardTitle>
+											<CardItem small>
+												Store id: {item?.store?._id && item.store._id}
+											</CardItem>
+											<CardItem small>
+												Type: {item?.store?.category && item.store.category}{' '}
+												Store
+											</CardItem>
+											<Mt size={16} />
+											<Hr />
+											<CardItem>Role: {item?.role && item.role}</CardItem>
+											<CardItem link href={`/b/${item.store._id}`}>
+												Visit Store
+											</CardItem>
+										</Card>
+									))}
+							</Cards>
+						) : (
+							<Section justify='center' align='center' pt={64}>
+								<h4>You do not have any projects yet</h4>
+								<Mb size={8} />
+								<Btn />
+							</Section>
+						)}
+					</DetailsTable>
+				</Section>
+			</Section>
 		</Page>
 	);
-}
+};
 
-const History = ({ children, data }) => {
+const Btn = () => {
 	return (
-		<Unit title={children}>
-			<UnitItem title='Total'>{data?.count && data?.count}</UnitItem>
-			<UnitItem value title='Value'>
-				{data?.value && data.value}
-			</UnitItem>
-		</Unit>
+		<Link href='/addproject'>
+			<Button icon='create-white'>Create Project</Button>
+		</Link>
 	);
 };
+
+export default Landingpage;

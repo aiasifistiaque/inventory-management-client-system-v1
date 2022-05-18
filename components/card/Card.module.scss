@@ -40,3 +40,45 @@
 		font-family: 'Montserrat', 'sans-sherif';
 	}
 }
+
+.sub {
+	p {
+		font-weight: 800;
+		font-size: 0.8rem;
+		color: #888;
+	}
+}
+
+.small {
+	p {
+		font-weight: 500;
+		font-size: 0.8rem;
+		color: #424242;
+	}
+}
+
+.cardItem {
+	p {
+		font-weight: 500;
+		font-size: 1rem;
+		color: #424242;
+	}
+}
+
+.danger {
+	p {
+		font-weight: 700;
+		font-size: 0.8rem;
+		color: crimson;
+		font-style: italic;
+	}
+}
+
+.link {
+	margin: 0.5rem 0;
+	a {
+		font-weight: 700;
+		font-size: 1rem;
+		color: dodgerblue;
+	}
+}

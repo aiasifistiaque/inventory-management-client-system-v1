@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Page from '../components/nav/Page/Page';
-import {
-	useAddCustomerMutation,
-	useAddExpensesMutation,
-} from '../store/services/productService';
-import { DetailsTable } from '../components/table/Details';
-import Input from '../components/auth/Input';
-import Button from '../components/buttons/Button';
-import Text from '../components/util/Text';
+import Page from '../../../components/nav/Page/Page';
+import { useAddCustomerMutation } from '../../../store/services/productService';
+import { DetailsTable } from '../../../components/table/Details';
+import Input from '../../../components/auth/Input';
+import Button from '../../../components/buttons/Button';
+import Text from '../../../components/util/Text';
 
 const AddCustomers = () => {
 	const router = useRouter();
@@ -31,7 +28,7 @@ const AddCustomers = () => {
 
 	useEffect(() => {
 		if (isSuccess) {
-			router.push('/customers');
+			router.push(`/b/${router.query.store}/customers`);
 		}
 	}, [isSuccess]);
 

@@ -4,6 +4,9 @@ import { Card, CardItem, Cards, CardTitle } from '../card/Card';
 
 const ProductsList = ({ category, addItem }) => {
 	const { data, isLoading, error } = useGetAllProductsQuery(category);
+	const onClick = item => {
+		addItem(item);
+	};
 	return (
 		<Cards title='All Products'>
 			{!isLoading &&
@@ -12,11 +15,14 @@ const ProductsList = ({ category, addItem }) => {
 					<Card
 						key={i}
 						w={220}
-						onClick={() => {
-							addItem(item);
-						}}>
+						onClick={item.stock > 0 ? () => onClick(item) : null}>
 						<CardTitle>{item?.name && item.name}</CardTitle>
 						<CardItem>{item?.price && `Tk. ${item.price}`}</CardItem>
+						{item.stock > 0 ? (
+							<CardItem sub>Stock: {item?.stock && `${item.stock}`}</CardItem>
+						) : (
+							<CardItem danger>Out of stock</CardItem>
+						)}
 					</Card>
 				))}
 		</Cards>

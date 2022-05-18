@@ -10,8 +10,12 @@ export const productsApi = createApi({
 		baseUrl: `${lib.api.backend}/api`,
 		prepareHeaders: (headers, { getState }) => {
 			const token = getState().auth.token;
+			const store = getState().store.id;
 			if (token) {
 				headers.set('authorization', token);
+			}
+			if (store) {
+				headers.set('store', store);
 			}
 			return headers;
 		},
@@ -26,12 +30,33 @@ export const productsApi = createApi({
 		'Expenses',
 		'Customers',
 		'Suppliers',
+		'Self',
+		'Store',
+		'SingleStore',
+		'Employee',
 	],
 
 	endpoints: builder => ({
+		getSelf: builder.query({
+			query: () => `/self`,
+			providesTags: ['Self'],
+		}),
+		getMyStores: builder.query({
+			query: () => `/store`,
+			providesTags: ['Store'],
+		}),
+		getStoreData: builder.query({
+			query: id => `/store/${id}`,
+
+			providesTags: ['SingleStore'],
+		}),
 		getDashboard: builder.query({
 			query: id => `/dashboard`,
 			providesTags: ['Dashboard'],
+		}),
+		getAllEmployee: builder.query({
+			query: () => `/employee`,
+			providesTags: ['Employee'],
 		}),
 		getProductById: builder.query({
 			query: id => `/products/${id}`,
@@ -82,6 +107,16 @@ export const productsApi = createApi({
 				};
 			},
 			invalidatesTags: ['Brands', 'Dashboard'],
+		}),
+		addStore: builder.mutation({
+			query(body) {
+				return {
+					url: `/store`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Store'],
 		}),
 		addExpenses: builder.mutation({
 			query(body) {
@@ -144,6 +179,16 @@ export const productsApi = createApi({
 			},
 			invalidatesTags: ['Customers'],
 		}),
+		addEmployee: builder.mutation({
+			query(body) {
+				return {
+					url: `/employee`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Employee'],
+		}),
 		addSupplier: builder.mutation({
 			query(body) {
 				return {
@@ -158,6 +203,8 @@ export const productsApi = createApi({
 });
 
 export const {
+	useGetSelfQuery,
+	useGetMyStoresQuery,
 	useGetProductByIdQuery,
 	useGetAllProductsQuery,
 	useGetAllCategoriesQuery,
@@ -176,4 +223,8 @@ export const {
 	useGetAllSuppliersQuery,
 	useAddCustomerMutation,
 	useAddSupplierMutation,
+	useAddStoreMutation,
+	useGetStoreDataQuery,
+	useGetAllEmployeeQuery,
+	useAddEmployeeMutation,
 } = productsApi;

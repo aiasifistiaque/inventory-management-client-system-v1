@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import styles from './Card.module.css';
 
@@ -27,7 +28,33 @@ export const CardTitle = ({ children, image }) => {
 	);
 };
 
-export const CardItem = ({ children }) => {
+export const CardItem = ({ children, sub, danger, small, href }) => {
+	if (href)
+		return (
+			<Link href={href}>
+				<div className={styles.link}>
+					<a>{children}</a>
+				</div>
+			</Link>
+		);
+	if (danger)
+		return (
+			<div className={styles.danger}>
+				<p>{children}</p>
+			</div>
+		);
+	if (sub)
+		return (
+			<div className={styles.sub}>
+				<p>{children}</p>
+			</div>
+		);
+	if (small)
+		return (
+			<div className={styles.small}>
+				<p>{children}</p>
+			</div>
+		);
 	return (
 		<div className={styles.cardItem}>
 			<p>{children}</p>

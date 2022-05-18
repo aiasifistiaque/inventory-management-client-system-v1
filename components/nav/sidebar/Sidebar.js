@@ -1,12 +1,16 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useGetStoreDataQuery } from '../../../store/services/productService';
 import { expand, shrink } from '../../../store/slices/toggleSlice';
 import styles from './SIdebar.module.css';
 
-const Sidebar = ({ selected }) => {
+const Sidebar = ({ selected, store }) => {
 	const { toggled } = useSelector(state => state.toggle);
 	const dispatch = useDispatch();
+
+	const storeData = useGetStoreDataQuery(store);
+
 	const Section = ({ children, title }) => {
 		return (
 			<div className={styles.section}>
@@ -30,6 +34,9 @@ const Sidebar = ({ selected }) => {
 			</div>
 		);
 	};
+
+	const url = `/b/${store}`;
+
 	return (
 		<div className={!toggled ? styles.container : styles.toggle}>
 			<div className={styles.logo}>
@@ -44,65 +51,68 @@ const Sidebar = ({ selected }) => {
 					}}
 				/>
 				{!toggled && (
-					<Link href='/'>
-						<h6>Thinkventory System</h6>
+					<Link href={`${url}`}>
+						<h6>{storeData?.data?.store?.name && storeData.data.store.name}</h6>
 					</Link>
 				)}
 			</div>
 			<div className={styles.items}>
-				<Link href='/'>
+				<Link href={`${url}/`}>
 					<Item selected={selected}>Dashboard</Item>
 				</Link>
 
 				<Section title={'Sales & Purchase'}>
-					<Link href='/sales'>
+					<Link href={`${url}/sales`}>
 						<Item selected={selected}>Sales</Item>
 					</Link>
-					<Link href='/purchases'>
+					<Link href={`${url}/purchases`}>
 						<Item selected={selected}>Purchases</Item>
 					</Link>
-					<Link href='/expenses'>
+					<Link href={`${url}/expenses`}>
 						<Item selected={selected}>Expenses</Item>
 					</Link>
 				</Section>
 
 				<Section title='Product Info'>
-					<Link href='/products'>
+					<Link href={`${url}/products`}>
 						<Item selected={selected}>Products</Item>
 					</Link>
-					<Link href='/categories'>
+					<Link href={`${url}/categories`}>
 						<Item selected={selected}>Categories</Item>
 					</Link>
-					<Link href='/brands'>
+					<Link href={`${url}/brands`}>
 						<Item selected={selected}>Brands</Item>
 					</Link>
 				</Section>
 				<Section title='Entities'>
-					<Link href='/customers'>
+					<Link href={`${url}/employees`}>
+						<Item selected={selected}>Employees</Item>
+					</Link>
+					<Link href={`${url}/customers`}>
 						<Item selected={selected}>Customers</Item>
 					</Link>
-					<Link href='/suppliers'>
+					<Link href={`${url}/suppliers`}>
 						<Item selected={selected}>Suppliers</Item>
 					</Link>
 				</Section>
 				<Section title={'Stats & Reports'}>
-					<Link href='/stats'>
+					<Link href={`${url}/stats`}>
 						<Item selected={selected}>Stats</Item>
 					</Link>
-					<Link href='/daily'>
+					<Link href={`${url}/daily`}>
 						<Item selected={selected}>Daily</Item>
 					</Link>
-					<Link href='/weekly'>
+					<Link href={`${url}/weekly`}>
 						<Item selected={selected}>Weekly</Item>
 					</Link>
-					<Link href='/monthly'>
+					<Link href={`${url}/monthly`}>
 						<Item selected={selected}>Monthly</Item>
 					</Link>
-					<Link href='/yearly'>
+					<Link href={`${url}/yearly`}>
 						<Item selected={selected}>Yearly</Item>
 					</Link>
 				</Section>
-				<Link href='/settings'>
+				<Link href={`${url}/settings`}>
 					<Item selected={selected}>Settings</Item>
 				</Link>
 			</div>{' '}

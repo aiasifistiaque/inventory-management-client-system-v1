@@ -22,7 +22,7 @@
 .button img, .disabled img, .secondary img, .outlined img, .textButton img {
   width: 24px;
   height: 24px;
-  margin-right: 12px;
+  margin-right: 8px;
   -o-object-fit: contain;
      object-fit: contain;
 }

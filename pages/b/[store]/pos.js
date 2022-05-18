@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Page from '../components/nav/Page/Page';
+import Page from '../../../components/nav/Page/Page';
 import {
 	useAddSaleMutation,
 	useGetAllCategoriesQuery,
-	useGetAllProductsQuery,
 	useGetProductByIdQuery,
-} from '../store/services/productService';
-import Input from '../components/auth/Input';
-import Button from '../components/buttons/Button';
+} from '../../../store/services/productService';
+import Input from '../../../components/auth/Input';
+import Button from '../../../components/buttons/Button';
 
-import Text from '../components/util/Text';
+import Text from '../../../components/util/Text';
 import dynamic from 'next/dynamic';
 
-import Section from '../components/container/Section';
-import SelectedProducts from '../components/pos/SelectedProducts';
-import ProductsList from '../components/pos/ProductsList';
+import Section from '../../../components/container/Section';
+import SelectedProducts from '../../../components/pos/SelectedProducts';
+import ProductsList from '../../../components/pos/ProductsList';
 import {
 	PosFooter,
 	PosFooterItem,
@@ -23,7 +22,7 @@ import {
 	PosPage,
 	PosRightTable,
 	PosTable,
-} from '../components/pos/PosItems';
+} from '../../../components/pos/PosItems';
 
 const BarcodeScannerComponent = dynamic(
 	() => import('react-qr-barcode-scanner'),
@@ -109,6 +108,9 @@ const Pospage = () => {
 		);
 
 		if (exists < 0) return;
+		if (productToIncrease.stock <= productToIncrease.quantity) {
+			return;
+		}
 		const newArr = orderItems;
 		newArr[exists].quantity += 1;
 		setOrderItems(x => [...newArr]);
@@ -133,6 +135,9 @@ const Pospage = () => {
 		);
 
 		if (exists >= 0) {
+			if (productToAdd.stock <= orderItems[exists].quantity) {
+				return;
+			}
 			const newArr = orderItems;
 			newArr[exists].quantity += 1;
 			setOrderItems(x => [...newArr]);
@@ -142,6 +147,7 @@ const Pospage = () => {
 				product: productToAdd?._id && productToAdd._id,
 				quantity: 1,
 				price: productToAdd?.price && productToAdd.price,
+				stock: productToAdd?.stock && productToAdd.stock,
 			};
 
 			setOrderItems(x => [...x, newItem]);

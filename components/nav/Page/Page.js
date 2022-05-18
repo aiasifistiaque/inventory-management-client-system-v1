@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../navbar/Navbar';
 import Sidebar from '../sidebar/Sidebar';
 import styles from './Page.module.css';
 import Head from 'next/head';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useGetStoreDataQuery } from '../../../store/services/productService';
+import { useRouter } from 'next/router';
+import { select } from '../../../store/slices/storeSlice';
 
-const Page = ({ children, selected }) => {
+const Page = ({ children, selected, landing, store }) => {
+	const router = useRouter();
 	const { toggled } = useSelector(state => state.toggle);
+	const st = router.query.store;
+	const storeData = useGetStoreDataQuery(st ? st : 'blank');
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (st) {
+			dispatch(select({ _id: st }));
+		}
+	}, [st]);
+
 	return (
 		<div>
 			<Head>
@@ -16,9 +30,12 @@ const Page = ({ children, selected }) => {
 					content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 				/>
 			</Head>
-			<Sidebar selected={selected} />
-			<Navbar />
-			<main className={toggled ? styles.toggled : styles.container}>
+			{!landing && <Sidebar selected={selected} store={st} />}
+			<Navbar landing={landing} />
+			<main
+				className={
+					landing ? styles.landing : toggled ? styles.toggled : styles.container
+				}>
 				{children}
 			</main>
 		</div>
