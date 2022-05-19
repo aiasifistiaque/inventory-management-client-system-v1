@@ -168,7 +168,8 @@ const Pospage = () => {
 	};
 
 	useEffect(() => {
-		isSuccess && router.push('/sales');
+		isSuccess &&
+			router.push(`/b/${router.query.store}/sale/${result.data.data._id}`);
 	}, [isSuccess]);
 
 	return (

@@ -24,11 +24,9 @@ const Salepage = () => {
 		data && (
 			<div>
 				<Page selected='Invoice' error={error}>
-					<DetailsTable error={error}>
-						<div ref={invRef}>
-							<Invoice data={data} />
-						</div>
-					</DetailsTable>
+					<div ref={invRef}>
+						<Invoice data={data} />
+					</div>
 
 					<Section flex={0.01} horizontal ml={16} justify='center'>
 						<Pdf

@@ -26,7 +26,7 @@ const Invoice = ({ data }) => {
 
 	if (!data) return null;
 	return (
-		<div>
+		<div className={styles.container}>
 			<Section horizontal mb={64}>
 				<Section justify='space-between'>
 					<h5>{store?.name && store.name}</h5>
@@ -101,10 +101,13 @@ const Invoice = ({ data }) => {
 				<h2>Thank You</h2>
 			</Section>
 			<Section mt={32} mb={24} justify='center' align={'center'}>
-				<Barcode value={data?._id ? data._id : ''} height={50} width={2} />,
+				<Barcode value={data?._id ? data._id : ''} height={50} width={1} />,
 			</Section>
 			<Section justify='center' align={'center'}>
-				{`${lib.api.app}/invoices/${data._id}`}
+				<p
+					style={{
+						fontSize: '.8rem',
+					}}>{`${lib.api.app}/invoices/${data._id}`}</p>
 			</Section>
 		</div>
 	);
@@ -118,9 +121,11 @@ const Detail = ({ title, children, date, time }) => {
 	return (
 		<div className={styles.detail}>
 			<h6>{title}</h6>
-			{date || time
-				? moment(children).format(time ? 'hh:mm:ss A' : 'MMMM Do YYYY')
-				: children}
+			<p>
+				{date || time
+					? moment(children).format(time ? 'hh:mm:ss A' : 'MMMM Do YYYY')
+					: children}
+			</p>
 		</div>
 	);
 };

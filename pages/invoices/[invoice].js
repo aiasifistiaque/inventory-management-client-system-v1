@@ -21,17 +21,15 @@ const Invoicepage = () => {
 	return !isLoading && data ? (
 		<div>
 			<Page landing selected='Invoice' error={error}>
-				<DetailsTable error={error}>
-					<div ref={invRef}>
-						<Invoice data={data} />
-					</div>
-				</DetailsTable>
+				<div ref={invRef}>
+					<Invoice data={data} />
+				</div>
 
 				<Section flex={0.01} horizontal ml={16} justify='center'>
 					<Pdf
 						targetRef={invRef}
 						filename={`${data._id}_${data.store.name}`}
-						scale={0.65}>
+						scale={0.6}>
 						{({ toPdf }) => (
 							<Button text onClick={toPdf}>
 								Download Invoice
