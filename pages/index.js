@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import Button from '../components/buttons/Button';
 import { Card, CardItem, Cards, CardTitle } from '../components/card/Card';
@@ -10,6 +11,7 @@ import useAuth from '../hooks/useAuth';
 import { useGetMyStoresQuery } from '../store/services/productService';
 
 const Landingpage = () => {
+	const router = useRouter();
 	const auth = useAuth();
 	const { data, isLoading, isError } = useGetMyStoresQuery();
 	useEffect(() => {
@@ -19,7 +21,7 @@ const Landingpage = () => {
 			}
 		}
 	}, [auth.loading]);
-	if (auth.loading) return null;
+	if (auth.loading || !auth.isLoggedIn) return null;
 
 	return (
 		<Page landing={true}>

@@ -34,6 +34,7 @@ export const productsApi = createApi({
 		'Store',
 		'SingleStore',
 		'Employee',
+		'Logs',
 	],
 
 	endpoints: builder => ({
@@ -49,6 +50,10 @@ export const productsApi = createApi({
 			query: id => `/store/${id}`,
 
 			providesTags: ['SingleStore'],
+		}),
+		getStoreLogs: builder.query({
+			query: () => `/activities`,
+			providesTags: ['Logs'],
 		}),
 		getDashboard: builder.query({
 			query: id => `/dashboard`,
@@ -227,4 +232,5 @@ export const {
 	useGetStoreDataQuery,
 	useGetAllEmployeeQuery,
 	useAddEmployeeMutation,
+	useGetStoreLogsQuery,
 } = productsApi;

@@ -115,6 +115,9 @@ const Sidebar = ({ selected, store }) => {
 				<Link href={`${url}/settings`}>
 					<Item selected={selected}>Settings</Item>
 				</Link>
+				<Link href={`${url}/activity-log`}>
+					<Item selected={selected}>Activity log</Item>
+				</Link>
 			</div>{' '}
 		</div>
 	);
