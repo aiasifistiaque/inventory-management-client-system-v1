@@ -14,7 +14,7 @@ const Activitylogpage = () => {
 					{!isLoading &&
 						data?.data &&
 						data.data.map((item, i) => (
-							<Row>
+							<Row key={i}>
 								<Item>
 									{item?.user?.name && item.user.name}
 									{' ('}
