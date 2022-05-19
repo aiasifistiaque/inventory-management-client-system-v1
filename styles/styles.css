@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 .ma-2 {
   margin: 2px 2px;
@@ -624,7 +623,7 @@ body {
   margin: 0;
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -673,7 +672,6 @@ h1 {
   margin: 0;
   padding: 0;
   line-height: 3rem;
-  font-family: "Montserrat", sans-serif;
   color: #424242;
 }
 
@@ -690,7 +688,6 @@ h2 {
   margin: 0;
   padding: 0;
   line-height: 2.625rem;
-  font-family: "Montserrat", sans-serif;
   color: #424242;
 }
 
@@ -707,7 +704,6 @@ h3 {
   margin: 0;
   padding: 0;
   line-height: 2.25rem;
-  font-family: "Montserrat", sans-serif;
   color: #424242;
 }
 
@@ -724,7 +720,6 @@ h4 {
   margin: 0;
   padding: 0;
   line-height: 3rem;
-  font-family: "Montserrat", sans-serif;
   color: #424242;
 }
 
@@ -734,7 +729,6 @@ h5 {
   margin: 0;
   padding: 0;
   line-height: 1.5;
-  font-family: "Montserrat", sans-serif;
   color: #424242;
 }
 
@@ -745,7 +739,6 @@ h6 {
   padding: 0;
   line-height: 1.5rem;
   color: #424242;
-  font-family: "Montserrat", sans-serif;
 }
 
 input {

@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetStoreDataQuery } from '../../../store/services/productService';
 import { useRouter } from 'next/router';
-import { select } from '../../../store/slices/storeSlice';
+import { employeeRole, select } from '../../../store/slices/storeSlice';
 
 const Page = ({ children, selected, landing, store }) => {
 	const router = useRouter();
@@ -20,6 +20,12 @@ const Page = ({ children, selected, landing, store }) => {
 			dispatch(select({ _id: st }));
 		}
 	}, [st]);
+
+	useEffect(() => {
+		if (!storeData.isFetching && storeData?.data?.role) {
+			dispatch(employeeRole({ role: storeData.data.role }));
+		}
+	}, [storeData.isFetching]);
 
 	return (
 		<div>

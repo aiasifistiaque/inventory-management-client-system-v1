@@ -24,10 +24,15 @@ export const storeSlice = createSlice({
 				localStorage.setItem('IDX_STORE', JSON.stringify(action.payload._id));
 			}
 		},
+		employeeRole: (state, action) => {
+			if (action.payload) {
+				state.role = action.payload.role;
+			}
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { select } = storeSlice.actions;
+export const { select, employeeRole } = storeSlice.actions;
 
 export default storeSlice.reducer;

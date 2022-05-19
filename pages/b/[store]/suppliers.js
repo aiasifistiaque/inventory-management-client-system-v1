@@ -9,10 +9,7 @@ const Supplierpage = () => {
 
 	return (
 		<Page selected='Suppliers'>
-			<ListPage
-				title='CustomSuppliersers'
-				button='Add Supplier'
-				href='/addsupplier'>
+			<ListPage title='Suppliers' button='Add Supplier' href='/addsupplier'>
 				<Table title='All Suppliers' isLoading={isLoading}>
 					<Row title>
 						<Item title>Name</Item>

@@ -4,7 +4,7 @@ import styles from './Table.module.css';
 import Link from 'next/link';
 import { Placeholder } from 'semantic-ui-react';
 
-export const DetailsTable = ({ children, loading, title, isLoading }) => {
+export const DetailsTable = ({ children, loading, title, isLoading, ref }) => {
 	if (isLoading)
 		return (
 			<div
@@ -17,6 +17,7 @@ export const DetailsTable = ({ children, loading, title, isLoading }) => {
 		);
 	return (
 		<div
+			ref={ref}
 			className={styles.container}
 			style={{
 				padding: `${24}px ${32}px`,

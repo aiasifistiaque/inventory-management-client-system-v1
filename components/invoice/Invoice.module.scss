@@ -1,0 +1,60 @@
+@import '../../styles/imports';
+
+.container {
+}
+
+.details {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: flex-end;
+	width: 100%;
+	align-items: flex-end;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.detail {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0.5rem 0;
+	h6 {
+		margin-right: 64px;
+	}
+	width: 100%;
+	@include desktop {
+		width: 350px;
+	}
+}
+
+.table {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 1rem 0;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px 0;
+	gap: 16px;
+}
+
+.titleRow {
+	display: flex;
+	justify-content: space-between;
+	border-top: 2px solid $color-primary;
+	border-bottom: 2px solid $color-primary;
+	padding: 16px 0;
+	gap: 16px;
+}
+
+.titleItem {
+	flex: 1;
+}
+
+.item {
+	flex: 1;
+	text-transform: capitalize;
+}

@@ -1,0 +1,25 @@
+@import '../../../styles/imports';
+
+$item-border: 1px solid rgba(#888, 0.15);
+
+.table {
+	display: flex;
+	flex-direction: column;
+	border: $item-border;
+	border-bottom: none;
+}
+
+.row {
+	border-bottom: $item-border;
+
+	display: flex;
+	.title {
+		padding: 0.75rem 1.25rem;
+		flex: 1;
+		border-right: $item-border;
+	}
+	.data {
+		padding: 0.75rem 1.25rem;
+		flex: 2;
+	}
+}

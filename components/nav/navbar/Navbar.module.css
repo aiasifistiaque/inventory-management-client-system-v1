@@ -36,7 +36,7 @@
 
 .nav {
   width: calc(100vw - 220px);
-  padding: 0 64px 0 16px;
+  padding: 0 64px 0 24px;
 }
 
 @media (min-width: 1008px) {
@@ -48,7 +48,7 @@
 .toggled {
   margin-left: 60px;
   width: calc(100vw - 60px);
-  padding: 0 64px 0 16px;
+  padding: 0 64px 0 24px;
 }
 
 .toggled h3 {
@@ -70,11 +70,17 @@
 .landing {
   margin-left: 0;
   width: 100%;
-  padding: 0 64px;
+  padding: 0 16px;
 }
 
 .landing h3 {
   cursor: pointer;
+}
+
+@media (min-width: 1008px) {
+  .landing {
+    padding: 0 64px;
+  }
 }
 
 .title {

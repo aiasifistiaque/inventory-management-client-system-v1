@@ -99,10 +99,17 @@ export const productsApi = createApi({
 			query: () => `/purchases`,
 			providesTags: ['Purchases'],
 		}),
+
+		/**Sale */
 		getAllSales: builder.query({
 			query: () => `/sales`,
 			providesTags: ['Sales'],
 		}),
+		getSalesById: builder.query({
+			query: id => `/sales/${id}`,
+			providesTags: ['Sales'],
+		}),
+
 		addBrand: builder.mutation({
 			query(body) {
 				return {
@@ -233,4 +240,5 @@ export const {
 	useGetAllEmployeeQuery,
 	useAddEmployeeMutation,
 	useGetStoreLogsQuery,
+	useGetSalesByIdQuery,
 } = productsApi;

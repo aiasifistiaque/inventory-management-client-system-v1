@@ -22,4 +22,16 @@ export const Mb = ({ size }) => {
 	return <div style={{ marginBottom: size ? size : 8 }} />;
 };
 
+export const SmallHr = ({ height, width, color }) => {
+	return (
+		<div
+			style={{
+				height: height || 1,
+				width: width || '100%',
+				backgroundColor: color || 'rgba(0,0,0,.1)',
+			}}
+		/>
+	);
+};
+
 export default Margins;

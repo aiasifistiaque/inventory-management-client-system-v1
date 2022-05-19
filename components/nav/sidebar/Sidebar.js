@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetStoreDataQuery } from '../../../store/services/productService';
 import { expand, shrink } from '../../../store/slices/toggleSlice';
@@ -10,6 +10,8 @@ const Sidebar = ({ selected, store }) => {
 	const dispatch = useDispatch();
 
 	const storeData = useGetStoreDataQuery(store);
+
+	const { role } = storeData.data || '';
 
 	const Section = ({ children, title }) => {
 		return (
@@ -95,23 +97,26 @@ const Sidebar = ({ selected, store }) => {
 						<Item selected={selected}>Suppliers</Item>
 					</Link>
 				</Section>
-				<Section title={'Stats & Reports'}>
-					<Link href={`${url}/stats`}>
-						<Item selected={selected}>Stats</Item>
-					</Link>
-					<Link href={`${url}/daily`}>
-						<Item selected={selected}>Daily</Item>
-					</Link>
-					<Link href={`${url}/weekly`}>
-						<Item selected={selected}>Weekly</Item>
-					</Link>
-					<Link href={`${url}/monthly`}>
-						<Item selected={selected}>Monthly</Item>
-					</Link>
-					<Link href={`${url}/yearly`}>
-						<Item selected={selected}>Yearly</Item>
-					</Link>
-				</Section>
+				{(role == 'owner' || role == 'analyst' || role == 'admin') && (
+					<Section title={'Stats & Reports'}>
+						<Link href={`${url}/stats`}>
+							<Item selected={selected}>Stats</Item>
+						</Link>
+						<Link href={`${url}/daily`}>
+							<Item selected={selected}>Daily</Item>
+						</Link>
+						<Link href={`${url}/weekly`}>
+							<Item selected={selected}>Weekly</Item>
+						</Link>
+						<Link href={`${url}/monthly`}>
+							<Item selected={selected}>Monthly</Item>
+						</Link>
+						<Link href={`${url}/yearly`}>
+							<Item selected={selected}>Yearly</Item>
+						</Link>
+					</Section>
+				)}
+
 				<Link href={`${url}/settings`}>
 					<Item selected={selected}>Settings</Item>
 				</Link>

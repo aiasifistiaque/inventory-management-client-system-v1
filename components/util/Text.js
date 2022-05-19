@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Text = ({ error, success, children }) => {
+const Text = ({ error, success, children, size }) => {
 	if (error)
 		return (
 			<div>
