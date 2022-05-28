@@ -16,15 +16,18 @@
     "qrcode.react": "^3.0.1",
     "react": "17.0.2",
     "react-barcode": "^1.4.1",
+    "react-charts": "^3.0.0-beta.36",
     "react-dom": "17.0.2",
     "react-qr-barcode-scanner": "^1.0.6",
     "react-redux": "^8.0.1",
     "react-to-pdf": "^0.0.14",
+    "recharts": "^2.1.10",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.1.2"
+    "semantic-ui-react": "^2.1.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "eslint": "8.9.0",

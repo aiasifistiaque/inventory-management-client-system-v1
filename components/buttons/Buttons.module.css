@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 .button, .disabled, .secondary, .outlined {
   display: -webkit-inline-box;
@@ -58,6 +57,10 @@
   font-weight: 700;
 }
 
+.small {
+  height: 36px;
+}
+
 .disabled {
   cursor: not-allowed;
   letter-spacing: 0.2px;
@@ -78,21 +81,27 @@
 }
 
 .secondary {
-  background-color: whitesmoke;
+  background-color: #eee;
   color: dodgerblue;
   letter-spacing: 0.2px;
   font-weight: 700;
-  border: none;
+  border: 1px solid #eee;
 }
 
 @media (min-width: 1008px) {
   .secondary:hover {
-    background-color: gainsboro;
+    background-color: #d5d5d5;
+    border: 1px solid #d5d5d5;
   }
 }
 
 .secondary:active {
   background-color: white;
+  border: 1px solid white;
+}
+
+.colorPrimary {
+  color: #391f42;
 }
 
 .textButton {
@@ -115,6 +124,11 @@
 .outlined {
   background-color: transparent;
   color: #391f42;
+  border: 1px solid #391f42;
+}
+
+.outlined p {
+  font-weight: 600;
 }
 
 @media (min-width: 1008px) {

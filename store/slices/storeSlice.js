@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import { productsApi } from '../services/productService';
 
 export const storeSlice = createSlice({
 	name: 'store',
@@ -22,6 +24,7 @@ export const storeSlice = createSlice({
 				state.name = action.payload.name;
 				state.role = action.payload.role;
 				localStorage.setItem('IDX_STORE', JSON.stringify(action.payload._id));
+				//productsApi.util.resetApiState());
 			}
 		},
 		employeeRole: (state, action) => {

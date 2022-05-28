@@ -1,8 +1,8 @@
 @import '../../styles/imports';
 
-$table-border: #e5e5e5;
-$table-header-color: #aeaeae;
-$table-top-color: #faf9fb;
+$table-border: rgba(#424242, 0.05);
+$table-header-color: #9b9eaa;
+$table-top-color: white;
 $table-box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.04),
 	0 2px 4px 0 rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
 
@@ -11,13 +11,13 @@ $table-box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.04),
 	flex-wrap: nowrap;
 	flex: 1;
 	display: flex;
-	border-radius: 10px;
+	border-radius: 4px;
 	background-color: white;
-	margin: 0.5rem;
-	//box-shadow: 0 2px 2px 2px rgba(black, 0.05);
-	//box-shadow: $table-box-shadow;
+	margin-top: 0.5rem;
+	margin-bottom: 4rem;
+
 	flex-direction: column;
-	border: 1px solid rgba($color-primary, 0.1);
+	border: 2px solid $table-border;
 	width: 100%;
 }
 
@@ -31,16 +31,15 @@ $table-box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.04),
 $item-margin: 32px;
 
 %table-items {
-	display: flex;
-	border-radius: 4;
+	display: inline-flex;
 	justify-content: space-between;
 	border-right-width: 0;
 	border-left-width: 0;
 	flex-wrap: nowrap;
-	border-bottom: 0.1px solid $table-border;
 	text-transform: capitalize;
-	margin: 0 $item-margin;
-	padding: 4px 0;
+	padding: 24px 32px;
+	min-width: 100%;
+	border-top: 2px solid $table-border;
 }
 
 .items {
@@ -52,21 +51,25 @@ $item-margin: 32px;
 	margin: 0;
 	padding: 4px $item-margin;
 	background-color: $table-top-color;
+	border-top: none;
+	padding: 12px 32px;
 }
 
 .linkItems {
 	@extend %table-items;
 	cursor: pointer;
+
 	&:hover {
 		text-decoration-line: underline;
 	}
 }
 
 %table-item {
+	display: flex;
 	flex: 1;
 	text-align: left;
 	min-width: 200px;
-	padding: 12px 0;
+	//padding: 16px 0;
 
 	p,
 	h6 {
@@ -74,7 +77,8 @@ $item-margin: 32px;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
-		font-weight: 400;
+		font-weight: 600;
+		color: #424242;
 	}
 }
 

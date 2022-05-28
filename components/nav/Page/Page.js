@@ -8,7 +8,7 @@ import { useGetStoreDataQuery } from '../../../store/services/productService';
 import { useRouter } from 'next/router';
 import { employeeRole, select } from '../../../store/slices/storeSlice';
 
-const Page = ({ children, selected, landing, store }) => {
+const Page = ({ children, selected, landing, store, full }) => {
 	const router = useRouter();
 	const { toggled } = useSelector(state => state.toggle);
 	const st = router.query.store;

@@ -47,7 +47,8 @@ const Productpage = () => {
 							{item?.totalSold && item.totalSold}
 						</ItemTableRow>
 						<ItemTableRow title='Added by'>
-							{item?.user?.name && item.user.name}
+							{item?.user?.name && item.user.name}{' '}
+							{`(${item?.user?.email && item.user.email})`}
 						</ItemTableRow>
 
 						<ItemTableRow title='Date Added' date>

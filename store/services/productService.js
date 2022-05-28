@@ -63,6 +63,9 @@ export const productsApi = createApi({
 			query: () => `/employee`,
 			providesTags: ['Employee'],
 		}),
+
+		/**Products, Categories & Brandss */
+
 		getProductById: builder.query({
 			query: id => `/products/${id}`,
 		}),
@@ -83,6 +86,19 @@ export const productsApi = createApi({
 			query: () => `/brands`,
 			providesTags: ['Brands'],
 		}),
+		addBrand: builder.mutation({
+			query(body) {
+				return {
+					url: `/brands`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Brands', 'Dashboard'],
+		}),
+
+		/**End of products, Categories & Brands */
+
 		getAllExpenses: builder.query({
 			query: () => `/expenses`,
 			providesTags: ['Expenses'],
@@ -110,16 +126,17 @@ export const productsApi = createApi({
 			providesTags: ['Sales'],
 		}),
 
-		addBrand: builder.mutation({
-			query(body) {
-				return {
-					url: `/brands`,
-					method: 'POST',
-					body,
-				};
-			},
-			invalidatesTags: ['Brands', 'Dashboard'],
+		/**Reports & Dashboard */
+		getSalesReport: builder.query({
+			query: () => `/dashboard/sales`,
 		}),
+
+		getTopProducts: builder.query({
+			query: () => `/dashboard/top`,
+		}),
+
+		/**Reports & Dashboard */
+
 		addStore: builder.mutation({
 			query(body) {
 				return {
@@ -241,4 +258,6 @@ export const {
 	useAddEmployeeMutation,
 	useGetStoreLogsQuery,
 	useGetSalesByIdQuery,
+	useGetSalesReportQuery,
+	useGetTopProductsQuery,
 } = productsApi;

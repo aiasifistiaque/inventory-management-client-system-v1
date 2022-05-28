@@ -1,7 +1,9 @@
 import React from 'react';
+import Section from '../../../components/container/Section';
 import ListPage from '../../../components/nav/listpage/ListPage';
 import Page from '../../../components/nav/Page/Page';
 import { Item, Row, Table } from '../../../components/table/Table';
+import Text from '../../../components/util/Text';
 import { useGetStoreLogsQuery } from '../../../store/services/productService';
 
 const Activitylogpage = () => {
@@ -15,13 +17,16 @@ const Activitylogpage = () => {
 						data?.data &&
 						data.data.map((item, i) => (
 							<Row key={i}>
-								<Item>
-									{item?.user?.name && item.user.name}
-									{' ('}
-									{item?.user?.email && item.user.email}
-									{') '}
-									{item?.description && item.description}
-								</Item>
+								<Section mb={8}>
+									<Item>
+										{item?.user?.name && item.user.name}
+										{' ('}
+										{item?.user?.email && item.user.email}
+										{') '}
+										{item?.description && item.description}
+									</Item>
+									<Text date>{item?.createdAt}</Text>
+								</Section>
 							</Row>
 						))}
 				</Table>

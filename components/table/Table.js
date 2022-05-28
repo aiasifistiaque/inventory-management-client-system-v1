@@ -4,9 +4,9 @@ import styles from './Table.module.css';
 import Link from 'next/link';
 import { Placeholder } from 'semantic-ui-react';
 
-export const Table = ({ children, loading, title, isLoading }) => {
+export const Table = ({ children, loading, title, isLoading, w }) => {
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ width: w || '100%' }}>
 			{/* <h5>{title}</h5> */}
 			{!isLoading ? <div>{children}</div> : <TablePlaceHolder />}
 		</div>
@@ -28,15 +28,18 @@ export const Row = ({ children, href, title }) => {
 	return <div className={styles.items}>{children}</div>;
 };
 
-export const Item = ({ children, title, date, email }) => {
+export const Item = ({ children, title, date, email, flex, w }) => {
+	const itemStyle = {
+		...(w && { minWidth: w }),
+	};
 	if (title)
 		return (
-			<div className={styles.titleItem}>
+			<div className={styles.titleItem} style={itemStyle}>
 				<h6>{children}</h6>
 			</div>
 		);
 	return (
-		<div className={styles.item}>
+		<div className={styles.item} style={itemStyle}>
 			<p style={email ? { textTransform: 'lowercase' } : {}}>
 				{date ? moment(children).calendar() : children}
 			</p>

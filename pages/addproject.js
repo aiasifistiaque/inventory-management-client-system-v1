@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Page from '../components/nav/Page/Page';
-import {
-	useAddCategoryMutation,
-	useAddStoreMutation,
-} from '../store/services/productService';
+import { useAddStoreMutation } from '../store/services/productService';
 import { DetailsTable } from '../components/table/Details';
 import Input from '../components/auth/Input';
 import Button from '../components/buttons/Button';
@@ -24,6 +21,11 @@ const Addproject = () => {
 	const router = useRouter();
 	const [name, setName] = useState();
 	const [category, setCategory] = useState();
+	const [street, setStreet] = useState();
+	const [city, setCity] = useState();
+	const [post, setPost] = useState();
+	const [email, setEmail] = useState();
+	const [phone, setPhone] = useState();
 
 	const [addStore, result] = useAddStoreMutation();
 	const { isLoading, isSuccess, isError } = result;
@@ -33,6 +35,13 @@ const Addproject = () => {
 		addStore({
 			name,
 			category,
+			email,
+			phone,
+			address: {
+				street,
+				city,
+				postCode: post,
+			},
 		});
 	};
 
@@ -53,6 +62,43 @@ const Addproject = () => {
 							onChange={e => setName(e)}
 							placeholder='Name of your store'
 							required
+						/>
+						<Input
+							label='Contact Number'
+							value={phone}
+							onChange={e => setPhone(e)}
+							placeholder='Primary Contact Number'
+							required
+							type='Number'
+						/>
+						<Input
+							label='Store email'
+							value={email}
+							onChange={e => setEmail(e)}
+							placeholder='Store Primary email'
+							required
+						/>
+						<Input
+							label='Store Address (Street)'
+							value={street}
+							onChange={e => setStreet(e)}
+							placeholder='Street, apt, road etc.'
+							required
+						/>
+						<Input
+							label='City'
+							value={city}
+							onChange={e => setCity(e)}
+							placeholder='Select City'
+							required
+						/>
+						<Input
+							label='Post Code'
+							value={post}
+							onChange={e => setPost(e)}
+							placeholder='eg. 1207'
+							required
+							type='Number'
 						/>
 						<Input
 							label='Store Category'

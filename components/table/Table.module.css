@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 .container {
   overflow: auto;
@@ -11,14 +10,15 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-radius: 10px;
+  border-radius: 4px;
   background-color: white;
-  margin: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 4rem;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  border: 1px solid rgba(57, 31, 66, 0.1);
+  border: 2px solid rgba(66, 66, 66, 0.05);
   width: 100%;
 }
 
@@ -31,10 +31,9 @@
 }
 
 .items, .titleItems, .linkItems {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  border-radius: 4;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -42,16 +41,18 @@
   border-left-width: 0;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  border-bottom: 0.1px solid #e5e5e5;
   text-transform: capitalize;
-  margin: 0 32px;
-  padding: 4px 0;
+  padding: 24px 32px;
+  min-width: 100%;
+  border-top: 2px solid rgba(66, 66, 66, 0.05);
 }
 
 .titleItems {
   margin: 0;
   padding: 4px 32px;
-  background-color: #faf9fb;
+  background-color: white;
+  border-top: none;
+  padding: 12px 32px;
 }
 
 .linkItems {
@@ -64,12 +65,14 @@
 }
 
 .titleItem, .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
   text-align: left;
   min-width: 200px;
-  padding: 12px 0;
 }
 
 .titleItem p, .item p,
@@ -79,12 +82,13 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-weight: 400;
+  font-weight: 600;
+  color: #424242;
 }
 
 .titleItem h6 {
   font-size: 0.9rem;
-  color: #aeaeae;
+  color: #9b9eaa;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
 }

@@ -11,7 +11,20 @@ const Button = ({
 	icon,
 	disabled,
 	noText,
+	small,
+	color,
 }) => {
+	const mainStyle = outlined
+		? styles.outlined
+		: text
+		? styles.textButton
+		: secondary
+		? styles.secondary
+		: styles.button;
+
+	const size = small ? styles.small : '';
+	const clr = color && color == 'primary' ? styles.colorPrimary : '';
+
 	if (disabled)
 		return (
 			<div className={styles.disabled}>
@@ -30,17 +43,7 @@ const Button = ({
 		);
 
 	return (
-		<div
-			className={
-				outlined
-					? styles.outlined
-					: text
-					? styles.textButton
-					: secondary
-					? styles.secondary
-					: styles.button
-			}
-			onClick={onClick}>
+		<div className={`${mainStyle} ${size} ${clr}`} onClick={onClick}>
 			{icon && <img src={`/icons/${icon}.png`} alt={icon} />}
 			{!noText && <p>{children}</p>}
 		</div>
