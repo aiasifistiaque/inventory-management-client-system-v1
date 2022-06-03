@@ -113,6 +113,9 @@ const Sidebar = ({ selected, store }) => {
 						</Link>
 						<Link href={`${url}/yearly`}>
 							<Item selected={selected}>Yearly</Item>
+						</Link>{' '}
+						<Link href={`${url}/low-stock`}>
+							<Item selected={selected}>Low Stock</Item>
 						</Link>
 					</Section>
 				)}

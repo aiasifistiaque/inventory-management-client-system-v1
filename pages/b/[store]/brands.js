@@ -1,17 +1,25 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import ListPage from '../../../components/nav/listpage/ListPage';
 import Page from '../../../components/nav/Page/Page';
 import { Item, Row, Table } from '../../../components/table/Table';
 import { useGetAllBrandsQuery } from '../../../store/services/productService';
 
 const BrandsPage = () => {
-	const { data, error, isLoading } = useGetAllBrandsQuery();
+	const [page, setPage] = useState();
+	const { data, error, isLoading, isFetching } = useGetAllBrandsQuery({
+		page: page,
+	});
 
 	return (
 		<Page selected='Brands'>
 			<ListPage title='Brands' button='Add Brand' href='/addbrand'>
-				<Table title='All Brands' isLoading={isLoading}>
+				<Table
+					title='All Brands'
+					isLoading={isFetching}
+					page={data?.page ? data.page : 1}
+					totalPages={data?.totalPages ? data.totalPages : 1}
+					setPage={e => setPage(e)}>
 					<Row title>
 						<Item title>Brand Name</Item>
 						<Item title>Date Added</Item>

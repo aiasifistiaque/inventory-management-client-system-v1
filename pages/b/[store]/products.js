@@ -9,7 +9,11 @@ import * as XLSX from 'xlsx';
 const ProductsPage = () => {
 	const router = useRouter();
 	const store = router.query.store;
-	const { data, error, isLoading } = useGetAllProductsQuery();
+	const [page, setPage] = useState();
+
+	const { data, error, isLoading, isFetching } = useGetAllProductsQuery({
+		page,
+	});
 
 	const downloadExcel = excelData => {
 		let dat = [];
@@ -40,7 +44,12 @@ const ProductsPage = () => {
 				excel={() => {
 					!isLoading && data.data && downloadExcel(data.data);
 				}}>
-				<Table title='All Products' isLoading={isLoading}>
+				<Table
+					title='All Products'
+					isLoading={isFetching}
+					page={data?.page ? data.page : 1}
+					totalPages={data?.totalPages ? data.totalPages : 1}
+					setPage={e => setPage(e)}>
 					<Row title>
 						<Item title w={64}>
 							#

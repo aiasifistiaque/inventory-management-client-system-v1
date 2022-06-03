@@ -20,14 +20,15 @@ const AddProduct = () => {
 	const [price, setPrice] = useState();
 	const [cost, setCost] = useState();
 	const [stock, setStock] = useState();
+	const [stockAlert, setStockAlert] = useState();
 	const [otherCategory, setOtherCategory] = useState();
+	const [otherBrand, setOtherBrand] = useState();
 
 	const store = router.query.store;
 
-	const brands = useGetAllBrandsQuery();
-	const categories = useGetAllCategoriesQuery();
+	const brands = useGetAllBrandsQuery({ perpage: 999, sort: 'name' });
+	const categories = useGetAllCategoriesQuery({ perpage: 999, sort: 'name' });
 
-	const auth = useAuth();
 	const [addNewProudct, result] = useAddProductMutation();
 
 	const { isLoading, isSuccess, isError } = result;
@@ -41,7 +42,9 @@ const AddProduct = () => {
 			price,
 			cost,
 			stock: stock ? stock : 0,
+			stockAlert,
 			otherCategory,
+			otherBrand,
 			store,
 		});
 	};
@@ -81,7 +84,7 @@ const AddProduct = () => {
 								label='Category Name'
 								value={otherCategory}
 								onChange={e => setOtherCategory(e)}
-								placeholder='Enter Other Category Name'
+								placeholder='Enter Category Name'
 								required
 							/>
 						)}
@@ -93,6 +96,17 @@ const AddProduct = () => {
 								placeholder='Product Brand'
 								select
 								data={brands.data.data}
+								other
+							/>
+						)}
+
+						{brand == 'other' && (
+							<Input
+								label='Brand Name'
+								value={otherBrand}
+								onChange={e => setOtherBrand(e)}
+								placeholder='Enter Brand Name'
+								required
 							/>
 						)}
 
@@ -114,6 +128,13 @@ const AddProduct = () => {
 							value={stock}
 							onChange={e => setStock(e)}
 							placeholder='Initial stock of product'
+							type='Number'
+						/>
+						<Input
+							label='Low Stock Alert'
+							value={stockAlert}
+							onChange={e => setStockAlert(e)}
+							placeholder='Set a value for low stock alert'
 							type='Number'
 						/>
 						{isLoading ? (

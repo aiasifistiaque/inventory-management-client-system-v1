@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Button from '../../../components/buttons/Button';
 import Section from '../../../components/container/Section';
 import ListPage from '../../../components/nav/listpage/ListPage';
 import Page from '../../../components/nav/Page/Page';
@@ -7,12 +8,20 @@ import Text from '../../../components/util/Text';
 import { useGetStoreLogsQuery } from '../../../store/services/productService';
 
 const Activitylogpage = () => {
-	const { data, error, isLoading } = useGetStoreLogsQuery();
+	const [page, setPage] = useState(1);
+	const { data, error, isLoading, isFetching } = useGetStoreLogsQuery({
+		page: page,
+	});
 
 	return (
 		<Page selected='Activity Logs'>
 			<ListPage title='Store Activity Log' button='Add New Expense'>
-				<Table title='All Expenses' isLoading={isLoading}>
+				<Table
+					title='All Expenses'
+					isLoading={isFetching}
+					page={data?.page ? data.page : 1}
+					totalPages={data?.totalPages ? data.totalPages : 1}
+					setPage={e => setPage(e)}>
 					{!isLoading &&
 						data?.data &&
 						data.data.map((item, i) => (

@@ -3,12 +3,54 @@ import moment from 'moment';
 import styles from './Table.module.css';
 import Link from 'next/link';
 import { Placeholder } from 'semantic-ui-react';
+import Button from '../buttons/Button';
+import { Mr } from '../util/Margins';
+import Section from '../container/Section';
 
-export const Table = ({ children, loading, title, isLoading, w }) => {
+export const Table = ({
+	children,
+	loading,
+	title,
+	isLoading,
+	w,
+	page,
+	totalPages,
+	setPage,
+}) => {
 	return (
 		<div className={styles.container} style={{ width: w || '100%' }}>
 			{/* <h5>{title}</h5> */}
-			{!isLoading ? <div>{children}</div> : <TablePlaceHolder />}
+			{!isLoading ? (
+				<div>
+					{children}
+					<Row>
+						<Item>
+							Page {page} of {totalPages}
+						</Item>
+						<Item>
+							<Section horizontal>
+								<Button
+									text
+									onClick={() => {
+										page > 0 && setPage(page - 1);
+									}}>
+									Prev
+								</Button>
+								<Mr size={16} />
+								<Button
+									text
+									onClick={() => {
+										page < totalPages && setPage(page + 1);
+									}}>
+									Next
+								</Button>
+							</Section>
+						</Item>
+					</Row>
+				</div>
+			) : (
+				<TablePlaceHolder />
+			)}
 		</div>
 	);
 };

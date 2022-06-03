@@ -1,18 +1,26 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import ListPage from '../../../components/nav/listpage/ListPage';
 import Page from '../../../components/nav/Page/Page';
 import { Item, Row, Table } from '../../../components/table/Table';
 import { useGetAllSalesQuery } from '../../../store/services/productService';
 
 const Salespage = () => {
-	const { data, error, isLoading } = useGetAllSalesQuery();
+	const [page, setPage] = useState();
+
+	const { data, error, isLoading, isFetching } = useGetAllSalesQuery({ page });
 	const router = useRouter();
 	const { store } = router.query;
+
 	return (
 		<Page selected='Sales'>
 			<ListPage title='Total Sales' button='New Sale' href='/pos'>
-				<Table title='All Sales' isLoading={isLoading}>
+				<Table
+					title='All Sales'
+					isLoading={isFetching}
+					page={data?.page ? data.page : 1}
+					totalPages={data?.totalPages ? data.totalPages : 1}
+					setPage={e => setPage(e)}>
 					<Row title>
 						<Item title>Sale Date</Item>
 						<Item title>Total price</Item>

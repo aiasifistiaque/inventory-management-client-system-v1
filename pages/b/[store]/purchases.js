@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ListPage from '../../../components/nav/listpage/ListPage';
 import Page from '../../../components/nav/Page/Page';
 import { Item, Row, Table } from '../../../components/table/Table';
 import { useGetAllPurchaseOrdersQuery } from '../../../store/services/productService';
 
 const Purchasespage = () => {
-	const { data, error, isLoading } = useGetAllPurchaseOrdersQuery();
+	const [page, setPage] = useState();
+
+	const { data, error, isLoading, isFetching } = useGetAllPurchaseOrdersQuery({
+		page: page,
+	});
 	return (
 		<Page selected='Purchases'>
 			<ListPage
 				title='Purchase Orders'
 				button='Add Purchase Order'
 				href='/addpurchaseorder'>
-				<Table title='All Purchase orders' isLoading={isLoading}>
+				<Table
+					title='All Purchase orders'
+					isLoading={isFetching}
+					page={data?.page ? data.page : 1}
+					totalPages={data?.totalPages ? data.totalPages : 1}
+					setPage={e => setPage(e)}>
 					<Row title>
 						<Item title>Purchase Date</Item>
 						<Item title>Total price</Item>

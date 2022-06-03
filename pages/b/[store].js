@@ -4,6 +4,7 @@ import Section from '../../components/container/Section';
 import DashFragment from '../../components/dashboard/home/DashFragment';
 import SalesReport from '../../components/dashboard/home/SalesReport';
 import TopProducts from '../../components/dashboard/home/TopProducts';
+import KpiLoading from '../../components/dashboard/unit/KpiLoading';
 import {
 	Unit,
 	UnitBox,
@@ -20,9 +21,9 @@ import {
 export default function Storehome() {
 	const router = useRouter();
 	const auth = useAuth();
-	const { data, isLoading, error } = useGetDashboardQuery();
 	const { store } = router.query;
 	const storeData = useGetStoreDataQuery(store);
+	const { data, isLoading, error } = useGetDashboardQuery(store);
 
 	useEffect(() => {
 		if (!auth.loading) {
@@ -35,39 +36,47 @@ export default function Storehome() {
 
 	return (
 		<Page selected='Dashboard' store={store}>
-			<UnitBox isLoading={isLoading}>
-				<UnitLayer title={`${storeData?.data?.store?.name} store overview`}>
-					<Unit title='Products'>
-						<UnitItem> {data?.data?.products && data.data.products}</UnitItem>
-					</Unit>
-					<Unit title='Categories'>
-						<UnitItem>
-							{data?.data?.categories && data.data.categories}
-						</UnitItem>
-					</Unit>
-					<Unit title='Brands'>
-						<UnitItem>{data?.data?.brands && data.data.brands}</UnitItem>
-					</Unit>
-					<Unit title='Employees'>
-						<UnitItem>{data?.data?.employees && data.data.employees}</UnitItem>
-					</Unit>
-					<Unit title='Customers'>
-						<UnitItem>{data?.data?.customers && data.data.customers}</UnitItem>
-					</Unit>
-					<Unit title='Inventory'>
-						<UnitItem title='Total Item'>
-							{data?.data?.inventory?.count && data.data.inventory.count}
-						</UnitItem>
-						<UnitItem value title='Total Value'>
-							{data?.data?.inventory?.value && data.data.inventory.value}
-						</UnitItem>
-					</Unit>
+			{isLoading ? (
+				<KpiLoading title='Store Overview' />
+			) : (
+				<UnitBox isLoading={isLoading}>
+					<UnitLayer title={`${storeData?.data?.store?.name} store overview`}>
+						<Unit title='Products'>
+							<UnitItem> {data?.data?.products && data.data.products}</UnitItem>
+						</Unit>
+						<Unit title='Categories'>
+							<UnitItem>
+								{data?.data?.categories && data.data.categories}
+							</UnitItem>
+						</Unit>
+						<Unit title='Brands'>
+							<UnitItem>{data?.data?.brands && data.data.brands}</UnitItem>
+						</Unit>
+						<Unit title='Employees'>
+							<UnitItem>
+								{data?.data?.employees && data.data.employees}
+							</UnitItem>
+						</Unit>
+						<Unit title='Customers'>
+							<UnitItem>
+								{data?.data?.customers && data.data.customers}
+							</UnitItem>
+						</Unit>
+						<Unit title='Inventory'>
+							<UnitItem title='Total Item'>
+								{data?.data?.inventory?.count && data.data.inventory.count}
+							</UnitItem>
+							<UnitItem value title='Total Value'>
+								{data?.data?.inventory?.value && data.data.inventory.value}
+							</UnitItem>
+						</Unit>
 
-					<History data={data?.data?.sales && data.data.sales}>
-						{`Sales [All Time]`}{' '}
-					</History>
-				</UnitLayer>
-			</UnitBox>
+						<History data={data?.data?.sales && data.data.sales}>
+							{`Sales [All Time]`}{' '}
+						</History>
+					</UnitLayer>
+				</UnitBox>
+			)}
 			<Section horizontal>
 				<Section flex={2}>
 					<SalesReport />

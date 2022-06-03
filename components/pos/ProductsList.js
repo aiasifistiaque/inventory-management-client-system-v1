@@ -3,7 +3,10 @@ import { useGetAllProductsQuery } from '../../store/services/productService';
 import { Card, CardItem, Cards, CardTitle } from '../card/Card';
 
 const ProductsList = ({ category, addItem }) => {
-	const { data, isLoading, error } = useGetAllProductsQuery(category);
+	const { data, isLoading, error } = useGetAllProductsQuery({
+		category: category,
+		perpage: 99,
+	});
 	const onClick = item => {
 		addItem(item);
 	};

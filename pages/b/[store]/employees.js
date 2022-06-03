@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ListPage from '../../../components/nav/listpage/ListPage';
 import Page from '../../../components/nav/Page/Page';
 import { Item, Row, Table } from '../../../components/table/Table';
 import { useGetAllEmployeeQuery } from '../../../store/services/productService';
 
 const Employeepage = () => {
-	const { data, error, isLoading, isFetching } = useGetAllEmployeeQuery();
+	const [page, setPage] = useState();
+	const { data, error, isLoading, isFetching } = useGetAllEmployeeQuery({
+		page: page,
+	});
 
 	return (
 		<Page selected='Employees'>
 			<ListPage title='Employees' button='Add Employee' href='/addemployee'>
-				<Table title='All Employees' isLoading={isLoading}>
+				<Table
+					title='All Employees'
+					isLoading={isFetching}
+					page={data?.page ? data.page : 1}
+					totalPages={data?.totalPages ? data.totalPages : 1}
+					setPage={e => setPage(e)}>
 					<Row title>
 						<Item title>Name</Item>
 						<Item title>Email</Item>

@@ -35,6 +35,7 @@ export const productsApi = createApi({
 		'SingleStore',
 		'Employee',
 		'Logs',
+		'Kpi',
 	],
 
 	endpoints: builder => ({
@@ -50,9 +51,26 @@ export const productsApi = createApi({
 			query: id => `/store/${id}`,
 
 			providesTags: ['SingleStore'],
+			invalidatesTags: [
+				'Products',
+				'Purchases',
+				'Sales',
+				'Categories',
+				'Brands',
+				'Dashboard',
+				'Expenses',
+				'Customers',
+				'Suppliers',
+				'Self',
+				'Store',
+				'SingleStore',
+				'Employee',
+				'Logs',
+			],
 		}),
 		getStoreLogs: builder.query({
-			query: () => `/activities`,
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+				`/activities?sort=${sort}&page=${page}`,
 			providesTags: ['Logs'],
 		}),
 		getDashboard: builder.query({
@@ -60,7 +78,8 @@ export const productsApi = createApi({
 			providesTags: ['Dashboard'],
 		}),
 		getAllEmployee: builder.query({
-			query: () => `/employee`,
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 }) =>
+				`/employee?sort=${sort}&page=${page}&perpage=${perpage}`,
 			providesTags: ['Employee'],
 		}),
 
@@ -70,20 +89,41 @@ export const productsApi = createApi({
 			query: id => `/products/${id}`,
 		}),
 		getAllProducts: builder.query({
-			query: category => `/products?category=${category ? category : ''}`,
+			query: ({ category, sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+				`/products?sort=${sort}&page=${page}&category=${category}&perpage=${perpage}`,
 			providesTags: ['Products'],
 		}),
 
-		getProductById: builder.query({
-			query: id => `/products/${id}`,
+		addProduct: builder.mutation({
+			query(body) {
+				return {
+					url: `/products`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Products', 'Dashboard', 'Categories', 'Brands'],
 		}),
 
 		getAllCategories: builder.query({
-			query: () => `/categories`,
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+				`/categories?sort=${sort}&page=${page}&perpage=${perpage}`,
 			providesTags: ['Categories'],
 		}),
+
+		addCategory: builder.mutation({
+			query(body) {
+				return {
+					url: `/categories`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Categories', 'Dashboard', 'Products'],
+		}),
 		getAllBrands: builder.query({
-			query: () => `/brands`,
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+				`/brands?sort=${sort}&page=${page}&perpage=${perpage}`,
 			providesTags: ['Brands'],
 		}),
 		addBrand: builder.mutation({
@@ -97,107 +137,32 @@ export const productsApi = createApi({
 			invalidatesTags: ['Brands', 'Dashboard'],
 		}),
 
-		/**End of products, Categories & Brands */
+		/**End of products, Categories & Brands
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 */
 
-		getAllExpenses: builder.query({
-			query: () => `/expenses`,
-			providesTags: ['Expenses'],
-		}),
+		/**Customers, Suppliers & Employees */
+
 		getAllCustomers: builder.query({
-			query: () => `/customers?role=customer`,
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+				`/customers?role=customer&sort=${sort}&page=${page}&perpage=${perpage}`,
 			providesTags: ['Customers'],
 		}),
 		getAllSuppliers: builder.query({
-			query: () => `/customers?role=supplier`,
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+				`/customers?role=supplier&sort=${sort}&page=${page}&perpage=${perpage}`,
 			providesTags: ['Suppliers'],
 		}),
-		getAllPurchaseOrders: builder.query({
-			query: () => `/purchases`,
-			providesTags: ['Purchases'],
-		}),
 
-		/**Sale */
-		getAllSales: builder.query({
-			query: () => `/sales`,
-			providesTags: ['Sales'],
-		}),
-		getSalesById: builder.query({
-			query: id => `/sales/${id}`,
-			providesTags: ['Sales'],
-		}),
-
-		/**Reports & Dashboard */
-		getSalesReport: builder.query({
-			query: () => `/dashboard/sales`,
-		}),
-
-		getTopProducts: builder.query({
-			query: () => `/dashboard/top`,
-		}),
-
-		/**Reports & Dashboard */
-
-		addStore: builder.mutation({
-			query(body) {
-				return {
-					url: `/store`,
-					method: 'POST',
-					body,
-				};
-			},
-			invalidatesTags: ['Store'],
-		}),
-		addExpenses: builder.mutation({
-			query(body) {
-				return {
-					url: `/expenses`,
-					method: 'POST',
-					body,
-				};
-			},
-			invalidatesTags: ['Expenses', 'Dashboard'],
-		}),
-		addProduct: builder.mutation({
-			query(body) {
-				return {
-					url: `/products`,
-					method: 'POST',
-					body,
-				};
-			},
-			invalidatesTags: ['Products', 'Dashboard'],
-		}),
-		addCategory: builder.mutation({
-			query(body) {
-				return {
-					url: `/categories`,
-					method: 'POST',
-					body,
-				};
-			},
-			invalidatesTags: ['Categories', 'Dashboard'],
-		}),
-		addPurchaseOrder: builder.mutation({
-			query(body) {
-				return {
-					url: `/purchases`,
-					method: 'POST',
-					body,
-				};
-			},
-			invalidatesTags: ['Purchases', 'Products', 'Dashboard'],
-		}),
-
-		addSale: builder.mutation({
-			query(body) {
-				return {
-					url: `/sales`,
-					method: 'POST',
-					body,
-				};
-			},
-			invalidatesTags: ['Sales', 'Products', 'Dashboard'],
-		}),
 		addCustomer: builder.mutation({
 			query(body) {
 				return {
@@ -227,6 +192,136 @@ export const productsApi = createApi({
 				};
 			},
 			invalidatesTags: ['Suppliers'],
+		}),
+
+		/**End of Customers, Suppliers & Employees
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 */
+
+		/**Sales,Purchases & Expenses */
+
+		getAllSales: builder.query({
+			query: ({
+				date = '',
+				sort = '-createdAt',
+				page = 1,
+				perpage = 10,
+			} = {}) =>
+				`/sales?date=${date}&page=${page}&sort=${sort}&perpage=${perpage}`,
+			providesTags: query => [{ type: 'Sales', id: query.date }],
+		}),
+		getSalesById: builder.query({
+			query: id => `/sales/${id}`,
+			providesTags: ['Sales'],
+		}),
+		addSale: builder.mutation({
+			query(body) {
+				return {
+					url: `/sales`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Sales', 'Products', 'Dashboard'],
+		}),
+
+		getAllExpenses: builder.query({
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+				`/expenses?sort=${sort}&page=${page}&perpage=${perpage}`,
+			providesTags: ['Expenses'],
+		}),
+
+		getAllPurchaseOrders: builder.query({
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+				`/purchases?sort=${sort}&page=${page}&perpage=${perpage}`,
+			providesTags: ['Purchases'],
+		}),
+
+		addExpenses: builder.mutation({
+			query(body) {
+				return {
+					url: `/expenses`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Expenses', 'Dashboard'],
+		}),
+
+		addPurchaseOrder: builder.mutation({
+			query(body) {
+				return {
+					url: `/purchases`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Purchases', 'Products', 'Dashboard'],
+		}),
+
+		/**End of Sales */
+		/**
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 */
+
+		/**Reports & Dashboard */
+
+		getSalesReport: builder.query({
+			query: id => `/dashboard/sales`,
+		}),
+
+		getTopProducts: builder.query({
+			query: id => `/dashboard/top`,
+		}),
+
+		getLowStock: builder.query({
+			query: ({ sort = '-createdAt', page = 1, perpage = 10, limit } = {}) =>
+				`/dashboard/lowstock?sort=${sort}&page=${page}&perpage=${perpage}`,
+		}),
+
+		getSalesKpi: builder.query({
+			query: date => `/dashboard/kpi?field=sales&date=${date}`,
+			providesTags: result => [
+				{ type: 'Kpi', id: result?.date ? result.date : '' },
+			],
+		}),
+
+		/**End of Reports & Dashboard
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 */
+
+		addStore: builder.mutation({
+			query(body) {
+				return {
+					url: `/store`,
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: ['Store'],
 		}),
 	}),
 });
@@ -260,4 +355,6 @@ export const {
 	useGetSalesByIdQuery,
 	useGetSalesReportQuery,
 	useGetTopProductsQuery,
+	useGetLowStockQuery,
+	useGetSalesKpiQuery,
 } = productsApi;

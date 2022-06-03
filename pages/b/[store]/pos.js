@@ -205,25 +205,6 @@ const Pospage = () => {
 									<Button onClick={() => setReader(false)}>Stop scan</Button>
 								)}
 
-								{/* {products?.data?.data && (
-									<Section horizontal align='center'>
-										<Input
-											label='Product'
-											value={product}
-											onChange={e => setProduct(e)}
-											placeholder='Select a product'
-											select
-											objectSelect
-											data={products.data.data}
-										/>
-										{product ? (
-											<Button onClick={addItem}>Add</Button>
-										) : (
-											<Button disabled>Add</Button>
-										)}
-									</Section>
-								)} */}
-
 								{categories?.data?.data && (
 									<Section horizontal align='center'>
 										<Input

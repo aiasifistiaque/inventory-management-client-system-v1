@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ListPage from '../../../components/nav/listpage/ListPage';
 import Page from '../../../components/nav/Page/Page';
 import { Item, Row, Table } from '../../../components/table/Table';
 import { useGetAllExpensesQuery } from '../../../store/services/productService';
 
 const Expensespage = () => {
-	const { data, error, isLoading } = useGetAllExpensesQuery();
+	const [page, setPage] = useState();
+
+	const { data, error, isLoading, isFetching } = useGetAllExpensesQuery({
+		page: page,
+	});
 
 	return (
 		<Page selected='Expenses'>
 			<ListPage title='Expenses' button='Add New Expense' href='/addexpense'>
-				<Table title='All Expenses' isLoading={isLoading}>
+				<Table
+					title='All Expenses'
+					isLoading={isFetching}
+					page={data?.page ? data.page : 1}
+					totalPages={data?.totalPages ? data.totalPages : 1}
+					setPage={e => setPage(e)}>
 					<Row title>
 						<Item title>Name</Item>
 						<Item title>Amount</Item>
