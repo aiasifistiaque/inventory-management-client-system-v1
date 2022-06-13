@@ -39,8 +39,6 @@ const ProductsPage = () => {
 	return (
 		<Page selected='Products'>
 			<ListPage
-				isError={isError}
-				error={error}
 				title='Products'
 				button='New Product'
 				href={`/addproduct`}

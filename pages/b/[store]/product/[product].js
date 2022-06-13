@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Page from '../../../../components/nav/Page/Page';
 import { useGetProductByIdQuery } from '../../../../store/services/productService';
-import {
-	DetailsItem,
-	DetailsTable,
-} from '../../../../components/table/Details';
+import { DetailsTable } from '../../../../components/table/Details';
 import Barcode from 'react-barcode';
 import { QRCodeSVG, QRCodeCanvas } from 'qrcode.react';
 import ItemTable, {

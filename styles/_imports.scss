@@ -6,7 +6,6 @@
 //$color-primary: #363062;
 $color-primary: #391f42;
 $color-secondary: #4d4c7d;
-$color-light: #827397;
 $color-bg: #faf9fb;
 $color-text: #424242;
 $color-text-inv: #f5f5f5;
@@ -20,6 +19,7 @@ $container-radius: 8px;
 $color-input: #eeecec;
 // $color-input-border: rgba(#827397, 0.6);
 $color-input-border: transparent;
+$color-light: #eef0f3;
 
 @import './utilities/mixin';
 @import './utilities/partials';

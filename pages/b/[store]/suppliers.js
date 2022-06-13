@@ -6,13 +6,19 @@ import { useGetAllSuppliersQuery } from '../../../store/services/productService'
 
 const Supplierpage = () => {
 	const [page, setPage] = useState();
-	const { data, error, isLoading, isFetching } = useGetAllSuppliersQuery({
-		page: page,
-	});
+	const { data, error, isLoading, isFetching, isError } =
+		useGetAllSuppliersQuery({
+			page: page,
+		});
 
 	return (
 		<Page selected='Suppliers'>
-			<ListPage title='Suppliers' button='Add Supplier' href='/addsupplier'>
+			<ListPage
+				isError={isError}
+				error={error}
+				title='Suppliers'
+				button='Add Supplier'
+				href='/addsupplier'>
 				<Table
 					title='All Suppliers'
 					isLoading={isFetching}

@@ -9,8 +9,7 @@ import {
 import { DetailsTable } from '../../../components/table/Details';
 import Input from '../../../components/auth/Input';
 import Button from '../../../components/buttons/Button';
-import useAuth from '../../../hooks/useAuth';
-import Text from '../../../components/util/Text';
+import Error from '../../../components/util/error-modal/Error';
 
 const AddProduct = () => {
 	const router = useRouter();
@@ -31,7 +30,7 @@ const AddProduct = () => {
 
 	const [addNewProudct, result] = useAddProductMutation();
 
-	const { isLoading, isSuccess, isError } = result;
+	const { isLoading, isSuccess, isError, error } = result;
 
 	const submitForm = async e => {
 		e.preventDefault();
@@ -123,6 +122,7 @@ const AddProduct = () => {
 							onChange={e => setCost(e)}
 							placeholder='Product Cost'
 						/>
+
 						<Input
 							label='Opening stock'
 							value={stock}
@@ -143,7 +143,7 @@ const AddProduct = () => {
 							<Button submit>Create Product</Button>
 						)}
 					</form>
-					{isError && <Text error>There was an error</Text>}
+					<Error isError={isError}>{error}</Error>
 				</DetailsTable>
 			</Page>
 		</div>

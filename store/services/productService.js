@@ -54,6 +54,7 @@ export const productsApi = createApi({
 			invalidatesTags: [
 				'Products',
 				'Purchases',
+				'Purchase',
 				'Sales',
 				'Categories',
 				'Brands',
@@ -215,7 +216,9 @@ export const productsApi = createApi({
 				perpage = 10,
 			} = {}) =>
 				`/sales?date=${date}&page=${page}&sort=${sort}&perpage=${perpage}`,
-			providesTags: query => [{ type: 'Sales', id: query.date }],
+			providesTags: query => [
+				{ type: 'Sales', id: query?.date ? query.date : '' },
+			],
 		}),
 		getSalesById: builder.query({
 			query: id => `/sales/${id}`,
@@ -242,6 +245,11 @@ export const productsApi = createApi({
 			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
 				`/purchases?sort=${sort}&page=${page}&perpage=${perpage}`,
 			providesTags: ['Purchases'],
+		}),
+
+		getPurchaseById: builder.query({
+			query: id => `/purchases/${id}`,
+			providesTags: id => [{ type: 'Purchase', id: id ? id : '' }],
 		}),
 
 		addExpenses: builder.mutation({
@@ -357,4 +365,5 @@ export const {
 	useGetTopProductsQuery,
 	useGetLowStockQuery,
 	useGetSalesKpiQuery,
+	useGetPurchaseByIdQuery,
 } = productsApi;

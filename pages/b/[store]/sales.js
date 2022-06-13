@@ -8,13 +8,20 @@ import { useGetAllSalesQuery } from '../../../store/services/productService';
 const Salespage = () => {
 	const [page, setPage] = useState();
 
-	const { data, error, isLoading, isFetching } = useGetAllSalesQuery({ page });
+	const { data, error, isLoading, isFetching, isError } = useGetAllSalesQuery({
+		page,
+	});
 	const router = useRouter();
 	const { store } = router.query;
 
 	return (
 		<Page selected='Sales'>
-			<ListPage title='Total Sales' button='New Sale' href='/pos'>
+			<ListPage
+				isError={isError}
+				error={error}
+				title='Total Sales'
+				button='New Sale'
+				href='/pos'>
 				<Table
 					title='All Sales'
 					isLoading={isFetching}

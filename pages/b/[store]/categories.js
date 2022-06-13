@@ -6,13 +6,19 @@ import { useGetAllCategoriesQuery } from '../../../store/services/productService
 
 const CategoriesPage = () => {
 	const [page, setPage] = useState();
-	const { data, error, isLoading, isFetching } = useGetAllCategoriesQuery({
-		page: page,
-	});
+	const { data, error, isLoading, isFetching, isError } =
+		useGetAllCategoriesQuery({
+			page: page,
+		});
 
 	return (
 		<Page selected='Categories'>
-			<ListPage title='Categories' button='Add Category' href='/addcategory'>
+			<ListPage
+				isError={isError}
+				error={error}
+				title='Categories'
+				button='Add Category'
+				href='/addcategory'>
 				<Table
 					title='All Categories'
 					isLoading={isFetching}

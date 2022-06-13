@@ -4,6 +4,7 @@ import Page from '../../../components/nav/Page/Page';
 import {
 	useAddPurchaseOrderMutation,
 	useGetAllProductsQuery,
+	useGetAllSuppliersQuery,
 	useGetProductByIdQuery,
 } from '../../../store/services/productService';
 import { DetailsItem, DetailsTable } from '../../../components/table/Details';
@@ -16,6 +17,7 @@ import {
 	Table,
 } from '../../../components/table/Table';
 import Text from '../../../components/util/Text';
+import InputSection from '../../../components/container/InputSection';
 
 const AddPurchaseOrder = () => {
 	const router = useRouter();
@@ -24,9 +26,11 @@ const AddPurchaseOrder = () => {
 	const [price, setPrice] = useState();
 
 	const [product, setProduct] = useState();
+	const [supplier, setSupplier] = useState();
 	const [orderItems, setOrderItems] = useState([]);
 
-	const products = useGetAllProductsQuery();
+	const products = useGetAllProductsQuery({ perpage: 99, sort: 'name' });
+	const suppliers = useGetAllSuppliersQuery({ perpage: 99, sort: 'name' });
 	const singleProduct = useGetProductByIdQuery(product);
 
 	const [addPurchaseOrder, result] = useAddPurchaseOrderMutation();
@@ -36,6 +40,15 @@ const AddPurchaseOrder = () => {
 		setPrice('');
 		setQuantity('');
 	}, [product]);
+
+	useEffect(() => {
+		if (!singleProduct.isFetching) {
+			if (singleProduct?.data?.data) {
+				setQuantity(1);
+				setPrice(singleProduct.data.data.price);
+			}
+		}
+	}, [singleProduct.isFetching, product]);
 
 	const addItem = item => {
 		const newItem = {
@@ -59,6 +72,7 @@ const AddPurchaseOrder = () => {
 			shippingPrice: 0,
 			discount: 0,
 			vat: 0,
+			supplier,
 		};
 		addPurchaseOrder(newData);
 	};
@@ -72,6 +86,16 @@ const AddPurchaseOrder = () => {
 			<Page selected='Purchases'>
 				<DetailsTable title='Create Purchase Order'>
 					<form style={{ marginTop: 32 }} onSubmit={submitForm}>
+						{suppliers?.data?.data && (
+							<Input
+								label='Select Supplier'
+								value={supplier}
+								onChange={e => setSupplier(e)}
+								placeholder='Select a product'
+								select
+								data={suppliers.data.data}
+							/>
+						)}
 						{products?.data?.data && (
 							<Input
 								label='Product'
@@ -90,27 +114,30 @@ const AddPurchaseOrder = () => {
 										Price: Tk.{JSON.stringify(singleProduct.data.data.price)}
 									</h6>
 								</>
-
-								<Input
-									label='Quantity'
-									value={quantity}
-									onChange={e => setQuantity(e)}
-									placeholder='Enter a quantity'
-								/>
-								<Input
-									label='Price per unit'
-									value={price}
-									onChange={e => setPrice(e)}
-									placeholder='Enter the price per unit'
-								/>
-								<Button text onClick={addItem}>
-									add item
-								</Button>
+								<InputSection horizontal={true} align='center'>
+									<Input
+										label='Quantity'
+										value={quantity}
+										onChange={e => setQuantity(e)}
+										placeholder='Enter a quantity'
+										type='Number'
+									/>
+									<Input
+										label='Price per unit'
+										value={price}
+										onChange={e => setPrice(e)}
+										placeholder='Enter the price per unit'
+										type='Number'
+									/>
+									<Button text onClick={addItem}>
+										add item
+									</Button>
+								</InputSection>
 							</div>
 						)}
 
 						<Table title='Selected Products'>
-							<TableRow>
+							<TableRow title>
 								<TableItem title>Name</TableItem>
 								<TableItem title>Price per unit</TableItem>
 								<TableItem title>Quantity</TableItem>
@@ -134,6 +161,7 @@ const AddPurchaseOrder = () => {
 							<Button submit>Submit Order</Button>
 						)}
 					</form>
+
 					{isError && <Text error>There was an error, try again</Text>}
 					{isSuccess && <Text success>Order placed successfully</Text>}
 				</DetailsTable>

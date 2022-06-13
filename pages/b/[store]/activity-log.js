@@ -9,13 +9,17 @@ import { useGetStoreLogsQuery } from '../../../store/services/productService';
 
 const Activitylogpage = () => {
 	const [page, setPage] = useState(1);
-	const { data, error, isLoading, isFetching } = useGetStoreLogsQuery({
+	const { data, error, isLoading, isFetching, isError } = useGetStoreLogsQuery({
 		page: page,
 	});
 
 	return (
 		<Page selected='Activity Logs'>
-			<ListPage title='Store Activity Log' button='Add New Expense'>
+			<ListPage
+				isError={isError}
+				error={error}
+				title='Store Activity Log'
+				button='Add New Expense'>
 				<Table
 					title='All Expenses'
 					isLoading={isFetching}

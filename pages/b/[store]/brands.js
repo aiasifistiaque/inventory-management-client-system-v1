@@ -7,13 +7,18 @@ import { useGetAllBrandsQuery } from '../../../store/services/productService';
 
 const BrandsPage = () => {
 	const [page, setPage] = useState();
-	const { data, error, isLoading, isFetching } = useGetAllBrandsQuery({
+	const { data, error, isLoading, isFetching, isError } = useGetAllBrandsQuery({
 		page: page,
 	});
 
 	return (
 		<Page selected='Brands'>
-			<ListPage title='Brands' button='Add Brand' href='/addbrand'>
+			<ListPage
+				isError={isError}
+				error={error}
+				title='Brands'
+				button='Add Brand'
+				href='/addbrand'>
 				<Table
 					title='All Brands'
 					isLoading={isFetching}

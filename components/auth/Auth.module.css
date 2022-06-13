@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 .container {
   display: -webkit-box;
@@ -54,6 +53,20 @@
   margin: 0;
 }
 
+.input input[type='checkbox'] {
+  height: 24px;
+  width: 24px;
+  border: 1px solid #391f42;
+  padding: 0;
+}
+
+.input input[type='checkbox']:checked {
+  content: 'x';
+  background-color: #391f42;
+  display: inline-block;
+  font-size: 1.6em;
+}
+
 .input input,
 .input textarea,
 .input select {
@@ -69,7 +82,7 @@
           justify-content: center;
   padding: 0 0.75rem;
   border-radius: 4px;
-  border: 0.5px solid transparent;
+  border: 1px solid transparent;
 }
 
 .input input::-webkit-input-placeholder,
@@ -111,7 +124,7 @@
 .input input:focus,
 .input textarea:focus,
 .input select:focus {
-  border: 0.5px solid #391f42;
+  border: 1px solid #391f42;
 }
 
 

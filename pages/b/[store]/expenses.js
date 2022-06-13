@@ -7,13 +7,19 @@ import { useGetAllExpensesQuery } from '../../../store/services/productService';
 const Expensespage = () => {
 	const [page, setPage] = useState();
 
-	const { data, error, isLoading, isFetching } = useGetAllExpensesQuery({
-		page: page,
-	});
+	const { data, error, isLoading, isFetching, isError } =
+		useGetAllExpensesQuery({
+			page: page,
+		});
 
 	return (
 		<Page selected='Expenses'>
-			<ListPage title='Expenses' button='Add New Expense' href='/addexpense'>
+			<ListPage
+				isError={isError}
+				error={error}
+				title='Expenses'
+				button='Add New Expense'
+				href='/addexpense'>
 				<Table
 					title='All Expenses'
 					isLoading={isFetching}

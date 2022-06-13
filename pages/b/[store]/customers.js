@@ -6,13 +6,19 @@ import { useGetAllCustomersQuery } from '../../../store/services/productService'
 
 const Customerspage = () => {
 	const [page, setPage] = useState();
-	const { data, error, isLoading, isFetching } = useGetAllCustomersQuery({
-		page: page,
-	});
+	const { data, error, isLoading, isFetching, isError } =
+		useGetAllCustomersQuery({
+			page: page,
+		});
 
 	return (
 		<Page selected='Customers'>
-			<ListPage title='Customers' button='Add Customer' href='/addcustomer'>
+			<ListPage
+				isError={isError}
+				error={error}
+				title='Customers'
+				button='Add Customer'
+				href='/addcustomer'>
 				<Table
 					title='All Customers'
 					isLoading={isFetching}

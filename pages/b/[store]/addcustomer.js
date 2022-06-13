@@ -64,7 +64,12 @@ const AddCustomers = () => {
 							<Button submit>Create Customer</Button>
 						)}
 					</form>
-					{isError && <Text error>There was an error</Text>}
+
+					{isError && (
+						<Text error>
+							{result?.error?.data?.message && result.error.data.message}
+						</Text>
+					)}
 				</DetailsTable>
 			</Page>
 		</div>

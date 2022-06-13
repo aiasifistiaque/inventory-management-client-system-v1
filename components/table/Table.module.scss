@@ -14,8 +14,7 @@ $table-box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.04),
 	border-radius: 4px;
 	background-color: white;
 	margin-top: 0.5rem;
-	margin-bottom: 4rem;
-
+	margin-bottom: 1rem;
 	flex-direction: column;
 	border: 2px solid $table-border;
 	width: 100%;
@@ -79,6 +78,61 @@ $item-margin: 32px;
 		overflow: hidden;
 		font-weight: 600;
 		color: #424242;
+	}
+}
+
+.checkboxItem {
+	display: inline-flex;
+	flex: 1;
+	text-align: left;
+	min-width: 100pxs;
+
+	.innerItem {
+		display: flex;
+
+		cursor: pointer;
+		align-items: center;
+		padding: 0 16px;
+	}
+
+	p {
+		font-size: 12px;
+		font-weight: 800;
+		text-transform: uppercase;
+	}
+
+	.checkbox {
+		width: 16px;
+		height: 16px;
+		border: 1px solid $color-secondary;
+		margin-right: 8px;
+		border-radius: 2px;
+	}
+	.checked {
+		width: 16px;
+		height: 16px;
+		border: 1px solid $color-secondary;
+		margin-right: 8px;
+		border-radius: 2px;
+		background-color: $color-primary;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		img {
+			width: 20px;
+			height: auto;
+			object-fit: contain;
+			padding: 2px;
+		}
+	}
+	transition: 0.1s;
+
+	&:hover {
+		.checkbox,
+		.checked {
+			background-color: rgba($color-secondary, 0.6);
+		}
 	}
 }
 

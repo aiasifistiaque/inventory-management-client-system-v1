@@ -16,37 +16,40 @@ export const Table = ({
 	page,
 	totalPages,
 	setPage,
+	header,
+	paginate,
 }) => {
 	return (
 		<div className={styles.container} style={{ width: w || '100%' }}>
-			{/* <h5>{title}</h5> */}
 			{!isLoading ? (
 				<div>
 					{children}
-					<Row>
-						<Item>
-							Page {page} of {totalPages}
-						</Item>
-						<Item>
-							<Section horizontal>
-								<Button
-									text
-									onClick={() => {
-										page > 0 && setPage(page - 1);
-									}}>
-									Prev
-								</Button>
-								<Mr size={16} />
-								<Button
-									text
-									onClick={() => {
-										page < totalPages && setPage(page + 1);
-									}}>
-									Next
-								</Button>
-							</Section>
-						</Item>
-					</Row>
+					{paginate != 'no' && (
+						<Row>
+							<Item>
+								Page {page} of {totalPages}
+							</Item>
+							<Item>
+								<Section horizontal>
+									<Button
+										text
+										onClick={() => {
+											page > 0 && setPage(page - 1);
+										}}>
+										Prev
+									</Button>
+									<Mr size={16} />
+									<Button
+										text
+										onClick={() => {
+											page < totalPages && setPage(page + 1);
+										}}>
+										Next
+									</Button>
+								</Section>
+							</Item>
+						</Row>
+					)}
 				</div>
 			) : (
 				<TablePlaceHolder />
@@ -70,7 +73,7 @@ export const Row = ({ children, href, title }) => {
 	return <div className={styles.items}>{children}</div>;
 };
 
-export const Item = ({ children, title, date, email, flex, w }) => {
+export const Item = ({ children, title, date, email, flex, w, price }) => {
 	const itemStyle = {
 		...(w && { minWidth: w }),
 	};
@@ -83,8 +86,26 @@ export const Item = ({ children, title, date, email, flex, w }) => {
 	return (
 		<div className={styles.item} style={itemStyle}>
 			<p style={email ? { textTransform: 'lowercase' } : {}}>
+				{price && 'BDT. '}
 				{date ? moment(children).calendar() : children}
 			</p>
+		</div>
+	);
+};
+
+export const CheckBoxItem = ({ style, onClick, children, checked }) => {
+	return (
+		<div className={styles.checkboxItem} style={style}>
+			<div className={styles.innerItem} onClick={onClick}>
+				{checked ? (
+					<div className={styles.checked}>
+						{checked && <img src='/icons/check-white.png' />}
+					</div>
+				) : (
+					<div className={styles.checkbox} />
+				)}
+				<p>{children}</p>
+			</div>
 		</div>
 	);
 };

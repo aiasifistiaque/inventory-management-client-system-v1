@@ -4,9 +4,29 @@ import React from 'react';
 import Button from '../../buttons/Button';
 import styles from './ListPage.module.css';
 
-const ListPage = ({ children, title, button, onClick, href, excel }) => {
+const ListPage = ({
+	children,
+	title,
+	button,
+	onClick,
+	href,
+	excel,
+	isError,
+	error,
+}) => {
 	const router = useRouter();
 	const url = `/b/${router.query.store}/${href}`;
+	if (isError && error && error?.status && error.status == 401)
+		return (
+			<div className={styles.unauthorized}>
+				<img src='/icons/warning-red.png' />
+				<h3>Warning: Unauthorized Access</h3>
+				<p>
+					Sorry, you do not have permission to access this page, please contact
+					your administrator
+				</p>
+			</div>
+		);
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>

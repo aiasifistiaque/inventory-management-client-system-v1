@@ -6,13 +6,19 @@ import { useGetAllEmployeeQuery } from '../../../store/services/productService';
 
 const Employeepage = () => {
 	const [page, setPage] = useState();
-	const { data, error, isLoading, isFetching } = useGetAllEmployeeQuery({
-		page: page,
-	});
+	const { data, error, isLoading, isFetching, isError } =
+		useGetAllEmployeeQuery({
+			page: page,
+		});
 
 	return (
 		<Page selected='Employees'>
-			<ListPage title='Employees' button='Add Employee' href='/addemployee'>
+			<ListPage
+				title='Employees'
+				button='Add Employee'
+				href='/addemployee'
+				error={error}
+				isError={isError}>
 				<Table
 					title='All Employees'
 					isLoading={isFetching}
@@ -23,6 +29,7 @@ const Employeepage = () => {
 						<Item title>Name</Item>
 						<Item title>Email</Item>
 						<Item title>Role</Item>
+						<Item title>Added by</Item>
 					</Row>
 					{!isLoading &&
 						data?.data &&
@@ -35,6 +42,7 @@ const Employeepage = () => {
 								</Item>
 								<Item email>{item?.email && item.email}</Item>
 								<Item>{item?.role && item.role}</Item>
+								<Item>{item?.addedBy?.name && item.addedBy.name}</Item>
 							</Row>
 						))}
 				</Table>

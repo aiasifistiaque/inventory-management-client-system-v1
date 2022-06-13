@@ -1,0 +1,57 @@
+@import '../../../styles/imports';
+
+.container {
+	background-color: whitesmoke;
+	//height: 200px;
+	max-width: 350px;
+	margin: auto;
+	display: flex;
+	//align-items: center;
+	//justify-content: center;
+	flex-direction: column;
+
+	p {
+		color: #424242;
+	}
+	.header {
+		padding: 8px 16px;
+
+		h6 {
+			color: whitesmoke;
+		}
+	}
+	.body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+		padding: 8px 16px;
+		flex-direction: column;
+		margin: 16px 0;
+		img {
+			height: 100px;
+			width: 100px;
+			object-fit: contain;
+			margin-bottom: 8px;
+		}
+	}
+	.footer {
+		padding: 8px 16px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: $color-danger;
+		border-bottom-left-radius: 2px;
+		border-bottom-right-radius: 2px;
+		cursor: pointer;
+		@include btn-text-unselect;
+		&:hover {
+			background-color: darken($color-danger, 5%);
+		}
+		p {
+			color: whitesmoke;
+			font-size: 1rem;
+			font-weight: 500;
+		}
+	}
+}

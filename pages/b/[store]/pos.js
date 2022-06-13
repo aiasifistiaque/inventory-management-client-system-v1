@@ -4,6 +4,7 @@ import Page from '../../../components/nav/Page/Page';
 import {
 	useAddSaleMutation,
 	useGetAllCategoriesQuery,
+	useGetAllCustomersQuery,
 	useGetProductByIdQuery,
 } from '../../../store/services/productService';
 import Input from '../../../components/auth/Input';
@@ -36,7 +37,8 @@ const Pospage = () => {
 
 	const [category, setCategory] = useState();
 
-	const categories = useGetAllCategoriesQuery();
+	const categories = useGetAllCategoriesQuery({ perpage: 99 });
+	const customers = useGetAllCustomersQuery({ perpage: 999 });
 
 	const [product, setProduct] = useState();
 
@@ -50,6 +52,7 @@ const Pospage = () => {
 	const [reader, setReader] = useState(false);
 	const [test, setTest] = useState();
 	const [reload, setReload] = useState(false);
+	const [customer, setCustomer] = useState();
 
 	useEffect(() => {
 		setTest(productData.isLoading);
@@ -163,6 +166,7 @@ const Pospage = () => {
 			shippingPrice: 0,
 			discount: 0,
 			vat: 0,
+			customer,
 		};
 		addPurchaseOrder(newData);
 	};
@@ -180,30 +184,44 @@ const Pospage = () => {
 						<Section horizontal>
 							<PosLeftTable mr={8} flex={1} border='none'>
 								<h5>Create New Sale</h5>
+								<Section horizontal>
+									<>
+										{reader && (
+											<BarcodeScannerComponent
+												width={200}
+												height={100}
+												onUpdate={(err, result) => {
+													if (result) {
+														setProduct(result.text);
+														setReader(false);
+														setReload(!reload);
+													} else setBarCode('Not Found');
+												}}
+											/>
+										)}
+										{!reader ? (
+											<Button
+												secondary
+												onClick={() => setReader(true)}
+												icon='barcode-link'>
+												Scan Barcode
+											</Button>
+										) : (
+											<Button onClick={() => setReader(false)}>
+												Stop scan
+											</Button>
+										)}
+									</>
+								</Section>
 
-								{reader && (
-									<BarcodeScannerComponent
-										width={200}
-										height={100}
-										onUpdate={(err, result) => {
-											if (result) {
-												setProduct(result.text);
-												setReader(false);
-												setReload(!reload);
-											} else setBarCode('Not Found');
-										}}
-									/>
-								)}
-								{!reader ? (
-									<Button
-										secondary
-										onClick={() => setReader(true)}
-										icon='barcode-link'>
-										Scan Barcode
-									</Button>
-								) : (
-									<Button onClick={() => setReader(false)}>Stop scan</Button>
-								)}
+								<Input
+									label='Select Customer'
+									value={customer}
+									onChange={e => setCustomer(e)}
+									placeholder='Select a customer'
+									select
+									data={customers?.data?.data ? customers.data.data : []}
+								/>
 
 								{categories?.data?.data && (
 									<Section horizontal align='center'>
