@@ -24,9 +24,12 @@ const Productpage = () => {
 				<DetailsTable title='Product'>
 					<ItemTable loading={isLoading || !item ? true : false}>
 						<ItemTableRow title='Name'>{item?.name && item.name}</ItemTableRow>
+						<ItemTableRow title='SKU'>{item?.sku && item.sku}</ItemTableRow>
+
 						<ItemTableRow title='Id'>{item?._id && item._id}</ItemTableRow>
 						<ItemTableRow title='Category'>
-							{item?.category?.name && item.category.name}
+							{item?.category?.name && item.category.name}{' '}
+							{item?.category?.code && `- ${item.category.code}`}
 						</ItemTableRow>
 						<ItemTableRow title='Brand'>
 							{item?.brand?.name ? item.brand.name : 'Not defined'}

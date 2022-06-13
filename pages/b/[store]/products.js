@@ -58,6 +58,7 @@ const ProductsPage = () => {
 							#
 						</Item>
 						<Item title>Name</Item>
+						<Item title>SKU</Item>
 						<Item title>Category</Item>
 						<Item title>MRP</Item>
 						<Item title>Stock</Item>
@@ -69,6 +70,7 @@ const ProductsPage = () => {
 							<Row key={i} href={`/b/${store}/product/${item._id}`}>
 								<Item w={64}>{item && i + 1 <= 9 ? `0${i + 1}` : i + 1}</Item>
 								<Item>{item?.name && item.name}</Item>
+								<Item>{item?.sku && item.sku}</Item>
 								<Item>{item?.category?.name && item.category.name}</Item>
 								<Item>{item?.price && item.price}</Item>
 								<Item>{item?.stock && item.stock}</Item>

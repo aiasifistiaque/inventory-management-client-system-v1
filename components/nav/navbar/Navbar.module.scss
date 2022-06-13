@@ -26,12 +26,15 @@
 .nav {
 	@extend %nav;
 	//justify-content: space-between;
+	width: 100%;
+	padding: 0 16px 0 24px;
+	width: calc(100vw - 60px);
+
 	@include desktop {
 		margin-left: 220px;
+		padding: 0 64px 0 24px;
+		width: calc(100vw - 220px);
 	}
-	width: calc(100vw - 220px);
-
-	padding: 0 64px 0 24px;
 }
 
 .toggled {
@@ -42,7 +45,10 @@
 		cursor: pointer;
 	}
 	width: calc(100vw - 60px);
-	padding: 0 64px 0 24px;
+	padding: 0 16px 0 24px;
+	@include desktop {
+		padding: 0 64px 0 24px;
+	}
 }
 
 .logo {

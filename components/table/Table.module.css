@@ -72,7 +72,14 @@
       -ms-flex: 1;
           flex: 1;
   text-align: left;
-  min-width: 200px;
+  width: 64px;
+  margin-right: 2rem;
+}
+
+@media (min-width: 1008px) {
+  .titleItem, .item {
+    min-width: 200px;
+  }
 }
 
 .titleItem p, .item p,

@@ -34,24 +34,33 @@
 }
 
 .nav {
-  width: calc(100vw - 220px);
-  padding: 0 64px 0 24px;
+  width: 100%;
+  padding: 0 16px 0 24px;
+  width: calc(100vw - 60px);
 }
 
 @media (min-width: 1008px) {
   .nav {
     margin-left: 220px;
+    padding: 0 64px 0 24px;
+    width: calc(100vw - 220px);
   }
 }
 
 .toggled {
   margin-left: 60px;
   width: calc(100vw - 60px);
-  padding: 0 64px 0 24px;
+  padding: 0 16px 0 24px;
 }
 
 .toggled h3 {
   cursor: pointer;
+}
+
+@media (min-width: 1008px) {
+  .toggled {
+    padding: 0 64px 0 24px;
+  }
 }
 
 .logo {

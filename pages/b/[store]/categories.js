@@ -26,14 +26,16 @@ const CategoriesPage = () => {
 					totalPages={data?.totalPages ? data.totalPages : 1}
 					setPage={e => setPage(e)}>
 					<Row title>
-						<Item title>Category Name</Item>
+						<Item title>Name</Item>
+						<Item title>Code</Item>
 						<Item title>Date Added</Item>
 					</Row>
 					{!isLoading &&
 						data?.data &&
 						data.data.map((item, i) => (
 							<Row key={i}>
-								<Item>{item.name}</Item>
+								<Item>{item?.name && item.name}</Item>
+								<Item>{item?.code && item.code}</Item>
 								<Item date>{item.createdAt}</Item>
 							</Row>
 						))}

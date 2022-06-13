@@ -12,6 +12,7 @@ import {
 	UnitLayer,
 } from '../../components/dashboard/unit/Unit';
 import Page from '../../components/nav/Page/Page';
+import Container from '../../components/util/container/Container';
 import useAuth from '../../hooks/useAuth';
 import {
 	useGetDashboardQuery,
@@ -77,14 +78,14 @@ export default function Storehome() {
 					</UnitLayer>
 				</UnitBox>
 			)}
-			<Section horizontal>
+			<Container horizontal>
 				<Section flex={2}>
 					<SalesReport />
 				</Section>
 				<Section>
 					<TopProducts />
 				</Section>
-			</Section>
+			</Container>
 		</Page>
 	);
 }

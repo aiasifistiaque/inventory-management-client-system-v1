@@ -45,7 +45,7 @@ const AddPurchaseOrder = () => {
 		if (!singleProduct.isFetching) {
 			if (singleProduct?.data?.data) {
 				setQuantity(1);
-				setPrice(singleProduct.data.data.price);
+				setPrice(singleProduct.data.data.cost);
 			}
 		}
 	}, [singleProduct.isFetching, product]);
@@ -111,7 +111,7 @@ const AddPurchaseOrder = () => {
 								<>
 									<h6>Item: {singleProduct.data.data.name}</h6>
 									<h6>
-										Price: Tk.{JSON.stringify(singleProduct.data.data.price)}
+										Price: Tk.{JSON.stringify(singleProduct.data.data.cost)}
 									</h6>
 								</>
 								<InputSection horizontal={true} align='center'>
@@ -136,12 +136,12 @@ const AddPurchaseOrder = () => {
 							</div>
 						)}
 
-						<Table title='Selected Products'>
+						<Table title='Selected Products' paginate='no'>
 							<TableRow title>
 								<TableItem title>Name</TableItem>
 								<TableItem title>Price per unit</TableItem>
 								<TableItem title>Quantity</TableItem>
-								<TableItem title>item id</TableItem>
+								<TableItem title>id</TableItem>
 							</TableRow>
 							{orderItems &&
 								orderItems.length > 0 &&

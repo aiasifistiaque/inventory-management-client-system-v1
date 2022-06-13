@@ -67,8 +67,12 @@ $item-margin: 32px;
 	display: flex;
 	flex: 1;
 	text-align: left;
-	min-width: 200px;
+	width: 64px;
+	margin-right: 2rem;
 	//padding: 16px 0;
+	@include desktop {
+		min-width: 200px;
+	}
 
 	p,
 	h6 {

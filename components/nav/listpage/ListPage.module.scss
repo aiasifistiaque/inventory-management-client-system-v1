@@ -8,6 +8,15 @@
 		display: flex;
 		justify-content: space-between;
 		margin: 0 8px;
+		align-items: center;
+		h4 {
+			font-size: 1rem;
+			font-weight: 700;
+			line-height: 1.5;
+			@include desktop {
+				font-size: 1.7rem;
+			}
+		}
 	}
 }
 

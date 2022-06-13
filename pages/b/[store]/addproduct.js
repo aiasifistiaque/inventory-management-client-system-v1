@@ -10,6 +10,7 @@ import { DetailsTable } from '../../../components/table/Details';
 import Input from '../../../components/auth/Input';
 import Button from '../../../components/buttons/Button';
 import Error from '../../../components/util/error-modal/Error';
+import CategorySelect from '../../../components/auth/CategorySelect';
 
 const AddProduct = () => {
 	const router = useRouter();
@@ -34,9 +35,12 @@ const AddProduct = () => {
 
 	const submitForm = async e => {
 		e.preventDefault();
+
+		const cat = category == 'other' ? { _id: 'other' } : JSON.parse(category);
 		addNewProudct({
 			name,
-			category,
+			category: cat._id,
+			categoryCode: cat.code && cat.code,
 			brand,
 			price,
 			cost,
@@ -67,7 +71,7 @@ const AddProduct = () => {
 							required
 						/>
 						{categories?.data?.data && (
-							<Input
+							<CategorySelect
 								label='Category'
 								value={category}
 								onChange={e => setCategory(e)}
@@ -78,6 +82,7 @@ const AddProduct = () => {
 								other
 							/>
 						)}
+
 						{category == 'other' && (
 							<Input
 								label='Category Name'
@@ -121,6 +126,7 @@ const AddProduct = () => {
 							value={cost}
 							onChange={e => setCost(e)}
 							placeholder='Product Cost'
+							required
 						/>
 
 						<Input
