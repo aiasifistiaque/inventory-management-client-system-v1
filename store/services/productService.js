@@ -52,6 +52,7 @@ export const productsApi = createApi({
 
 			providesTags: ['SingleStore'],
 			invalidatesTags: [
+				'Product',
 				'Products',
 				'Purchases',
 				'Purchase',
@@ -88,6 +89,7 @@ export const productsApi = createApi({
 
 		getProductById: builder.query({
 			query: id => `/products/${id}`,
+			providesTags: id => [{ type: 'Product', id: id ? id : '' }],
 		}),
 		getAllProducts: builder.query({
 			query: ({ category, sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
@@ -104,6 +106,21 @@ export const productsApi = createApi({
 				};
 			},
 			invalidatesTags: ['Products', 'Dashboard', 'Categories', 'Brands'],
+		}),
+
+		updateProduct: builder.mutation({
+			query(data) {
+				const { id, ...body } = data;
+				return {
+					url: `/products/${id}`,
+					method: 'PUT',
+					body,
+				};
+			},
+			invalidatesTags: (result, error, { id }) => [
+				{ type: 'Product', id },
+				{ type: 'Products' },
+			],
 		}),
 
 		getAllCategories: builder.query({
@@ -337,12 +354,9 @@ export const productsApi = createApi({
 export const {
 	useGetSelfQuery,
 	useGetMyStoresQuery,
-	useGetProductByIdQuery,
-	useGetAllProductsQuery,
 	useGetAllCategoriesQuery,
 	useGetAllBrandsQuery,
 	useGetAllPurchaseOrdersQuery,
-	useAddProductMutation,
 	useAddPurchaseOrderMutation,
 	useGetAllSalesQuery,
 	useAddSaleMutation,
@@ -366,4 +380,11 @@ export const {
 	useGetLowStockQuery,
 	useGetSalesKpiQuery,
 	useGetPurchaseByIdQuery,
+
+	/**Products */
+	useGetAllProductsQuery,
+	useGetProductByIdQuery,
+	useAddProductMutation,
+	useUpdateProductMutation,
+	/**End of Products */
 } = productsApi;

@@ -104,6 +104,10 @@
   color: #391f42;
 }
 
+.colorDanger {
+  color: #ff3152;
+}
+
 .textButton {
   background-color: transparent;
   color: #1e90ff;

@@ -33,4 +33,76 @@
       -ms-flex: 2;
           flex: 2;
 }
+
+@media (min-width: 1008px) {
+  .row .data {
+    -webkit-box-flex: 2.5;
+        -ms-flex: 2.5;
+            flex: 2.5;
+  }
+}
+
+.row .data p {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.editing {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0.5rem 1.25rem;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+@media (min-width: 1008px) {
+  .editing {
+    -webkit-box-flex: 2.5;
+        -ms-flex: 2.5;
+            flex: 2.5;
+  }
+}
+
+.editing input[type='number']::-webkit-inner-spin-button,
+.editing input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.editing input,
+.editing textarea,
+.editing select {
+  margin: 0;
+  height: 42px;
+  width: 100%;
+  border: none;
+  outline: none;
+  border: 1px solid rgba(57, 31, 66, 0.2);
+  background-color: #f9f9f9;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0 0.75rem;
+  border-radius: 4px;
+}
+
+.editing input:focus,
+.editing textarea:focus,
+.editing select:focus {
+  border: 1px solid #391f42;
+}
+
+.editing textarea {
+  padding: 1em;
+}
+
+.editing textarea {
+  min-height: 200px;
+}
 /*# sourceMappingURL=ItemTable.module.css.map */

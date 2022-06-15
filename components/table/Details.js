@@ -11,6 +11,7 @@ export const DetailsTable = ({
 	isLoading,
 	ref,
 	full,
+	edit,
 }) => {
 	if (isLoading)
 		return (
@@ -59,7 +60,7 @@ export const DetailsItem = ({ children, title, date }) => {
 	);
 };
 
-const DetailsPlaceholder = () => {
+export const DetailsPlaceholder = () => {
 	return (
 		<Placeholder>
 			<Placeholder.Header image>

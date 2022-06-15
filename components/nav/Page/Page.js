@@ -8,7 +8,17 @@ import { useGetStoreDataQuery } from '../../../store/services/productService';
 import { useRouter } from 'next/router';
 import { employeeRole, select } from '../../../store/slices/storeSlice';
 
-const Page = ({ children, selected, landing, store, full }) => {
+const Page = ({
+	children,
+	selected,
+	landing,
+	store,
+	full,
+	error,
+	isError,
+	isFetching,
+	isLoading,
+}) => {
 	const router = useRouter();
 	const { toggled } = useSelector(state => state.toggle);
 	const st = router.query.store;
@@ -38,13 +48,58 @@ const Page = ({ children, selected, landing, store, full }) => {
 			</Head>
 			{!landing && <Sidebar selected={selected} store={st} />}
 			<Navbar landing={landing} />
+			<LoadPage
+				landing={landing}
+				toggled={toggled}
+				error={error}
+				isError={isError}
+				isLoading={isLoading}
+				isFetching={isFetching}>
+				{children}
+			</LoadPage>
+		</div>
+	);
+};
+
+const LoadPage = ({
+	children,
+	landing,
+	toggled,
+	isLoading,
+	error,
+	isError,
+	data,
+}) => {
+	if (isError)
+		return (
 			<main
 				className={
 					landing ? styles.landing : toggled ? styles.toggled : styles.container
 				}>
-				{children}
+				<div
+					style={{
+						display: 'flex',
+						flex: 1,
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}>
+					<h5 style={{ color: 'crimson' }}>
+						{error?.data?.message
+							? error.data.message
+							: error?.data
+							? error.data
+							: error}
+					</h5>
+				</div>
 			</main>
-		</div>
+		);
+	return (
+		<main
+			className={
+				landing ? styles.landing : toggled ? styles.toggled : styles.container
+			}>
+			{children}
+		</main>
 	);
 };
 

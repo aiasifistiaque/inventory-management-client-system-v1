@@ -67,7 +67,7 @@ const ProductsPage = () => {
 					{!isLoading &&
 						data?.data &&
 						data.data.map((item, i) => (
-							<Row key={i} href={`/b/${store}/product/${item._id}`}>
+							<Row key={i} href={`/b/${store}/product/${item._id}`} i={i}>
 								<Item w={64}>{item && i + 1 <= 9 ? `0${i + 1}` : i + 1}</Item>
 								<Item>{item?.name && item.name}</Item>
 								<Item>{item?.sku && item.sku}</Item>

@@ -23,33 +23,34 @@ export const Table = ({
 		<div className={styles.container} style={{ width: w || '100%' }}>
 			{!isLoading ? (
 				<div>
-					{children}
 					{paginate != 'no' && (
-						<Row>
-							<Item>
-								Page {page} of {totalPages}
-							</Item>
-							<Item>
-								<Section horizontal>
-									<Button
-										text
-										onClick={() => {
-											page > 0 && setPage(page - 1);
-										}}>
-										Prev
-									</Button>
-									<Mr size={16} />
-									<Button
-										text
-										onClick={() => {
-											page < totalPages && setPage(page + 1);
-										}}>
-										Next
-									</Button>
-								</Section>
-							</Item>
-						</Row>
+						<div className={styles.paginate}>
+							<div className={styles.title}>
+								<p>
+									Page {page} of {totalPages}
+								</p>
+							</div>
+
+							<div className={styles.buttons}>
+								<Button
+									text
+									onClick={() => {
+										page > 0 && setPage(page - 1);
+									}}>
+									Prev
+								</Button>
+								<Mr size={16} />
+								<Button
+									text
+									onClick={() => {
+										page < totalPages && setPage(page + 1);
+									}}>
+									Next
+								</Button>
+							</div>
+						</div>
 					)}
+					{children}
 				</div>
 			) : (
 				<TablePlaceHolder />
@@ -62,7 +63,7 @@ export const Contain = ({ children }) => {
 	return <div className={styles.contain}>{children}</div>;
 };
 
-export const Row = ({ children, href, title }) => {
+export const Row = ({ children, href, title, i, key }) => {
 	if (title) return <div className={styles.titleItems}>{children}</div>;
 	if (href)
 		return (

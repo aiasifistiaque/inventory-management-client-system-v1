@@ -36,7 +36,7 @@ $item-margin: 32px;
 	border-left-width: 0;
 	flex-wrap: nowrap;
 	text-transform: capitalize;
-	padding: 24px 32px;
+	padding: 12px 32px;
 	min-width: 100%;
 	border-top: 2px solid $table-border;
 }
@@ -57,7 +57,6 @@ $item-margin: 32px;
 .linkItems {
 	@extend %table-items;
 	cursor: pointer;
-
 	&:hover {
 		text-decoration-line: underline;
 	}
@@ -71,7 +70,7 @@ $item-margin: 32px;
 	margin-right: 2rem;
 	//padding: 16px 0;
 	@include desktop {
-		min-width: 200px;
+		min-width: 120px;
 	}
 
 	p,
@@ -82,6 +81,9 @@ $item-margin: 32px;
 		overflow: hidden;
 		font-weight: 600;
 		color: #424242;
+	}
+	p {
+		font-size: 0.9rem;
 	}
 }
 
@@ -155,5 +157,27 @@ $item-margin: 32px;
 		font-size: 14px;
 		color: dodgerblue;
 		cursor: pointer;
+	}
+}
+
+.paginate {
+	display: inline-flex;
+	border-bottom: 2px solid $table-border;
+	align-items: center;
+	padding: 0 32px;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	min-width: 100%;
+	//background-color: whitesmoke;
+
+	.title {
+		p {
+			color: $color-primary;
+			font-size: 0.9rem;
+			font-weight: 600;
+		}
+	}
+	.buttons {
+		display: flex;
 	}
 }

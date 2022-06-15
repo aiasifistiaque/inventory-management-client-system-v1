@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ErrorModal.module.css';
-import { Button, Header, Icon, Modal } from 'semantic-ui-react';
+import { Modal } from 'semantic-ui-react';
 
-const Error = ({ error, children, isError, title }) => {
+const Error = ({ children, isError, title }) => {
 	const [open, setOpen] = useState(false);
 	useEffect(() => {
 		if (isError) {

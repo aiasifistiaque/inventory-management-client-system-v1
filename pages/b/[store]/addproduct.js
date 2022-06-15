@@ -11,6 +11,7 @@ import Input from '../../../components/auth/Input';
 import Button from '../../../components/buttons/Button';
 import Error from '../../../components/util/error-modal/Error';
 import CategorySelect from '../../../components/auth/CategorySelect';
+import InputSection from '../../../components/container/InputSection';
 
 const AddProduct = () => {
 	const router = useRouter();
@@ -70,79 +71,88 @@ const AddProduct = () => {
 							placeholder='Add product Name'
 							required
 						/>
-						{categories?.data?.data && (
-							<CategorySelect
-								label='Category'
-								value={category}
-								onChange={e => setCategory(e)}
-								placeholder='Product Category'
-								required
-								select
-								data={categories.data.data}
-								other
-							/>
-						)}
+						<InputSection horizontal>
+							{categories?.data?.data && (
+								<CategorySelect
+									label='Category'
+									value={category}
+									onChange={e => setCategory(e)}
+									placeholder='Product Category'
+									required
+									select
+									data={categories.data.data}
+									other
+								/>
+							)}
 
-						{category == 'other' && (
+							{category == 'other' && (
+								<Input
+									label='Category Name'
+									value={otherCategory}
+									onChange={e => setOtherCategory(e)}
+									placeholder='Enter Category Name'
+									required
+								/>
+							)}
+						</InputSection>
+						<InputSection horizontal>
+							{brands?.data?.data && (
+								<Input
+									label='Brand'
+									value={brand}
+									onChange={e => setBrand(e)}
+									placeholder='Product Brand'
+									select
+									data={brands.data.data}
+									other
+								/>
+							)}
+
+							{brand == 'other' && (
+								<Input
+									label='Brand Name'
+									value={otherBrand}
+									onChange={e => setOtherBrand(e)}
+									placeholder='Enter Brand Name'
+									required
+								/>
+							)}
+						</InputSection>
+
+						<InputSection horizontal>
 							<Input
-								label='Category Name'
-								value={otherCategory}
-								onChange={e => setOtherCategory(e)}
-								placeholder='Enter Category Name'
+								label='MRP'
+								value={price}
+								onChange={e => setPrice(e)}
+								placeholder='Product Price'
 								required
 							/>
-						)}
-						{brands?.data?.data && (
 							<Input
-								label='Brand'
-								value={brand}
-								onChange={e => setBrand(e)}
-								placeholder='Product Brand'
-								select
-								data={brands.data.data}
-								other
-							/>
-						)}
-
-						{brand == 'other' && (
-							<Input
-								label='Brand Name'
-								value={otherBrand}
-								onChange={e => setOtherBrand(e)}
-								placeholder='Enter Brand Name'
+								label='Cost Price'
+								value={cost}
+								onChange={e => setCost(e)}
+								placeholder='Product Cost'
 								required
 							/>
-						)}
+						</InputSection>
 
-						<Input
-							label='MRP'
-							value={price}
-							onChange={e => setPrice(e)}
-							placeholder='Product Price'
-							required
-						/>
-						<Input
-							label='Cost Price'
-							value={cost}
-							onChange={e => setCost(e)}
-							placeholder='Product Cost'
-							required
-						/>
+						<InputSection horizontal>
+							<Input
+								label='Opening stock'
+								value={stock}
+								onChange={e => setStock(e)}
+								placeholder='Initial stock of product'
+								type='Number'
+							/>
+							<Input
+								label='Low Stock Alert'
+								value={stockAlert}
+								onChange={e => setStockAlert(e)}
+								placeholder='Set a value for low stock alert'
+								type='Number'
+							/>
+						</InputSection>
 
-						<Input
-							label='Opening stock'
-							value={stock}
-							onChange={e => setStock(e)}
-							placeholder='Initial stock of product'
-							type='Number'
-						/>
-						<Input
-							label='Low Stock Alert'
-							value={stockAlert}
-							onChange={e => setStockAlert(e)}
-							placeholder='Set a value for low stock alert'
-							type='Number'
-						/>
 						{isLoading ? (
 							<Button>processing...</Button>
 						) : (

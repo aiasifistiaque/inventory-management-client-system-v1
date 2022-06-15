@@ -12,26 +12,26 @@ import Button from '../../../../components/buttons/Button';
 const Salepage = () => {
 	const router = useRouter();
 	const { sale } = router.query;
-	const { data, error, isLoading } = useGetSalesByIdQuery(sale);
+	const { data, error, isLoading, isError } = useGetSalesByIdQuery(sale);
 	const [item, setItem] = useState();
 	const invRef = useRef();
 	useEffect(() => {
-		!isLoading && data && setItem(data);
+		!isLoading && !isError && data && setItem(data);
 	}, [isLoading]);
 
 	return (
-		!isLoading &&
-		data && (
-			<div>
-				<Page selected='Invoice' error={error}>
+		<Page selected='Invoice' error={error} isError={isError}>
+			{!isLoading && (
+				<>
 					<div ref={invRef}>
 						<Invoice data={data} />
 					</div>
-
 					<Section flex={0.01} horizontal ml={16} justify='center'>
 						<Pdf
 							targetRef={invRef}
-							filename={`${data._id}_${data.store.name}`}
+							filename={`${data?._id && data._id}_${
+								data?.store?.name && data.store.name
+							}`}
 							scale={0.65}>
 							{({ toPdf }) => (
 								<Button text onClick={toPdf}>
@@ -40,9 +40,9 @@ const Salepage = () => {
 							)}
 						</Pdf>
 					</Section>
-				</Page>
-			</div>
-		)
+				</>
+			)}
+		</Page>
 	);
 };
 

@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "mappings": "ACCA,OAAO,CAAC,4MAAI;AAEZ,OAAO,CAAC,oGAAI;ADDZ,AAAA,OAAO,CAAC;EACP,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;CAOtB;;AEqBA,MAAM,EAAE,SAAS,EAAE,MAAM;EF9B1B,AAAA,OAAO,CAAC;IAKN,cAAc,EAAE,GAAG;IACnB,eAAe,EAAE,aAAa;IAC9B,WAAW,EAAE,MAAM;GAEpB",
+    "sources": [
+        "EditTable.module.scss",
+        "../../../styles/_imports.scss",
+        "../../../styles/utilities/_mixin.scss",
+        "../../../styles/utilities/_partials.scss"
+    ],
+    "names": [],
+    "file": "EditTable.module.css"
+}

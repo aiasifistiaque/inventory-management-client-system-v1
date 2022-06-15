@@ -103,6 +103,10 @@
 	color: $color-primary;
 }
 
+.colorDanger {
+	color: $color-danger;
+}
+
 .textButton {
 	@extend %common;
 	background-color: transparent;

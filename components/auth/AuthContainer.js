@@ -13,11 +13,13 @@ const AuthContainer = ({ children }) => {
 						src='/logofull.png'
 						style={{ width: 200, objectFit: 'contain' }}
 					/> */}
-					<h3>Welcome to IMS</h3>
-					<p>
+					<div>
+						<h3>Welcome to IMS</h3>
+					</div>
+					{/* <p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
 						vulputate libero <br /> et velit interdum,
-					</p>
+					</p> */}
 					<div className='mt-3'>{children}</div>
 				</div>
 			</div>

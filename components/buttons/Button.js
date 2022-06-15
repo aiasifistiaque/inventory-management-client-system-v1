@@ -23,7 +23,12 @@ const Button = ({
 		: styles.button;
 
 	const size = small ? styles.small : '';
-	const clr = color && color == 'primary' ? styles.colorPrimary : '';
+	const clr =
+		color && color == 'primary'
+			? styles.colorPrimary
+			: color == 'danger'
+			? styles.colorDanger
+			: '';
 
 	if (disabled)
 		return (

@@ -14,18 +14,36 @@ const ItemTable = ({ children, loading }) => {
 	return <div className={styles.table}>{children}</div>;
 };
 
-export const ItemTableRow = ({ children, title, price, date }) => {
+export const ItemTableRow = ({
+	children,
+	title,
+	price,
+	date,
+	editing,
+	number,
+	onChange,
+}) => {
 	return (
 		<div className={styles.row}>
 			<div className={styles.title}>
 				<h6>{title}</h6>
 			</div>
-			<div className={styles.data}>
-				<p>
-					{price && 'BDT. '}
-					{date ? moment(children).calendar() : children}
-				</p>
-			</div>
+			{editing ? (
+				<div className={styles.editing}>
+					<input
+						value={children}
+						onChange={e => onChange(e.target.value)}
+						type={price || number ? 'number' : 'text'}
+					/>
+				</div>
+			) : (
+				<div className={styles.data}>
+					<p>
+						{price && 'Tk. '}
+						{date ? moment(children).calendar() : children}
+					</p>
+				</div>
+			)}
 		</div>
 	);
 };
