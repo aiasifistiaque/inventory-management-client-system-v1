@@ -5,7 +5,6 @@ import { useAddEmployeeMutation } from '../../../store/services/productService';
 import { DetailsTable } from '../../../components/table/Details';
 import Input from '../../../components/auth/Input';
 import Button from '../../../components/buttons/Button';
-import Text from '../../../components/util/Text';
 import {
 	CheckBoxItem,
 	Item,
@@ -13,80 +12,13 @@ import {
 	Table,
 } from '../../../components/table/Table';
 import Error from '../../../components/util/error-modal/Error';
-
-const data = [
-	{
-		type: 'products',
-		options: [
-			'add-products',
-			'read-products',
-			'edit-products',
-			'delete-products',
-		],
-	},
-	{
-		type: 'sales',
-		options: ['add-sales', 'read-sales', 'edit-sales', 'delete-sales'],
-	},
-	{
-		type: 'purchases',
-		options: [
-			'add-purchases',
-			'read-purchases',
-			'edit-purchases',
-			'delete-purchases',
-		],
-	},
-	{
-		type: 'customers',
-		options: [
-			'add-customers',
-			'read-customers',
-			'edit-customers',
-			'delete-customers',
-		],
-	},
-	{
-		type: 'suppliers',
-		options: [
-			'add-suppliers',
-			'read-suppliers',
-			'edit-suppliers',
-			'delete-suppliers',
-		],
-	},
-	{
-		type: 'employees',
-		options: [
-			'add-employees',
-			'read-employees',
-			'edit-employees',
-			'delete-employees',
-		],
-	},
-	{
-		type: 'categories',
-		options: [
-			'add-categories',
-			'read-categories',
-			'edit-categories',
-			'delete-categories',
-		],
-	},
-	{
-		type: 'brands',
-		options: ['add-brands', 'read-brands', 'edit-brands', 'delete-brands'],
-	},
-];
+import * as lib from '../../../lib/constants';
 
 const Addemployee = () => {
 	const router = useRouter();
 	const [role, setRole] = useState();
 	const [email, setEmail] = useState();
-	const [permissions, setPermissions] = useState([
-		'add-products',
-		'delete-customers',
-	]);
+	const [permissions, setPermissions] = useState([]);
 
 	const [addEmployee, result] = useAddEmployeeMutation();
 
@@ -146,7 +78,7 @@ const Addemployee = () => {
 
 						<h5>Select Permissions</h5>
 						<Table paginate='no'>
-							{data.map((item, i) => (
+							{lib.data.permissions.map((item, i) => (
 								<Row key={i} title>
 									<Item>{item.type && item.type}</Item>
 									<CheckBoxItem

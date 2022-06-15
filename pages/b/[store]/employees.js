@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import ListPage from '../../../components/nav/listpage/ListPage';
 import Page from '../../../components/nav/Page/Page';
@@ -5,6 +6,7 @@ import { Item, Row, Table } from '../../../components/table/Table';
 import { useGetAllEmployeeQuery } from '../../../store/services/productService';
 
 const Employeepage = () => {
+	const { store } = useRouter().query;
 	const [page, setPage] = useState();
 	const { data, error, isLoading, isFetching, isError } =
 		useGetAllEmployeeQuery({
@@ -34,7 +36,7 @@ const Employeepage = () => {
 					{!isLoading &&
 						data?.data &&
 						data.data.map((item, i) => (
-							<Row key={i}>
+							<Row key={i} href={`/b/${store}/employee/${item._id}`}>
 								<Item>
 									{item?.status && item.status == 'invited'
 										? 'Invited'

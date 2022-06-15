@@ -9,6 +9,7 @@ import useAuth from '../../hooks/useAuth';
 import { Router, useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { login } from '../../store/slices/authSlice';
+import Error from '../util/error-modal/Error';
 
 const Login = () => {
 	const [email, setEmail] = useState();
@@ -79,6 +80,10 @@ const Login = () => {
 				/>
 				<div>
 					{loading ? <Button>loading</Button> : <Button submit>Login</Button>}
+					<Error
+						isError={error ? true : false}
+						error={error ? error.message : ''}
+					/>
 				</div>
 			</form>
 

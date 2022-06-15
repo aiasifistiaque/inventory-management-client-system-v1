@@ -59,6 +59,9 @@ const Input = ({
 				required={required ? true : false}
 				disabled={disabled ? true : false}
 				min={min}
+				style={{
+					...(disabled && { backgroundColor: 'white', paddingLeft: 0 }),
+				}}
 			/>
 		</div>
 	);

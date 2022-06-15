@@ -34,6 +34,7 @@ export const productsApi = createApi({
 		'Store',
 		'SingleStore',
 		'Employee',
+		'Role',
 		'Logs',
 		'Kpi',
 	],
@@ -78,11 +79,6 @@ export const productsApi = createApi({
 		getDashboard: builder.query({
 			query: id => `/dashboard`,
 			providesTags: ['Dashboard'],
-		}),
-		getAllEmployee: builder.query({
-			query: ({ sort = '-createdAt', page = 1, perpage = 10 }) =>
-				`/employee?sort=${sort}&page=${page}&perpage=${perpage}`,
-			providesTags: ['Employee'],
 		}),
 
 		/**Products, Categories & Brandss */
@@ -191,6 +187,13 @@ export const productsApi = createApi({
 			},
 			invalidatesTags: ['Customers'],
 		}),
+
+		getAllEmployee: builder.query({
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 }) =>
+				`/employee?sort=${sort}&page=${page}&perpage=${perpage}`,
+			providesTags: ['Employee'],
+		}),
+
 		addEmployee: builder.mutation({
 			query(body) {
 				return {
@@ -201,6 +204,24 @@ export const productsApi = createApi({
 			},
 			invalidatesTags: ['Employee'],
 		}),
+
+		getEmployeeById: builder.query({
+			query: id => `/employee/${id}`,
+			providesTags: id => [{ type: 'Role', id: id ? id : '' }],
+		}),
+
+		updateEmployee: builder.mutation({
+			query(data) {
+				const { id, ...body } = data;
+				return {
+					url: `/employee/${id}`,
+					method: 'PUT',
+					body,
+				};
+			},
+			invalidatesTags: ['Employee', 'Role'],
+		}),
+
 		addSupplier: builder.mutation({
 			query(body) {
 				return {
@@ -371,8 +392,6 @@ export const {
 	useAddSupplierMutation,
 	useAddStoreMutation,
 	useGetStoreDataQuery,
-	useGetAllEmployeeQuery,
-	useAddEmployeeMutation,
 	useGetStoreLogsQuery,
 	useGetSalesByIdQuery,
 	useGetSalesReportQuery,
@@ -380,6 +399,13 @@ export const {
 	useGetLowStockQuery,
 	useGetSalesKpiQuery,
 	useGetPurchaseByIdQuery,
+
+	/**Employees */
+	useAddEmployeeMutation,
+	useGetAllEmployeeQuery,
+	useGetEmployeeByIdQuery,
+	useUpdateEmployeeMutation,
+	/**End if Employees */
 
 	/**Products */
 	useGetAllProductsQuery,

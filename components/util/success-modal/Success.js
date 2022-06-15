@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './ErrorModal.module.css';
 import { Modal } from 'semantic-ui-react';
 
-const Error = ({ children, isError, title }) => {
+const Success = ({ children, isSuccess, title }) => {
 	const [open, setOpen] = useState(false);
 	useEffect(() => {
-		if (isError) {
+		if (isSuccess) {
 			setOpen(true);
 		}
-	}, [isError]);
+	}, [isSuccess]);
 
 	return (
 		<Modal
@@ -19,20 +19,12 @@ const Error = ({ children, isError, title }) => {
 			size='small'>
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<h6>An error has occured</h6>
+					<h6>Success</h6>
 				</div>
 				<div className={styles.body}>
-					<img src='/icons/warning-red.png' />
-					<h6>{title ? title : 'Error: Request Failed'}</h6>
-					<p>
-						{children?.data?.message
-							? JSON.stringify(children.data.message)
-							: children?.data
-							? JSON.stringify(children.data)
-							: children
-							? JSON.stringify(children)
-							: 'Error'}
-					</p>
+					<img src='/icons/tick.png' />
+					<h6>{title ? title : '200: Success'}</h6>
+					<p>{children}</p>
 				</div>
 				<div className={styles.footer} onClick={() => setOpen(false)}>
 					<p>Dismiss</p>
@@ -42,4 +34,4 @@ const Error = ({ children, isError, title }) => {
 	);
 };
 
-export default Error;
+export default Success;
