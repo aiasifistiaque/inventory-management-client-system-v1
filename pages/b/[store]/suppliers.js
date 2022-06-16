@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import ListPage from '../../../components/nav/listpage/ListPage';
 import Page from '../../../components/nav/Page/Page';
@@ -10,6 +11,7 @@ const Supplierpage = () => {
 		useGetAllSuppliersQuery({
 			page: page,
 		});
+	const store = useRouter().query.store;
 
 	return (
 		<Page selected='Suppliers'>
@@ -33,7 +35,7 @@ const Supplierpage = () => {
 					{!isLoading &&
 						data?.data &&
 						data.data.map((item, i) => (
-							<Row key={i}>
+							<Row key={i} href={`/b/${store}/supplier/${item._id}`}>
 								<Item>{item?.name && item.name}</Item>
 								<Item email>{item?.email && item.email}</Item>
 								<Item>{item?.phone && item.phone}</Item>

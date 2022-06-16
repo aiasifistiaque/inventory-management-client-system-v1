@@ -171,11 +171,6 @@ export const productsApi = createApi({
 				`/customers?role=customer&sort=${sort}&page=${page}&perpage=${perpage}`,
 			providesTags: ['Customers'],
 		}),
-		getAllSuppliers: builder.query({
-			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
-				`/customers?role=supplier&sort=${sort}&page=${page}&perpage=${perpage}`,
-			providesTags: ['Suppliers'],
-		}),
 
 		addCustomer: builder.mutation({
 			query(body) {
@@ -220,6 +215,12 @@ export const productsApi = createApi({
 				};
 			},
 			invalidatesTags: ['Employee', 'Role'],
+		}),
+
+		getAllSuppliers: builder.query({
+			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+				`/customers?role=supplier&sort=${sort}&page=${page}&perpage=${perpage}`,
+			providesTags: ['Suppliers'],
 		}),
 
 		addSupplier: builder.mutation({
@@ -280,8 +281,14 @@ export const productsApi = createApi({
 		}),
 
 		getAllPurchaseOrders: builder.query({
-			query: ({ sort = '-createdAt', page = 1, perpage = 10 } = {}) =>
+			query: ({ sort = '-createdAt', page = 1, perpage = 10, id } = {}) =>
 				`/purchases?sort=${sort}&page=${page}&perpage=${perpage}`,
+			providesTags: ['Purchases'],
+		}),
+
+		getAllPurchaseOrdersBySupplier: builder.query({
+			query: ({ sort = '-createdAt', page = 1, perpage = 10, id } = {}) =>
+				`/purchases?sort=${sort}&page=${page}&perpage=${perpage}&supplier=${id}`,
 			providesTags: ['Purchases'],
 		}),
 
@@ -400,6 +407,7 @@ export const {
 	useGetSalesKpiQuery,
 	useGetPurchaseByIdQuery,
 
+	useGetAllPurchaseOrdersBySupplierQuery,
 	/**Employees */
 	useAddEmployeeMutation,
 	useGetAllEmployeeQuery,
