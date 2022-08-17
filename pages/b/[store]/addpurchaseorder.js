@@ -28,6 +28,7 @@ const AddPurchaseOrder = () => {
 	const [product, setProduct] = useState();
 	const [supplier, setSupplier] = useState();
 	const [orderItems, setOrderItems] = useState([]);
+	const [productName, setProductName] = useState('');
 
 	const products = useGetAllProductsQuery({ perpage: 99, sort: 'name' });
 	const suppliers = useGetAllSuppliersQuery({ perpage: 99, sort: 'name' });
@@ -42,17 +43,21 @@ const AddPurchaseOrder = () => {
 	}, [product]);
 
 	useEffect(() => {
+		console.log('new');
 		if (!singleProduct.isFetching) {
-			if (singleProduct?.data?.data) {
+			console.log('fetching', singleProduct);
+			if (singleProduct?.data) {
+				console.log(singleProduct);
 				setQuantity(1);
-				setPrice(singleProduct.data.data.cost);
+				setPrice(singleProduct?.data?.cost && singleProduct.data.cost);
+				setProductName(singleProduct?.data?.name && singleProduct.data.name);
 			}
 		}
 	}, [singleProduct.isFetching, product]);
 
 	const addItem = item => {
 		const newItem = {
-			name: singleProduct?.data?.data?.name && singleProduct?.data?.data?.name,
+			name: productName,
 			product: product,
 			quantity: parseInt(quantity),
 			price: parseInt(price),
@@ -109,16 +114,11 @@ const AddPurchaseOrder = () => {
 						{!singleProduct.isLoading && product && (
 							<div style={{ marginBottom: 64 }}>
 								<>
-									<h6>
-										Item:{' '}
-										{singleProduct?.data?.data?.name &&
-											singleProduct.data.data.name}
-									</h6>
+									<h6>Item: {productName}</h6>
 									<h6>
 										Price: Tk.
 										{JSON.stringify(
-											singleProduct?.data?.data?.cost &&
-												singleProduct.data.data.cost
+											singleProduct?.data?.cost && singleProduct.data.cost
 										)}
 									</h6>
 								</>
