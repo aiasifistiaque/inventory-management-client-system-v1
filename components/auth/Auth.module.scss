@@ -26,12 +26,14 @@
 		align-items: flex-start;
 		justify-content: center;
 		margin: 2rem 0;
+		width: 100%;
 	}
 	.details {
 		display: flex;
 		flex-direction: column;
 		flex: 1;
 		align-items: center;
+		width: 100%;
 	}
 }
 
@@ -59,7 +61,7 @@
 	select {
 		margin: 0;
 		height: 42px;
-		width: 100%;
+		min-width: 300px;
 		border: none;
 		outline: none;
 		@include desktop {

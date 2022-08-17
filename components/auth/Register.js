@@ -6,6 +6,7 @@ import AuthInput from './AuthInput';
 import * as lib from '../../lib/constants';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
+import Error from '../util/error-modal/Error';
 
 import { useGetAllProductsQuery } from '../../store/services/productService';
 import { login } from '../../store/slices/authSlice';
@@ -98,6 +99,10 @@ const Register = () => {
 				/>
 				<div>
 					{loading ? <Button>loading</Button> : <Button submit>Sign Up</Button>}
+					<Error
+						isError={loading ? false : error ? true : false}
+						error={error ? error.message : ''}
+					/>
 				</div>
 			</form>
 
