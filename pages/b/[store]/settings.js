@@ -18,9 +18,9 @@ const SettingsPage = () => {
 	const [editing, setEditing] = useState(true);
 	useEffect(() => {
 		if (!isFetching && data) {
-			setName(data.store.name);
-			setPhone(data.store.phone);
-			setEmail(data.store.email);
+			setName(data?.store?.name && data.store.name);
+			setPhone(data?.store?.phone && data.store.phone);
+			setEmail(data?.store?.email && data.store.email);
 		}
 	}, [isFetching]);
 	return (
@@ -46,7 +46,7 @@ const SettingsPage = () => {
 					type='number'
 				/>
 				<Input
-					value={data.store.category}
+					value={data?.store?.category && data.store.category}
 					onChange={e => setPhone(e)}
 					label='Store Category'
 					disabled={true}
