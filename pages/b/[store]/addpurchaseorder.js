@@ -109,9 +109,17 @@ const AddPurchaseOrder = () => {
 						{!singleProduct.isLoading && product && (
 							<div style={{ marginBottom: 64 }}>
 								<>
-									<h6>Item: {singleProduct.data.data.name}</h6>
 									<h6>
-										Price: Tk.{JSON.stringify(singleProduct.data.data.cost)}
+										Item:{' '}
+										{singleProduct?.data?.data?.name &&
+											singleProduct.data.data.name}
+									</h6>
+									<h6>
+										Price: Tk.
+										{JSON.stringify(
+											singleProduct?.data?.data?.cost &&
+												singleProduct.data.data.cost
+										)}
 									</h6>
 								</>
 								<InputSection horizontal={true} align='center'>
@@ -147,10 +155,10 @@ const AddPurchaseOrder = () => {
 								orderItems.length > 0 &&
 								orderItems.map((item, i) => (
 									<TableRow key={i}>
-										<TableItem>{item.name}</TableItem>
-										<TableItem>Tk. {item.price}</TableItem>
-										<TableItem>{item.quantity}</TableItem>
-										<TableItem>{item.product}</TableItem>
+										<TableItem>{item?.name && item.name}</TableItem>
+										<TableItem>Tk. {item?.price && item.price}</TableItem>
+										<TableItem>{item?.quantity && item.quantity}</TableItem>
+										<TableItem>{item?.product && item.product}</TableItem>
 									</TableRow>
 								))}
 						</Table>

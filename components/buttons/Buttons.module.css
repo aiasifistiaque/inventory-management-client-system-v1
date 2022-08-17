@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
-.button, .disabled, .secondary, .outlined {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
+.outlined, .secondary, .disabled, .button {
   display: inline-flex;
   cursor: pointer;
   -moz-user-select: none;
@@ -10,15 +8,13 @@
   -ms-user-select: none;
   user-select: none;
   margin: 0.25rem;
-  -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-
-.button p, .disabled p, .secondary p, .outlined p {
+.outlined p, .secondary p, .disabled p, .button p {
   font-size: 0.9rem;
 }
 
-.button img, .disabled img, .secondary img, .outlined img, .textButton img {
+.textButton img, .outlined img, .secondary img, .disabled img, .button img {
   width: 24px;
   height: 24px;
   margin-right: 8px;
@@ -26,29 +22,23 @@
      object-fit: contain;
 }
 
-.button, .disabled, .secondary, .outlined {
+.outlined, .secondary, .disabled, .button {
   background-color: #391f42;
   height: 42px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   color: whitesmoke;
   padding: 0 16px;
   border-radius: 4px;
   border: 1px solid #391f42;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
-
 @media (min-width: 1008px) {
-  .button:hover, .disabled:hover, .secondary:hover, .outlined:hover {
+  .outlined:hover, .secondary:hover, .disabled:hover, .button:hover {
     background-color: #1b0f1f;
   }
 }
-
-.button:active, .disabled:active, .secondary:active, .outlined:active {
+.outlined:active, .secondary:active, .disabled:active, .button:active {
   background-color: #572f65;
 }
 
@@ -69,13 +59,11 @@
   border: 1px solid #bcbcbc;
   color: #424242;
 }
-
 @media (min-width: 1008px) {
   .disabled:hover {
     background-color: #bcbcbc;
   }
 }
-
 .disabled:active {
   background-color: #bcbcbc;
 }
@@ -87,14 +75,12 @@
   font-weight: 700;
   border: 1px solid #eee;
 }
-
 @media (min-width: 1008px) {
   .secondary:hover {
     background-color: #d5d5d5;
     border: 1px solid #d5d5d5;
   }
 }
-
 .secondary:active {
   background-color: white;
   border: 1px solid white;
@@ -112,14 +98,12 @@
   background-color: transparent;
   color: #1e90ff;
   padding: 1rem 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
 }
-
 .textButton p {
   font-weight: 600;
 }
-
 .textButton:hover {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -130,18 +114,14 @@
   color: #391f42;
   border: 1px solid #391f42;
 }
-
 .outlined p {
   font-weight: 600;
 }
-
 @media (min-width: 1008px) {
   .outlined:hover {
     background-color: rgba(57, 31, 66, 0.09);
   }
 }
-
 .outlined:active {
   background-color: rgba(57, 31, 66, 0.3);
-}
-/*# sourceMappingURL=Buttons.module.css.map */
+}/*# sourceMappingURL=Buttons.module.css.map */

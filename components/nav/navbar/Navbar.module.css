@@ -1,35 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
-.nav, .toggled, .landing {
+.landing, .toggled, .nav {
   background-color: white;
   height: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding: 0 32px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin-left: 60px;
   position: fixed;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex: 1;
+  justify-content: space-between;
   margin-right: 60px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
-
-.nav a, .toggled a, .landing a {
+.landing a, .toggled a, .nav a {
   font-size: 1.1rem;
   font-weight: 600;
 }
-
-.nav h3, .toggled h3, .landing h3 {
+.landing h3, .toggled h3, .nav h3 {
   cursor: pointer;
 }
 
@@ -38,7 +27,6 @@
   padding: 0 16px 0 24px;
   width: calc(100vw - 60px);
 }
-
 @media (min-width: 1008px) {
   .nav {
     margin-left: 220px;
@@ -52,11 +40,9 @@
   width: calc(100vw - 60px);
   padding: 0 16px 0 24px;
 }
-
 .toggled h3 {
   cursor: pointer;
 }
-
 @media (min-width: 1008px) {
   .toggled {
     padding: 0 64px 0 24px;
@@ -64,15 +50,11 @@
 }
 
 .logo {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
 }
 
 .items {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
 }
 
 .landing {
@@ -80,11 +62,9 @@
   width: 100%;
   padding: 0 16px;
 }
-
 .landing h3 {
   cursor: pointer;
 }
-
 @media (min-width: 1008px) {
   .landing {
     padding: 0 64px;
@@ -92,30 +72,19 @@
 }
 
 .title {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
 }
 
 .logout {
   cursor: pointer;
-  -ms-flex-item-align: center;
-      align-self: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  align-self: center;
   display: flex;
   gap: 8px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  align-items: center;
+  justify-content: flex-end;
 }
-
 .logout p {
   text-align: right;
   font-size: 14px;
   font-weight: 700;
-}
-/*# sourceMappingURL=Navbar.module.css.map */
+}/*# sourceMappingURL=Navbar.module.css.map */

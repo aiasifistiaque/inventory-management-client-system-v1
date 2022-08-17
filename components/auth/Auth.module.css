@@ -1,89 +1,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   min-height: 100vh;
   max-height: 140vh;
   color: black;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   max-width: 100vw;
   margin: 32px 16px;
 }
-
 @media (min-width: 1008px) {
   .container {
     margin: 64px 124px;
   }
 }
-
 .container .img {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
 }
-
 .container .img img {
   height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
 }
-
 .container .main {
-  -webkit-box-flex: 4;
-      -ms-flex: 4;
-          flex: 4;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  flex: 4;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: flex-start;
+  justify-content: center;
   margin: 2rem 0;
 }
-
 .container .details {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
 }
 
-.input input[type='number']::-webkit-inner-spin-button,
-.input input[type='number']::-webkit-outer-spin-button {
+.input input[type=number]::-webkit-inner-spin-button,
+.input input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-.input input[type='checkbox'] {
+.input input[type=checkbox] {
   height: 24px;
   width: 24px;
   border: 1px solid #391f42;
   padding: 0;
 }
-
-.input input[type='checkbox']:checked {
-  content: 'x';
+.input input[type=checkbox]:checked {
+  content: "x";
   background-color: #391f42;
   display: inline-block;
   font-size: 1.6em;
 }
-
 .input input,
 .input textarea,
 .input select {
@@ -93,81 +62,53 @@
   border: none;
   outline: none;
   background-color: #eeecec;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   padding: 0 0.75rem;
   border-radius: 4px;
   border: 1px solid transparent;
 }
-
 @media (min-width: 1008px) {
   .input input,
-  .input textarea,
-  .input select {
+.input textarea,
+.input select {
     width: 400px;
   }
 }
-
-.input input::-webkit-input-placeholder,
-.input textarea::-webkit-input-placeholder,
-.input select::-webkit-input-placeholder {
+.input input::-moz-placeholder, .input textarea::-moz-placeholder, .input select::-moz-placeholder {
   font-size: 14px;
   font-weight: 500;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   margin: 0;
 }
-
-.input input:-ms-input-placeholder,
-.input textarea:-ms-input-placeholder,
-.input select:-ms-input-placeholder {
+.input input:-ms-input-placeholder, .input textarea:-ms-input-placeholder, .input select:-ms-input-placeholder {
   font-size: 14px;
   font-weight: 500;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   margin: 0;
 }
-
-.input input::-ms-input-placeholder,
-.input textarea::-ms-input-placeholder,
-.input select::-ms-input-placeholder {
-  font-size: 14px;
-  font-weight: 500;
-  font-family: 'Space Grotesk', sans-serif;
-  margin: 0;
-}
-
 .input input::placeholder,
 .input textarea::placeholder,
 .input select::placeholder {
   font-size: 14px;
   font-weight: 500;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   margin: 0;
 }
-
 .input input:focus,
 .input textarea:focus,
 .input select:focus {
   border: 1px solid #391f42;
 }
-
-
 .input textarea {
   padding: 1em;
 }
 
 .input {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   margin-bottom: 1.5em;
   width: 100%;
 }
-
 .input label {
   font-size: 14px;
   margin: 0.25rem 0 0.25rem 0;
@@ -178,8 +119,6 @@
   -ms-user-select: none;
   user-select: none;
 }
-
 .input textarea {
   min-height: 200px;
-}
-/*# sourceMappingURL=Auth.module.css.map */
+}/*# sourceMappingURL=Auth.module.css.map */

@@ -31,7 +31,7 @@ export const DetailsTable = ({
 			style={{
 				padding: `${24}px ${32}px`,
 			}}>
-			<h5>{title}</h5>
+			<h5 style={{ marginBottom: '1rem' }}>{title}</h5>
 			{!loading ? <div>{children}</div> : <h6>loading...</h6>}
 		</div>
 	);

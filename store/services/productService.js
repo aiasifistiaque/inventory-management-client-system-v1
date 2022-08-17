@@ -51,7 +51,12 @@ export const productsApi = createApi({
 		getStoreData: builder.query({
 			query: id => `/store/${id}`,
 
-			providesTags: ['SingleStore'],
+			providesTags: id => [
+				{
+					type: 'SingleStore',
+					id: id ? id : '',
+				},
+			],
 			invalidatesTags: [
 				'Product',
 				'Products',

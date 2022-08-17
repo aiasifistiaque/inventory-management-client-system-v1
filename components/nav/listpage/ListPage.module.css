@@ -1,37 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex: 1;
+  flex-direction: column;
 }
-
 .container .title {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   margin: 0 8px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 .container .title h4 {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.5;
 }
-
 @media (min-width: 1008px) {
   .container .title h4 {
     font-size: 1.7rem;
@@ -39,25 +23,13 @@
 }
 
 .unauthorized {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
 }
-
 .unauthorized img {
   width: 100px;
   height: auto;
@@ -65,20 +37,16 @@
      object-fit: contain;
   margin-bottom: 1rem;
 }
-
 @media (min-width: 1008px) {
   .unauthorized img {
     width: 200px;
   }
 }
-
 .unauthorized h3 {
   color: #ff3152;
   margin-bottom: 0rem;
 }
-
 .unauthorized p {
   font-size: 1rem;
   font-weight: 500;
-}
-/*# sourceMappingURL=ListPage.module.css.map */
+}/*# sourceMappingURL=ListPage.module.css.map */

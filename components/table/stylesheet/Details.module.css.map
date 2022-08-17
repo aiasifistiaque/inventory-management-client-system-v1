@@ -1,12 +1,1 @@
-{
-    "version": 3,
-    "mappings": "ACCA,OAAO,CAAC,4MAAI;AAEZ,OAAO,CAAC,oGAAI",
-    "sources": [
-        "Details.module.scss",
-        "../../../styles/_imports.scss",
-        "../../../styles/utilities/_mixin.scss",
-        "../../../styles/utilities/_partials.scss"
-    ],
-    "names": [],
-    "file": "Details.module.css"
-}
+{"version":3,"sources":["../../../styles/_imports.scss"],"names":[],"mappings":"AACQ,oNAAA;AAEA,4GAAA","file":"Details.module.css"}

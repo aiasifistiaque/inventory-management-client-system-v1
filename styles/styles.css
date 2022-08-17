@@ -623,7 +623,7 @@ body {
   margin: 0;
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -633,7 +633,6 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-
 @media (min-width: 1008px) {
   a:hover {
     -webkit-text-decoration-line: underline;
@@ -642,8 +641,7 @@ a {
 }
 
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 input {
@@ -659,7 +657,6 @@ p {
   line-height: 24px;
   color: #424242;
 }
-
 @media (min-width: 640px) {
   p {
     font-size: 16px;
@@ -674,7 +671,6 @@ h1 {
   line-height: 3rem;
   color: #424242;
 }
-
 @media (min-width: 1008px) {
   h1 {
     font-size: 4rem;
@@ -690,7 +686,6 @@ h2 {
   line-height: 2.625rem;
   color: #424242;
 }
-
 @media (min-width: 1008px) {
   h2 {
     font-size: 3rem;
@@ -706,7 +701,6 @@ h3 {
   line-height: 2.25rem;
   color: #424242;
 }
-
 @media (min-width: 1008px) {
   h3 {
     font-size: 2rem;
@@ -752,5 +746,4 @@ a {
   text-decoration: none;
   color: #424242;
   cursor: pointer;
-}
-/*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles.css.map */
